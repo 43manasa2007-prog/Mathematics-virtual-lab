@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Histograms | Statistics Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fffde7;
+    color: #4e342e;
+}
+
+header {
+    background: linear-gradient(135deg, #f9a825, #fdd835);
+    color: #3e2723;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+main {
+    width: 92%;
+    max-width: 950px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+    color: #f57f17;
+    text-align: center;
+    margin-top: 0;
+}
+
+.description {
+    text-align: center;
+    line-height: 1.6;
+}
+
+.info {
+    background: #fff8c4;
+    border-left: 5px solid #fbc02d;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border: 2px solid #fbc02d;
+    border-radius: 10px;
+    font-size: 17px;
+    resize: vertical;
+}
+
+.button-area {
+    text-align: center;
+    margin: 18px 0;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 25px;
+    background: #fbc02d;
+    color: #3e2723;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #f9a825;
+}
+
+.graph-area {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 25px;
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    background: #fffef5;
+    border: 2px solid #fbc02d;
+    border-radius: 10px;
+}
+
+.quiz-question {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.quiz-options {
+    text-align: center;
+}
+
+.quiz-options button {
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+.quiz-result {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    min-height: 25px;
+}
+
+.score {
+    text-align: center;
+    font-weight: bold;
+}
+
+.back-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.back {
+    display: inline-block;
+    background: #f57f17;
+    color: white;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #e65100;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6d4c41;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📊 Histograms</h1>
+
+<p>
+Represent numerical data using continuous intervals.
+</p>
+
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>📖 Learn the Concept</h2>
+
+<p class="description">
+A histogram represents numerical data using
+continuous class intervals. The height of each
+bar represents the frequency of values in that interval.
+</p>
+
+<div class="info">
+
+<strong>Important:</strong><br>
+
+Unlike a bar graph, the bars of a histogram
+touch each other because the intervals are continuous.
+
+<br><br>
+
+Example intervals:
+
+10–20, 20–30, 30–40, 40–50
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🧮 Create a Histogram</h2>
+
+<p class="description">
+Enter numbers separated by commas.
+The histogram will automatically create intervals.
+</p>
+
+<textarea
+id="dataInput"
+placeholder="Example: 12, 15, 18, 22, 25, 27, 31, 35, 38, 42">12, 15, 18, 22, 25, 27, 31, 35, 38, 42</textarea>
+
+<div class="button-area">
+
+<button onclick="drawHistogram()">
+Create Histogram
+</button>
+
+<button onclick="clearHistogram()">
+Clear
+</button>
+
+</div>
+
+<div class="graph-area">
+
+<canvas
+id="histogramCanvas"
+width="850"
+height="450">
+</canvas>
+
+</div>
+
+</div>
+<div class="card">
+
+<h2>🎯 Histogram Quiz</h2>
+
+<p id="quizNumber" class="score">
+Question 1 of 5
+</p>
+
+<div id="quizQuestion" class="quiz-question">
+Loading question...
+</div>
+
+<div id="quizOptions" class="quiz-options"></div>
+
+<p id="quizResult" class="quiz-result"></p>
+
+<p class="score">
+Score:
+<span id="quizScore">0</span> / 5
+</p>
+
+<div class="button-area">
+
+<button
+id="nextButton"
+onclick="nextQuestion()"
+style="display:none;">
+
+Next Question →
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="back-area">
+
+<a
+class="back"
+href="../statistics.html">
+
+← Back to Statistics Lab
+
+</a>
+
+</div>
+
+</main>
+
+<footer>
+
+<p>
+Mathematics Virtual Lab © 2026
+</p>
+
+</footer>
+
+<script>
+    const canvas =
+    document.getElementById("histogramCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+
+function drawHistogram() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    const input =
+        document.getElementById("dataInput")
+        .value
+        .trim();
+
+    if (input === "") {
+
+        alert("Please enter some numbers.");
+
+        return;
+    }
+
+    const data =
+        input
+        .split(",")
+        .map(function(value) {
+            return Number(value.trim());
+        });
+
+
+    if (
+        data.length === 0 ||
+        data.some(function(value) {
+            return !Number.isFinite(value);
+        })
+    ) {
+
+        alert(
+            "Please enter only valid numbers separated by commas."
+        );
+
+        return;
+    }
+
+
+    const min =
+        Math.min(...data);
+
+    const max =
+        Math.max(...data);
+
+
+    if (min === max) {
+
+        alert(
+            "Please enter different values to create a histogram."
+        );
+
+        return;
+    }
+
+
+    /* CREATE 5 INTERVALS */
+
+    const classCount = 5;
+
+    const interval =
+        (max - min) / classCount;
+
+    const frequencies =
+        new Array(classCount).fill(0);
+
+
+    data.forEach(function(value) {
+
+        let index =
+            Math.floor(
+                (value - min) / interval
+            );
+
+        if (index >= classCount) {
+            index = classCount - 1;
+        }
+
+        frequencies[index]++;
+
+    });
+
+
+    const graphLeft = 70;
+    const graphTop = 40;
+    const graphBottom = 370;
+    const graphWidth = 730;
+    const graphHeight = 300;
+
+
+    /* AXES */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        graphLeft,
+        graphTop
+    );
+
+    ctx.lineTo(
+        graphLeft,
+        graphBottom
+    );
+
+    ctx.lineTo(
+        graphLeft + graphWidth,
+        graphBottom
+    );
+
+    ctx.strokeStyle =
+        "#4e342e";
+
+    ctx.lineWidth = 2;
+
+    ctx.stroke();
+
+
+    const maxFrequency =
+        Math.max(...frequencies);
+
+
+    /* Y AXIS */
+
+    ctx.font =
+        "14px Arial";
+
+    ctx.fillStyle =
+        "#4e342e";
+
+    ctx.textAlign =
+        "right";
+
+
+    for (let i = 0; i <= maxFrequency; i++) {
+
+        const y =
+            graphBottom -
+            (i / maxFrequency) *
+            graphHeight;
+
+
+        ctx.fillText(
+            i,
+            graphLeft - 10,
+            y + 5
+        );
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            graphLeft,
+            y
+        );
+
+        ctx.lineTo(
+            graphLeft + graphWidth,
+            y
+        );
+
+        ctx.strokeStyle =
+            "#eeeeee";
+
+        ctx.lineWidth = 1;
+
+        ctx.stroke();
+    }
+
+
+    /* HISTOGRAM BARS */
+
+    const barWidth =
+        graphWidth / classCount;
+
+
+    frequencies.forEach(
+        function(frequency, index) {
+
+            const height =
+                maxFrequency === 0
+                ? 0
+                : (frequency / maxFrequency) *
+                  graphHeight;
+
+
+            const x =
+                graphLeft +
+                index * barWidth;
+
+
+            const y =
+                graphBottom - height;
+
+
+            ctx.fillStyle =
+                "#fbc02d";
+
+
+            ctx.fillRect(
+                x,
+                y,
+                barWidth,
+                height
+            );
+
+
+            ctx.strokeStyle =
+                "#4e342e";
+
+            ctx.lineWidth = 1;
+
+            ctx.strokeRect(
+                x,
+                y,
+                barWidth,
+                height
+            );
+
+
+            /* FREQUENCY */
+
+            ctx.fillStyle =
+                "#3e2723";
+
+            ctx.font =
+                "bold 14px Arial";
+
+            ctx.textAlign =
+                "center";
+
+
+            ctx.fillText(
+                frequency,
+                x + barWidth / 2,
+                y - 8
+            );
+
+
+            /* INTERVAL */
+
+            const start =
+                min +
+                index * interval;
+
+            const end =
+                min +
+                (index + 1) * interval;
+
+
+            ctx.fillStyle =
+                "#4e342e";
+
+            ctx.font =
+                "13px Arial";
+
+
+            ctx.fillText(
+                start.toFixed(1),
+                x + 5,
+                graphBottom + 20
+            );
+
+
+            if (index === classCount - 1) {
+
+                ctx.fillText(
+                    end.toFixed(1),
+                    x + barWidth - 5,
+                    graphBottom + 20
+                );
+            }
+
+        }
+    );
+
+}
+
+
+function clearHistogram() {
+
+    document.getElementById(
+        "dataInput"
+    ).value = "";
+
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+}
+
+
+/* QUIZ */
+
+const questions = [
+
+    {
+        question:
+            "What does a histogram represent?",
+
+        options: [
+            "Numerical data in intervals",
+            "Only names",
+            "Only percentages",
+            "Only averages"
+        ],
+
+        answer: 0
+    },
+
+    {
+        question:
+            "What does the height of a histogram bar represent?",
+
+        options: [
+            "Category name",
+            "Frequency",
+            "Color",
+            "Title"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question:
+            "Why do histogram bars touch each other?",
+
+        options: [
+            "The data is continuous",
+            "The bars are colorful",
+            "It looks better",
+            "They represent names"
+        ],
+
+        answer: 0
+    },
+
+    {
+        question:
+            "What is a class interval?",
+
+        options: [
+            "A range of values",
+            "A single value",
+            "A graph title",
+            "A percentage"
+        ],
+
+        answer: 0
+    },
+
+    {
+        question:
+            "Which graph is commonly used for continuous numerical data?",
+
+        options: [
+            "Pie chart",
+            "Bar graph",
+            "Histogram",
+            "Pictograph"
+        ],
+
+        answer: 2
+    }
+
+];
+
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let answered = false;
+
+
+function loadQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    document.getElementById(
+        "quizNumber"
+    ).textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+
+    document.getElementById(
+        "quizQuestion"
+    ).textContent =
+        question.question;
+
+
+    const options =
+        document.getElementById(
+            "quizOptions"
+        );
+
+    options.innerHTML = "";
+
+
+    question.options.forEach(
+        function(option, index) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.textContent =
+                option;
+
+
+            button.onclick =
+                function() {
+
+                    checkAnswer(index);
+
+                };
+
+
+            options.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "quizResult"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "none";
+
+
+    answered = false;
+}
+
+
+function checkAnswer(selected) {
+
+    if (answered) {
+        return;
+    }
+
+
+    answered = true;
+
+
+    const question =
+        questions[currentQuestion];
+
+
+    const result =
+        document.getElementById(
+            "quizResult"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            "#quizOptions button"
+        );
+
+
+    buttons.forEach(
+        function(button) {
+
+            button.disabled =
+                true;
+
+        }
+    );
+
+
+    if (
+        selected ===
+        question.answer
+    ) {
+
+        score++;
+
+
+        result.textContent =
+            "🎉 Correct!";
+
+
+        result.style.color =
+            "#f57f17";
+
+
+        document.getElementById(
+            "quizScore"
+        ).textContent =
+            score;
+
+    } else {
+
+        result.textContent =
+            "❌ Incorrect. Correct answer: " +
+            question.options[
+                question.answer
+            ];
+
+
+        result.style.color =
+            "#c62828";
+    }
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "inline-block";
+}
+
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        document.getElementById(
+            "quizNumber"
+        ).textContent =
+            "Quiz Completed";
+
+
+        document.getElementById(
+            "quizQuestion"
+        ).textContent =
+            "🏆 You completed the Histogram quiz!";
+
+
+        document.getElementById(
+            "quizOptions"
+        ).innerHTML =
+            "";
+
+
+        document.getElementById(
+            "quizResult"
+        ).textContent =
+            "Final Score: " +
+            score +
+            " / " +
+            questions.length;
+
+
+        document.getElementById(
+            "nextButton"
+        ).textContent =
+            "Try Again";
+
+
+        document.getElementById(
+            "nextButton"
+        ).onclick =
+            function() {
+
+                location.reload();
+
+            };
+
+
+        return;
+    }
+
+
+    loadQuestion();
+}
+
+
+/* START */
+
+drawHistogram();
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

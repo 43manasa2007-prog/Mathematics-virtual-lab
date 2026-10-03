@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Probability | Mathematics Virtual Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff5f8;
+    color: #4a2633;
+}
+
+header {
+    background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+    color: #4a2633;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 40px;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+main {
+    width: 92%;
+    max-width: 1000px;
+    margin: 35px auto;
+}
+
+.intro {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+    margin-bottom: 30px;
+}
+
+.intro h2 {
+    color: #d81b60;
+}
+
+.intro p {
+    line-height: 1.7;
+}
+
+.experiments {
+    display: grid;
+    grid-template-columns:
+        repeat(2, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+}
+
+.card h2 {
+    color: #d81b60;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.icon {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 22px;
+    background: #f48fb1;
+    color: #4a2633;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.button:hover {
+    background: #d81b60;
+    color: white;
+}
+
+.back-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.back {
+    display: inline-block;
+    padding: 13px 24px;
+    background: #d81b60;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #ad1457;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6d4c41;
+}
+
+@media (max-width: 700px) {
+
+    .experiments {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🎲 Probability Lab</h1>
+
+<p>
+Explore probability through interactive experiments
+</p>
+
+</header>
+
+<main>
+
+<div class="intro">
+
+<h2>📖 What is Probability?</h2>
+
+<p>
+Probability tells us how likely an event is to happen.
+It is expressed as a number between 0 and 1,
+or between 0% and 100%.
+</p>
+
+<p>
+Choose an experiment below to explore probability
+in an interactive way.
+</p>
+
+</div>
+
+<div class="experiments">
+    <div class="card">
+
+<div class="icon">
+🪙
+</div>
+
+<h2>Coin Toss</h2>
+
+<p>
+Toss a fair coin and observe
+the probability of Heads and Tails.
+</p>
+
+<a
+class="button"
+href="Probability/coin-toss.html">
+
+Start Experiment →
+
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+🎲
+</div>
+
+<h2>Dice Experiment</h2>
+
+<p>
+Roll a six-sided die and observe
+the frequency of each outcome.
+</p>
+
+<a
+class="button"
+href="Probability/dice-experiment.html">
+
+Start Experiment →
+
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+🎡
+</div>
+
+<h2>Spinner</h2>
+
+<p>
+Spin a probability spinner and
+observe the different outcomes.
+</p>
+
+<a
+class="button"
+href="Probability/spinner.html">
+
+Start Experiment →
+
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+🔢
+</div>
+
+<h2>Random Number Experiment</h2>
+
+<p>
+Generate random numbers and
+explore experimental probability.
+</p>
+
+<a
+class="button"
+href="Probability/random-number.html">
+
+Start Experiment →
+
+</a>
+
+</div>
+
+</div>
+<div class="back-area">
+
+<a
+class="back"
+href="index.html">
+
+← Back to Mathematics Virtual Lab
+
+</a>
+
+</div>
+
+</main>
+
+<footer>
+
+<p>
+Mathematics Virtual Lab © 2026
+</p>
+
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Mathematics Virtual Lab</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+    <style>
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        header {
+            background: #0f766e;
+            color: white;
+            padding: 25px 45px;
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .header-text h1 {
+            margin: 0 0 8px 0;
+        }
+
+        .header-text p {
+            margin: 0;
+            color: white;
+        }
+
+
+        /* ==============================
+           LOGOUT BUTTON
+        ============================== */
+
+        #logoutBtn {
+            background: white;
+            color: #0f766e;
+
+            border: 2px solid white;
+
+            padding: 11px 22px;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+
+            white-space: nowrap;
+        }
+
+        #logoutBtn:hover {
+            background: #0f766e;
+            color: white;
+
+            border-color: white;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ==============================
+           LABORATORY CARDS
+        ============================== */
+
+        .lab-container {
+            max-width: 1100px;
+            margin: 35px auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 25px;
+
+            padding: 20px;
+        }
+
+
+        .lab-card {
+            background: white;
+
+            padding: 30px 25px;
+
+            border-radius: 22px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px
+                rgba(100, 50, 90, 0.10);
+
+            border: 2px solid transparent;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+
+        .lab-card:hover {
+
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 14px 30px
+                rgba(100, 50, 90, 0.16);
+
+            border-color: #d7b8dc;
+        }
+
+
+        /* ==============================
+           ICON
+        ============================== */
+
+        .lab-card .icon {
+
+            font-size: 52px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* ==============================
+           TITLE
+        ============================== */
+
+        .lab-card h3 {
+
+            color: #7c1d3c;
+
+            margin-bottom: 12px;
+
+            font-size: 21px;
+        }
+
+
+        /* ==============================
+           DESCRIPTION
+        ============================== */
+
+        .lab-card p {
+
+            color: #555;
+
+            line-height: 1.6;
+
+            min-height: 55px;
+
+            margin-bottom: 0;
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .lab-container {
+
+                grid-template-columns: 1fr;
+
+                padding: 15px;
+            }
+
+            .lab-card {
+
+                padding: 25px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="home-page">
+
+
+    <!-- ==============================
+         HEADER
+    ============================== -->
+
+    <header>
+
+        <div class="header-content">
+
+            <div class="header-text">
+
+                <h1>
+                    📐 Mathematics Virtual Lab
+                </h1>
+
+                <p>
+                    Learn • Explore • Experiment • Visualize
+                </p>
+
+            </div>
+
+
+            <!-- LOGOUT BUTTON -->
+
+            <button id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==============================
+         MAIN
+    ============================== -->
+
+    <main>
+
+        <h2>
+            Choose Your Laboratory
+        </h2>
+
+
+        <div class="lab-container">
+
+
+            <!-- ==============================
+                 GEOMETRY LAB
+            ============================== -->
+
+            <div
+                class="lab-card"
+                onclick="window.location.href='geometry.html'">
+
+                <div class="icon">
+                    📐
+                </div>
+
+                <h3>
+                    Geometry Lab
+                </h3>
+
+                <p>
+                    Explore shapes, angles,
+                    areas and theorems.
+                </p>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 ALGEBRA LAB
+            ============================== -->
+
+            <div
+                class="lab-card"
+                onclick="window.location.href='algebra.html'">
+
+                <div class="icon">
+                    🔢
+                </div>
+
+                <h3>
+                    Algebra Lab
+                </h3>
+
+                <p>
+                    Learn equations, expressions
+                    and graphs.
+                </p>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 TRIGONOMETRY LAB
+            ============================== -->
+
+            <div
+                class="lab-card"
+                onclick="window.location.href='trigonometry.html'">
+
+                <div class="icon">
+                    📊
+                </div>
+
+                <h3>
+                    Trigonometry Lab
+                </h3>
+
+                <p>
+                    Explore angles, ratios and
+                    trigonometric functions.
+                </p>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 STATISTICS LAB
+            ============================== -->
+
+            <div
+                class="lab-card"
+                onclick="window.location.href='statistics.html'">
+
+                <div class="icon">
+                    📈
+                </div>
+
+                <h3>
+                    Statistics Lab
+                </h3>
+
+                <p>
+                    Understand data, mean,
+                    median, mode and graphs.
+                </p>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 PROBABILITY LAB
+            ============================== -->
+
+            <div
+                class="lab-card"
+                onclick="window.location.href='probability.html'">
+
+                <div class="icon">
+                    🎲
+                </div>
+
+                <h3>
+                    Probability Lab
+                </h3>
+
+                <p>
+                    Perform virtual coin, dice
+                    and probability experiments.
+                </p>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 AI MATH TUTOR
+            ============================== -->
+
+            
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+
+    <footer>
+
+        <p>
+            Mathematics Virtual Lab © 2026
+        </p>
+
+    </footer>
+
+
+
+    <!-- ==============================
+         LOGOUT JAVASCRIPT
+    ============================== -->
+
+    <script>
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener("click", async function () {
+
+                try {
+
+                    const response =
+                        await fetch("/logout");
+
+                    const result =
+                        await response.json();
+
+
+                    if (result.success) {
+
+                        window.location.href = "/";
+
+                    } else {
+
+                        alert(
+                            "Logout failed. Please try again."
+                        );
+
+                    }
+
+                } catch (error) {
+
+                    alert(
+                        "Unable to logout. Please try again."
+                    );
+
+                }
+
+            });
+
+    </script>
+
+
+</body>
+
+</html>

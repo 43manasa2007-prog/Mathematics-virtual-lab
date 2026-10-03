@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mean, Median & Mode | Statistics Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fffde7;
+    color: #4e342e;
+}
+
+header {
+    background: linear-gradient(135deg, #f9a825, #fdd835);
+    color: #3e2723;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+main {
+    width: 92%;
+    max-width: 950px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+    color: #f57f17;
+    text-align: center;
+    margin-top: 0;
+}
+
+.description {
+    text-align: center;
+    line-height: 1.6;
+}
+
+.formula {
+    background: #fff8c4;
+    border-left: 5px solid #fbc02d;
+    padding: 15px;
+    margin: 15px 0;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 110px;
+    padding: 15px;
+    border: 2px solid #fbc02d;
+    border-radius: 10px;
+    font-size: 17px;
+    resize: vertical;
+}
+
+.button-area {
+    text-align: center;
+    margin-top: 18px;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 25px;
+    background: #fbc02d;
+    color: #3e2723;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #f9a825;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background: #fffde7;
+    border: 2px solid #fbc02d;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 19px;
+    line-height: 1.8;
+}
+
+.quiz-question {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.quiz-options {
+    text-align: center;
+}
+
+.quiz-options button {
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+.quiz-result {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    min-height: 25px;
+}
+
+.score {
+    text-align: center;
+    font-weight: bold;
+}
+
+.back-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.back {
+    display: inline-block;
+    background: #f57f17;
+    color: white;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #e65100;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6d4c41;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>📊 Mean, Median & Mode</h1>
+
+    <p>
+        Learn the three basic measures of central tendency.
+    </p>
+
+</header>
+
+<main>
+
+<div class="card">
+
+    <h2>📖 Learn the Concept</h2>
+
+    <p class="description">
+        Mean, median and mode are used to describe
+        the center of a set of data.
+    </p>
+
+    <div class="formula">
+        Mean = Sum of all values ÷ Number of values
+    </div>
+
+    <div class="formula">
+        Median = Middle value after arranging the data
+    </div>
+
+    <div class="formula">
+        Mode = Most frequently occurring value
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2>🧮 Calculate</h2>
+
+    <p class="description">
+        Enter numbers separated by commas.
+    </p>
+
+    <textarea
+        id="dataInput"
+        placeholder="Example: 10, 20, 20, 30, 40">10, 20, 20, 30, 40</textarea>
+
+    <div class="button-area">
+
+        <button onclick="calculateStatistics()">
+            Calculate
+        </button>
+
+        <button onclick="clearData()">
+            Clear
+        </button>
+
+    </div>
+
+    <div id="result" class="result">
+        Enter your data and click Calculate.
+    </div>
+
+</div>
+<div class="card">
+
+    <h2>🎯 Statistics Quiz</h2>
+
+    <p id="quizNumber" class="score">
+        Question 1 of 5
+    </p>
+
+    <div id="quizQuestion" class="quiz-question">
+        Loading question...
+    </div>
+
+    <div id="quizOptions" class="quiz-options"></div>
+
+    <p id="quizResult" class="quiz-result"></p>
+
+    <p class="score">
+        Score:
+        <span id="quizScore">0</span> / 5
+    </p>
+
+    <div class="button-area">
+
+        <button
+            id="nextButton"
+            onclick="nextQuestion()"
+            style="display:none;">
+
+            Next Question →
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="back-area">
+
+    <a
+        class="back"
+        href="../statistics.html">
+
+        ← Back to Statistics Lab
+
+    </a>
+
+</div>
+
+</main>
+
+<footer>
+
+    <p>
+        Mathematics Virtual Lab © 2026
+    </p>
+
+</footer>
+
+<script>
+    function calculateStatistics() {
+
+    const input =
+        document.getElementById("dataInput").value.trim();
+
+    const result =
+        document.getElementById("result");
+
+    if (input === "") {
+
+        result.textContent =
+            "Please enter some numbers.";
+
+        return;
+    }
+
+    const data = input
+        .split(",")
+        .map(function(value) {
+            return Number(value.trim());
+        });
+
+    if (
+        data.length === 0 ||
+        data.some(function(value) {
+            return !Number.isFinite(value);
+        })
+    ) {
+
+        result.textContent =
+            "Please enter only valid numbers separated by commas.";
+
+        return;
+    }
+
+
+    /* MEAN */
+
+    const sum =
+        data.reduce(function(total, value) {
+            return total + value;
+        }, 0);
+
+    const mean =
+        sum / data.length;
+
+
+    /* MEDIAN */
+
+    const sorted =
+        data.slice().sort(function(a, b) {
+            return a - b;
+        });
+
+    const middle =
+        Math.floor(sorted.length / 2);
+
+    let median;
+
+    if (sorted.length % 2 === 0) {
+
+        median =
+            (sorted[middle - 1] + sorted[middle]) / 2;
+
+    } else {
+
+        median =
+            sorted[middle];
+    }
+
+
+    /* MODE */
+
+    const frequency = {};
+
+    data.forEach(function(value) {
+
+        const key = String(value);
+
+        if (frequency[key]) {
+            frequency[key]++;
+        } else {
+            frequency[key] = 1;
+        }
+
+    });
+
+    let highestFrequency = 0;
+
+    Object.values(frequency).forEach(function(count) {
+
+        if (count > highestFrequency) {
+            highestFrequency = count;
+        }
+
+    });
+
+    let modes = [];
+
+    if (highestFrequency > 1) {
+
+        modes = Object.keys(frequency)
+            .filter(function(value) {
+                return frequency[value] === highestFrequency;
+            })
+            .map(Number);
+    }
+
+    let modeText;
+
+    if (modes.length === 0) {
+
+        modeText = "No mode";
+
+    } else {
+
+        modeText = modes.join(", ");
+    }
+
+
+    result.innerHTML =
+        "<strong>Mean:</strong> " +
+        mean.toFixed(2) +
+
+        "<br>" +
+
+        "<strong>Median:</strong> " +
+        median.toFixed(2) +
+
+        "<br>" +
+
+        "<strong>Mode:</strong> " +
+        modeText;
+}
+
+
+function clearData() {
+
+    document.getElementById("dataInput").value = "";
+
+    document.getElementById("result").textContent =
+        "Enter your data and click Calculate.";
+}
+
+
+/* QUIZ */
+
+const questions = [
+
+    {
+        question: "What is the mean of 2, 4 and 6?",
+
+        options: [
+            "2",
+            "4",
+            "6",
+            "12"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question: "What is the median of 3, 5 and 7?",
+
+        options: [
+            "3",
+            "5",
+            "7",
+            "15"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question: "What is the mode of 2, 3, 3, 4?",
+
+        options: [
+            "2",
+            "3",
+            "4",
+            "No mode"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question: "What is the mean of 10, 20 and 30?",
+
+        options: [
+            "10",
+            "20",
+            "30",
+            "60"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question:
+            "Which measure represents the most frequently occurring value?",
+
+        options: [
+            "Mean",
+            "Median",
+            "Mode",
+            "Range"
+        ],
+
+        answer: 2
+    }
+
+];
+
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+
+function loadQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+    document.getElementById("quizNumber").textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+    document.getElementById("quizQuestion").textContent =
+        question.question;
+
+    const options =
+        document.getElementById("quizOptions");
+
+    options.innerHTML = "";
+
+    question.options.forEach(function(option, index) {
+
+        const button =
+            document.createElement("button");
+
+        button.textContent = option;
+
+        button.onclick = function() {
+            checkAnswer(index);
+        };
+
+        options.appendChild(button);
+    });
+
+    document.getElementById("quizResult").textContent = "";
+
+    document.getElementById("nextButton").style.display =
+        "none";
+
+    answered = false;
+}
+
+
+function checkAnswer(selected) {
+
+    if (answered) {
+        return;
+    }
+
+    answered = true;
+
+    const question =
+        questions[currentQuestion];
+
+    const result =
+        document.getElementById("quizResult");
+
+    const buttons =
+        document.querySelectorAll("#quizOptions button");
+
+    buttons.forEach(function(button) {
+        button.disabled = true;
+    });
+
+    if (selected === question.answer) {
+
+        score++;
+
+        result.textContent =
+            "🎉 Correct!";
+
+        result.style.color =
+            "#f57f17";
+
+        document.getElementById("quizScore").textContent =
+            score;
+
+    } else {
+
+        result.textContent =
+            "❌ Incorrect. Correct answer: " +
+            question.options[question.answer];
+
+        result.style.color =
+            "#c62828";
+    }
+
+    document.getElementById("nextButton").style.display =
+        "inline-block";
+}
+
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+    if (currentQuestion >= questions.length) {
+
+        document.getElementById("quizNumber").textContent =
+            "Quiz Completed";
+
+        document.getElementById("quizQuestion").textContent =
+            "🏆 You completed the Statistics quiz!";
+
+        document.getElementById("quizOptions").innerHTML =
+            "";
+
+        document.getElementById("quizResult").textContent =
+            "Final Score: " +
+            score +
+            " / " +
+            questions.length;
+
+        document.getElementById("nextButton").textContent =
+            "Try Again";
+
+        document.getElementById("nextButton").onclick =
+            function() {
+                location.reload();
+            };
+
+        return;
+    }
+
+    loadQuestion();
+}
+
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

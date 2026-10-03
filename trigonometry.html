@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trigonometry Lab</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff7ef;
+    color: #4e342e;
+}
+
+header {
+    background: linear-gradient(135deg, #e65100, #ff9800);
+    color: white;
+    text-align: center;
+    padding: 45px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+main {
+    width: 92%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+h2 {
+    text-align: center;
+    color: #d84315;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.experiments {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.card:last-child {
+    grid-column: 1 / -1;
+    max-width: 550px;
+    width: 100%;
+    justify-self: center;
+}
+
+.icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #d84315;
+    font-size: 25px;
+    margin: 10px 0;
+}
+
+.card p {
+    line-height: 1.6;
+    color: #6d4c41;
+    min-height: 55px;
+}
+
+.start {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 13px 25px;
+    background: #f57c00;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.start:hover {
+    background: #e65100;
+}
+
+.back-area {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.back {
+    display: inline-block;
+    padding: 13px 25px;
+    background: #d84315;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 22px;
+    text-align: center;
+    background: #4e342e;
+    color: white;
+}
+
+@media (max-width: 700px) {
+
+    .experiments {
+        grid-template-columns: 1fr;
+    }
+
+    .card:last-child {
+        grid-column: auto;
+        max-width: none;
+    }
+
+    header h1 {
+        font-size: 32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📐 Trigonometry Lab</h1>
+    <p>Explore angles, ratios, graphs, heights and distances</p>
+</header>
+
+<main>
+
+    <h2>Choose Your Trigonometry Experiment</h2>
+
+    <section class="experiments">
+
+        <div class="card">
+
+            <div class="icon">📐</div>
+
+            <h3>Sin, Cos &amp; Tan</h3>
+
+            <p>
+                Explore the three basic trigonometric
+                ratios and test your understanding.
+            </p>
+
+            <a
+                class="start"
+                href="trigonometry/sin-cos-tan.html">
+                Start Experiment
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">📈</div>
+
+            <h3>Trigonometric Graphs</h3>
+
+            <p>
+                Explore the graphs of sine, cosine
+                and tangent functions.
+            </p>
+
+            <a
+                class="start"
+                href="trigonometry/trigonometry-graphs.html">
+                Start Experiment
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">📏</div>
+
+            <h3>Heights &amp; Distances</h3>
+
+            <p>
+                Use trigonometry to calculate heights
+                and distances using angles.
+            </p>
+
+            <a
+                class="start"
+                href="trigonometry/heights-distances.html">
+                Start Experiment
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <div class="back-area">
+
+        <a
+            class="back"
+            href="../index.html">
+            ← Back to Mathematics Lab
+        </a>
+
+    </div>
+
+</main>
+
+<footer>
+
+    <p>
+        Mathematics Virtual Lab © 2026
+    </p>
+
+</footer>
+
+</body>
+</html>

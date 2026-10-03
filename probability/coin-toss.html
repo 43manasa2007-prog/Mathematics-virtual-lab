@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Coin Toss | Probability Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff5f8;
+    color: #4a2633;
+}
+
+header {
+    background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+    color: #4a2633;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+main {
+    width: 92%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+}
+
+.card h2 {
+    color: #d81b60;
+    text-align: center;
+    margin-top: 0;
+}
+
+.description {
+    text-align: center;
+    line-height: 1.6;
+}
+
+.info {
+    background: #fce4ec;
+    border-left: 5px solid #f48fb1;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+.coin-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.coin {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    border-radius: 50%;
+    background: #f8bbd0;
+    border: 8px solid #ec407a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #880e4f;
+}
+
+.result {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #c2185b;
+    min-height: 30px;
+}
+
+.buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 25px;
+    background: #f48fb1;
+    color: #4a2633;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #f06292;
+    color: white;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.stat {
+    background: #fce4ec;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 150px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 24px;
+    color: #d81b60;
+}
+
+.quiz-question {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.quiz-options {
+    text-align: center;
+}
+
+.quiz-options button {
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+.quiz-result {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    min-height: 25px;
+}
+
+.score {
+    text-align: center;
+    font-weight: bold;
+}
+
+.back-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.back {
+    display: inline-block;
+    background: #d81b60;
+    color: white;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #ad1457;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6d4c41;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🪙 Coin Toss</h1>
+
+<p>
+Explore probability using a fair coin.
+</p>
+
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>📖 Learn the Concept</h2>
+
+<p class="description">
+A fair coin has two possible outcomes:
+Heads and Tails.
+</p>
+
+<div class="info">
+
+<strong>Probability of Heads:</strong>
+1 ÷ 2 = 0.5 = 50%
+
+<br><br>
+
+<strong>Probability of Tails:</strong>
+1 ÷ 2 = 0.5 = 50%
+
+<br><br>
+
+For a fair coin, both outcomes have an equal
+theoretical probability.
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🧪 Coin Toss Experiment</h2>
+
+<div class="coin-area">
+
+<div class="coin" id="coin">
+?
+</div>
+
+<p id="result" class="result">
+Click Toss Coin to begin.
+</p>
+
+</div>
+
+<div class="buttons">
+
+<button onclick="tossCoin()">
+🪙 Toss Coin
+</button>
+
+<button onclick="tossMultiple()">
+Toss 10 Times
+</button>
+
+<button onclick="resetExperiment()">
+Reset
+</button>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+Heads
+
+<strong id="heads">
+0
+</strong>
+
+</div>
+
+<div class="stat">
+
+Tails
+
+<strong id="tails">
+0
+</strong>
+
+</div>
+
+<div class="stat">
+
+Total Tosses
+
+<strong id="total">
+0
+</strong>
+
+</div>
+
+</div>
+
+</div>
+<div class="card">
+
+<h2>🎯 Coin Toss Quiz</h2>
+
+<p id="quizNumber" class="score">
+Question 1 of 5
+</p>
+
+<div id="quizQuestion" class="quiz-question">
+Loading question...
+</div>
+
+<div id="quizOptions" class="quiz-options"></div>
+
+<p id="quizResult" class="quiz-result"></p>
+
+<p class="score">
+Score:
+<span id="quizScore">0</span> / 5
+</p>
+
+<div class="buttons">
+
+<button
+id="nextButton"
+onclick="nextQuestion()"
+style="display:none;">
+
+Next Question →
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="back-area">
+
+<a
+class="back"
+href="../probability.html">
+
+← Back to Probability Lab
+
+</a>
+
+</div>
+
+</main>
+
+<footer>
+
+<p>
+Mathematics Virtual Lab © 2026
+</p>
+
+</footer>
+
+<script>
+    let heads = 0;
+let tails = 0;
+
+
+function tossCoin() {
+
+    const result =
+        Math.random() < 0.5
+        ? "Heads"
+        : "Tails";
+
+    if (result === "Heads") {
+        heads++;
+    } else {
+        tails++;
+    }
+
+    document.getElementById(
+        "coin"
+    ).textContent = result;
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "Result: " + result;
+
+    updateStats();
+}
+
+
+function tossMultiple() {
+
+    for (let i = 0; i < 10; i++) {
+        tossCoin();
+    }
+}
+
+
+function updateStats() {
+
+    const total =
+        heads + tails;
+
+    document.getElementById(
+        "heads"
+    ).textContent = heads;
+
+    document.getElementById(
+        "tails"
+    ).textContent = tails;
+
+    document.getElementById(
+        "total"
+    ).textContent = total;
+}
+
+
+function resetExperiment() {
+
+    heads = 0;
+    tails = 0;
+
+    document.getElementById(
+        "coin"
+    ).textContent = "?";
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "Click Toss Coin to begin.";
+
+    updateStats();
+}
+
+
+/* QUIZ */
+
+const questions = [
+
+    {
+        question:
+            "How many possible outcomes does a coin toss have?",
+
+        options: [
+            "1",
+            "2",
+            "3",
+            "4"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question:
+            "What are the two outcomes of a coin toss?",
+
+        options: [
+            "Red and Blue",
+            "Heads and Tails",
+            "Even and Odd",
+            "High and Low"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question:
+            "What is the probability of Heads for a fair coin?",
+
+        options: [
+            "0%",
+            "25%",
+            "50%",
+            "100%"
+        ],
+
+        answer: 2
+    },
+
+    {
+        question:
+            "What is the probability of Tails for a fair coin?",
+
+        options: [
+            "10%",
+            "25%",
+            "50%",
+            "75%"
+        ],
+
+        answer: 2
+    },
+
+    {
+        question:
+            "If a fair coin is tossed many times, what should the proportion of Heads approach?",
+
+        options: [
+            "0%",
+            "25%",
+            "50%",
+            "100%"
+        ],
+
+        answer: 2
+    }
+
+];
+
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+
+function loadQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    document.getElementById(
+        "quizNumber"
+    ).textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+
+    document.getElementById(
+        "quizQuestion"
+    ).textContent =
+        question.question;
+
+
+    const options =
+        document.getElementById(
+            "quizOptions"
+        );
+
+    options.innerHTML = "";
+
+
+    question.options.forEach(
+        function(option, index) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.textContent =
+                option;
+
+            button.onclick =
+                function() {
+                    checkAnswer(index);
+                };
+
+            options.appendChild(button);
+
+        }
+    );
+
+
+    document.getElementById(
+        "quizResult"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "none";
+
+
+    answered = false;
+}
+
+
+function checkAnswer(selected) {
+
+    if (answered) {
+        return;
+    }
+
+    answered = true;
+
+
+    const question =
+        questions[currentQuestion];
+
+
+    const result =
+        document.getElementById(
+            "quizResult"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            "#quizOptions button"
+        );
+
+
+    buttons.forEach(
+        function(button) {
+            button.disabled = true;
+        }
+    );
+
+
+    if (selected === question.answer) {
+
+        score++;
+
+        result.textContent =
+            "🎉 Correct!";
+
+        result.style.color =
+            "#d81b60";
+
+
+        document.getElementById(
+            "quizScore"
+        ).textContent =
+            score;
+
+    } else {
+
+        result.textContent =
+            "❌ Incorrect. Correct answer: " +
+            question.options[
+                question.answer
+            ];
+
+        result.style.color =
+            "#c62828";
+    }
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "inline-block";
+}
+
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        document.getElementById(
+            "quizNumber"
+        ).textContent =
+            "Quiz Completed";
+
+
+        document.getElementById(
+            "quizQuestion"
+        ).textContent =
+            "🏆 You completed the Coin Toss quiz!";
+
+
+        document.getElementById(
+            "quizOptions"
+        ).innerHTML = "";
+
+
+        document.getElementById(
+            "quizResult"
+        ).textContent =
+            "Final Score: " +
+            score +
+            " / " +
+            questions.length;
+
+
+        document.getElementById(
+            "nextButton"
+        ).textContent =
+            "Try Again";
+
+
+        document.getElementById(
+            "nextButton"
+        ).onclick =
+            function() {
+                location.reload();
+            };
+
+
+        return;
+    }
+
+
+    loadQuestion();
+}
+
+
+/* START QUIZ */
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

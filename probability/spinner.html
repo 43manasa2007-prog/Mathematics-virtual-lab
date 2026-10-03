@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Spinner | Probability Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff5f8;
+    color: #4a2633;
+}
+
+header {
+    background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+    color: #4a2633;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+main {
+    width: 92%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+}
+
+.card h2 {
+    color: #d81b60;
+    text-align: center;
+    margin-top: 0;
+}
+
+.description {
+    text-align: center;
+    line-height: 1.6;
+}
+
+.info {
+    background: #fce4ec;
+    border-left: 5px solid #f48fb1;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+.spinner-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+}
+
+.result {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #c2185b;
+    min-height: 30px;
+}
+
+.buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 25px;
+    background: #f48fb1;
+    color: #4a2633;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #f06292;
+    color: white;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.stat {
+    background: #fce4ec;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 22px;
+    color: #d81b60;
+    margin-top: 5px;
+}
+
+.probability {
+    margin-top: 20px;
+    padding: 18px;
+    background: #fff0f5;
+    border-radius: 12px;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.quiz-question {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.quiz-options {
+    text-align: center;
+}
+
+.quiz-options button {
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+.quiz-result {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    min-height: 25px;
+}
+
+.score {
+    text-align: center;
+    font-weight: bold;
+}
+
+.back-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.back {
+    display: inline-block;
+    background: #d81b60;
+    color: white;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #ad1457;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6d4c41;
+}
+
+@media (max-width: 650px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🎡 Spinner Experiment</h1>
+
+<p>
+Explore probability using a four-section spinner.
+</p>
+
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>📖 Learn the Concept</h2>
+
+<p class="description">
+This spinner has four equal sections:
+Red, Blue, Green and Yellow.
+Each section has the same theoretical probability.
+</p>
+
+<div class="info">
+
+<strong>Number of equal sections:</strong> 4
+
+<br><br>
+
+<strong>Probability of each color:</strong>
+
+<br>
+
+1 ÷ 4 = 0.25 = 25%
+
+<br><br>
+
+When the spinner is spun many times,
+the experimental probabilities should get
+closer to the theoretical probability.
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🧪 Spin the Spinner</h2>
+
+<div class="spinner-area">
+
+<canvas
+id="spinnerCanvas"
+width="320"
+height="320">
+</canvas>
+
+<p
+class="result"
+id="result">
+
+Click Spin to begin.
+
+</p>
+
+</div>
+
+<div class="buttons">
+
+<button onclick="spin()">
+
+🎡 Spin
+
+</button>
+
+<button onclick="spinTenTimes()">
+
+Spin 10 Times
+
+</button>
+
+<button onclick="resetExperiment()">
+
+Reset
+
+</button>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+Red
+<strong id="redCount">0</strong>
+</div>
+
+<div class="stat">
+Blue
+<strong id="blueCount">0</strong>
+</div>
+
+<div class="stat">
+Green
+<strong id="greenCount">0</strong>
+</div>
+
+<div class="stat">
+Yellow
+<strong id="yellowCount">0</strong>
+</div>
+
+</div>
+
+<div
+class="probability"
+id="probability">
+
+Spin the spinner to see the experimental probabilities.
+
+</div>
+
+</div>
+<div class="card">
+
+<h2>🎯 Spinner Probability Quiz</h2>
+
+<p
+id="quizNumber"
+class="score">
+
+Question 1 of 5
+
+</p>
+
+<div
+id="quizQuestion"
+class="quiz-question">
+
+Loading question...
+
+</div>
+
+<div
+id="quizOptions"
+class="quiz-options">
+</div>
+
+<p
+id="quizResult"
+class="quiz-result">
+</p>
+
+<p class="score">
+
+Score:
+<span id="quizScore">0</span> / 5
+
+</p>
+
+<div class="buttons">
+
+<button
+id="nextButton"
+onclick="nextQuestion()"
+style="display:none;">
+
+Next Question →
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="back-area">
+
+<a
+class="back"
+href="../probability.html">
+
+← Back to Probability Lab
+
+</a>
+
+</div>
+
+</main>
+
+<footer>
+
+<p>
+Mathematics Virtual Lab © 2026
+</p>
+
+</footer>
+
+<script>
+    const canvas =
+    document.getElementById("spinnerCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+const colors = [
+    "#ef9a9a",
+    "#90caf9",
+    "#a5d6a7",
+    "#fff59d"
+];
+
+const names = [
+    "Red",
+    "Blue",
+    "Green",
+    "Yellow"
+];
+
+let counts = [0, 0, 0, 0];
+
+let rotation = 0;
+
+
+function drawSpinner() {
+
+    const center = 160;
+    const radius = 125;
+    const section = (Math.PI * 2) / 4;
+
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    for (let i = 0; i < 4; i++) {
+
+        const start =
+            rotation +
+            i * section;
+
+        const end =
+            start + section;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            center,
+            center
+        );
+
+        ctx.arc(
+            center,
+            center,
+            radius,
+            start,
+            end
+        );
+
+        ctx.closePath();
+
+        ctx.fillStyle =
+            colors[i];
+
+        ctx.fill();
+
+        ctx.strokeStyle =
+            "#6d4c41";
+
+        ctx.lineWidth = 2;
+
+        ctx.stroke();
+
+
+        const middle =
+            start + section / 2;
+
+        const textX =
+            center +
+            Math.cos(middle) * 75;
+
+        const textY =
+            center +
+            Math.sin(middle) * 75;
+
+
+        ctx.fillStyle =
+            "#4a2633";
+
+        ctx.font =
+            "bold 16px Arial";
+
+        ctx.textAlign =
+            "center";
+
+        ctx.textBaseline =
+            "middle";
+
+        ctx.fillText(
+            names[i],
+            textX,
+            textY
+        );
+    }
+
+
+    /* CENTER */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        center,
+        center,
+        18,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+        "#d81b60";
+
+    ctx.fill();
+
+
+    /* POINTER */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        center,
+        5
+    );
+
+    ctx.lineTo(
+        center - 12,
+        30
+    );
+
+    ctx.lineTo(
+        center + 12,
+        30
+    );
+
+    ctx.closePath();
+
+    ctx.fillStyle =
+        "#880e4f";
+
+    ctx.fill();
+}
+
+
+function spin() {
+
+    const selected =
+        Math.floor(
+            Math.random() * 4
+        );
+
+
+    counts[selected]++;
+
+
+    /*
+       Rotate so the selected section
+       appears under the pointer.
+    */
+
+    const section =
+        (Math.PI * 2) / 4;
+
+    const target =
+        -Math.PI / 2 -
+        (selected + 0.5) * section;
+
+
+    rotation = target;
+
+
+    drawSpinner();
+
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "Result: " +
+        names[selected];
+
+
+    updateStats();
+}
+
+
+function spinTenTimes() {
+
+    for (let i = 0; i < 10; i++) {
+
+        const selected =
+            Math.floor(
+                Math.random() * 4
+            );
+
+        counts[selected]++;
+    }
+
+
+    drawSpinner();
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "The spinner was spun 10 times.";
+
+    updateStats();
+}
+
+
+function updateStats() {
+
+    const total =
+        counts.reduce(
+            function(sum, value) {
+                return sum + value;
+            },
+            0
+        );
+
+
+    document.getElementById(
+        "redCount"
+    ).textContent =
+        counts[0];
+
+    document.getElementById(
+        "blueCount"
+    ).textContent =
+        counts[1];
+
+    document.getElementById(
+        "greenCount"
+    ).textContent =
+        counts[2];
+
+    document.getElementById(
+        "yellowCount"
+    ).textContent =
+        counts[3];
+
+
+    if (total === 0) {
+
+        document.getElementById(
+            "probability"
+        ).textContent =
+            "Spin the spinner to see the experimental probabilities.";
+
+        return;
+    }
+
+
+    let text =
+        "<strong>Experimental Probability</strong><br>";
+
+
+    for (let i = 0; i < 4; i++) {
+
+        const percentage =
+            (
+                counts[i] / total * 100
+            ).toFixed(1);
+
+
+        text +=
+            names[i] +
+            " = " +
+            percentage +
+            "%";
+
+
+        if (i < 3) {
+            text += " &nbsp; | &nbsp; ";
+        }
+    }
+
+
+    document.getElementById(
+        "probability"
+    ).innerHTML =
+        text;
+}
+
+
+function resetExperiment() {
+
+    counts = [0, 0, 0, 0];
+
+    rotation = 0;
+
+    drawSpinner();
+
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "Click Spin to begin.";
+
+
+    updateStats();
+}
+
+
+/* QUIZ */
+
+const questions = [
+
+    {
+        question:
+            "How many equal sections does this spinner have?",
+
+        options: [
+            "2",
+            "3",
+            "4",
+            "6"
+        ],
+
+        answer: 2
+    },
+
+    {
+        question:
+            "What is the probability of landing on Red?",
+
+        options: [
+            "10%",
+            "25%",
+            "50%",
+            "75%"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question:
+            "What is the probability of landing on Blue?",
+
+        options: [
+            "1/2",
+            "1/3",
+            "1/4",
+            "1"
+        ],
+
+        answer: 2
+    },
+
+    {
+        question:
+            "What happens to experimental probability after many spins?",
+
+        options: [
+            "It tends to approach the theoretical probability",
+            "It always becomes 100%",
+            "It becomes zero",
+            "It never changes"
+        ],
+
+        answer: 0
+    },
+
+    {
+        question:
+            "What is the theoretical probability of any one section?",
+
+        options: [
+            "10%",
+            "20%",
+            "25%",
+            "50%"
+        ],
+
+        answer: 2
+    }
+
+];
+
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let answered = false;
+
+
+function loadQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    document.getElementById(
+        "quizNumber"
+    ).textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+
+    document.getElementById(
+        "quizQuestion"
+    ).textContent =
+        question.question;
+
+
+    const options =
+        document.getElementById(
+            "quizOptions"
+        );
+
+    options.innerHTML = "";
+
+
+    question.options.forEach(
+        function(option, index) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.textContent =
+                option;
+
+            button.onclick =
+                function() {
+
+                    checkAnswer(index);
+
+                };
+
+            options.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "quizResult"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "none";
+
+
+    answered = false;
+}
+
+
+function checkAnswer(selected) {
+
+    if (answered) {
+        return;
+    }
+
+
+    answered = true;
+
+
+    const question =
+        questions[currentQuestion];
+
+
+    const result =
+        document.getElementById(
+            "quizResult"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            "#quizOptions button"
+        );
+
+
+    buttons.forEach(
+        function(button) {
+
+            button.disabled = true;
+
+        }
+    );
+
+
+    if (
+        selected ===
+        question.answer
+    ) {
+
+        score++;
+
+
+        result.textContent =
+            "🎉 Correct!";
+
+        result.style.color =
+            "#d81b60";
+
+
+        document.getElementById(
+            "quizScore"
+        ).textContent =
+            score;
+
+    } else {
+
+        result.textContent =
+            "❌ Incorrect. Correct answer: " +
+            question.options[
+                question.answer
+            ];
+
+        result.style.color =
+            "#c62828";
+    }
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "inline-block";
+}
+
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        document.getElementById(
+            "quizNumber"
+        ).textContent =
+            "Quiz Completed";
+
+
+        document.getElementById(
+            "quizQuestion"
+        ).textContent =
+            "🏆 You completed the Spinner quiz!";
+
+
+        document.getElementById(
+            "quizOptions"
+        ).innerHTML = "";
+
+
+        document.getElementById(
+            "quizResult"
+        ).textContent =
+            "Final Score: " +
+            score +
+            " / " +
+            questions.length;
+
+
+        document.getElementById(
+            "nextButton"
+        ).textContent =
+            "Try Again";
+
+
+        document.getElementById(
+            "nextButton"
+        ).onclick =
+            function() {
+
+                location.reload();
+
+            };
+
+
+        return;
+    }
+
+
+    loadQuestion();
+}
+
+
+/* START */
+
+drawSpinner();
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

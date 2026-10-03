@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Number Experiment | Probability Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff5f8;
+    color: #4a2633;
+}
+
+header {
+    background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+    color: #4a2633;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+main {
+    width: 92%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+}
+
+.card h2 {
+    color: #d81b60;
+    text-align: center;
+    margin-top: 0;
+}
+
+.description {
+    text-align: center;
+    line-height: 1.6;
+}
+
+.info {
+    background: #fce4ec;
+    border-left: 5px solid #f48fb1;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+.inputs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+.input-group {
+    text-align: center;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 120px;
+    padding: 10px;
+    border: 2px solid #f48fb1;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.number {
+    width: 150px;
+    height: 150px;
+    margin: 25px auto;
+    border-radius: 20px;
+    background: #f8bbd0;
+    border: 6px solid #ec407a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    font-weight: bold;
+    color: #880e4f;
+}
+
+.result {
+    text-align: center;
+    font-size: 21px;
+    font-weight: bold;
+    color: #c2185b;
+    min-height: 30px;
+}
+
+.buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 25px;
+    background: #f48fb1;
+    color: #4a2633;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #f06292;
+    color: white;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.stat {
+    background: #fce4ec;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 140px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 22px;
+    color: #d81b60;
+    margin-top: 5px;
+}
+
+.probability {
+    margin-top: 20px;
+    padding: 18px;
+    background: #fff0f5;
+    border-radius: 12px;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.quiz-question {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.quiz-options {
+    text-align: center;
+}
+
+.quiz-options button {
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+.quiz-result {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    min-height: 25px;
+}
+
+.score {
+    text-align: center;
+    font-weight: bold;
+}
+
+.back-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.back {
+    display: inline-block;
+    background: #d81b60;
+    color: white;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #ad1457;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6d4c41;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🔢 Random Number Experiment</h1>
+
+<p>
+Explore probability using random numbers.
+</p>
+
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>📖 Learn the Concept</h2>
+
+<p class="description">
+A random number experiment generates numbers
+without knowing which number will appear next.
+Each number in the selected range has an equal
+chance of being generated.
+</p>
+
+<div class="info">
+
+<strong>Example:</strong>
+
+<br>
+
+If the range is 1 to 5, there are 5 possible outcomes.
+
+<br><br>
+
+Probability of getting any particular number:
+
+<br>
+
+1 ÷ 5 = 0.2 = 20%
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🧪 Random Number Generator</h2>
+
+<div class="inputs">
+
+<div class="input-group">
+
+<label for="minimum">
+Minimum
+</label>
+
+<input
+id="minimum"
+type="number"
+value="1">
+
+</div>
+
+<div class="input-group">
+
+<label for="maximum">
+Maximum
+</label>
+
+<input
+id="maximum"
+type="number"
+value="5">
+
+</div>
+
+</div>
+
+<div
+class="number"
+id="randomNumber">
+
+?
+
+</div>
+
+<p
+class="result"
+id="result">
+
+Enter a range and click Generate.
+
+</p>
+
+<div class="buttons">
+
+<button onclick="generateNumber()">
+🔢 Generate Number
+</button>
+
+<button onclick="generateTen()">
+Generate 10 Numbers
+</button>
+
+<button onclick="resetExperiment()">
+Reset
+</button>
+
+</div>
+
+<div
+class="stats"
+id="stats">
+
+</div>
+
+<div
+class="probability"
+id="probability">
+
+Generate numbers to see experimental probabilities.
+
+</div>
+
+</div>
+<div class="card">
+
+<h2>🎯 Random Number Quiz</h2>
+
+<p
+id="quizNumber"
+class="score">
+
+Question 1 of 5
+
+</p>
+
+<div
+id="quizQuestion"
+class="quiz-question">
+
+Loading question...
+
+</div>
+
+<div
+id="quizOptions"
+class="quiz-options">
+</div>
+
+<p
+id="quizResult"
+class="quiz-result">
+</p>
+
+<p class="score">
+
+Score:
+<span id="quizScore">0</span> / 5
+
+</p>
+
+<div class="buttons">
+
+<button
+id="nextButton"
+onclick="nextQuestion()"
+style="display:none;">
+
+Next Question →
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="back-area">
+
+<a
+class="back"
+href="../probability.html">
+
+← Back to Probability Lab
+
+</a>
+
+</div>
+
+</main>
+
+<footer>
+
+<p>
+Mathematics Virtual Lab © 2026
+</p>
+
+</footer>
+
+<script>
+    let counts = {};
+
+let total = 0;
+
+
+function getRange() {
+
+    const minimum =
+        parseInt(
+            document.getElementById(
+                "minimum"
+            ).value
+        );
+
+    const maximum =
+        parseInt(
+            document.getElementById(
+                "maximum"
+            ).value
+        );
+
+
+    if (
+        !Number.isInteger(minimum) ||
+        !Number.isInteger(maximum) ||
+        minimum >= maximum
+    ) {
+
+        alert(
+            "Please enter valid minimum and maximum values."
+        );
+
+        return null;
+    }
+
+
+    return {
+        minimum: minimum,
+        maximum: maximum
+    };
+}
+
+
+function generateNumber() {
+
+    const range =
+        getRange();
+
+    if (!range) {
+        return;
+    }
+
+
+    const number =
+        Math.floor(
+            Math.random() *
+            (
+                range.maximum -
+                range.minimum +
+                1
+            )
+        ) +
+        range.minimum;
+
+
+    if (
+        counts[number] === undefined
+    ) {
+        counts[number] = 0;
+    }
+
+
+    counts[number]++;
+
+    total++;
+
+
+    document.getElementById(
+        "randomNumber"
+    ).textContent =
+        number;
+
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "Generated number: " +
+        number;
+
+
+    updateStats();
+}
+
+
+function generateTen() {
+
+    for (
+        let i = 0;
+        i < 10;
+        i++
+    ) {
+
+        const range =
+            getRange();
+
+        if (!range) {
+            return;
+        }
+
+
+        const number =
+            Math.floor(
+                Math.random() *
+                (
+                    range.maximum -
+                    range.minimum +
+                    1
+                )
+            ) +
+            range.minimum;
+
+
+        if (
+            counts[number] === undefined
+        ) {
+            counts[number] = 0;
+        }
+
+
+        counts[number]++;
+
+        total++;
+    }
+
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "10 random numbers generated.";
+
+    updateStats();
+}
+
+
+function updateStats() {
+
+    const stats =
+        document.getElementById(
+            "stats"
+        );
+
+
+    stats.innerHTML = "";
+
+
+    const numbers =
+        Object.keys(counts)
+            .map(Number)
+            .sort(
+                function(a, b) {
+                    return a - b;
+                }
+            );
+
+
+    numbers.forEach(
+        function(number) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "stat";
+
+
+            const percentage =
+                (
+                    counts[number] /
+                    total *
+                    100
+                ).toFixed(1);
+
+
+            div.innerHTML =
+                number +
+                "<strong>" +
+                counts[number] +
+                "</strong>" +
+                percentage +
+                "%";
+
+
+            stats.appendChild(div);
+
+        }
+    );
+
+
+    if (total === 0) {
+
+        document.getElementById(
+            "probability"
+        ).textContent =
+            "Generate numbers to see experimental probabilities.";
+
+        return;
+    }
+
+
+    document.getElementById(
+        "probability"
+    ).innerHTML =
+        "<strong>Total Numbers: " +
+        total +
+        "</strong><br>" +
+        "The percentages above show the experimental probability of each generated number.";
+}
+
+
+function resetExperiment() {
+
+    counts = {};
+
+    total = 0;
+
+
+    document.getElementById(
+        "randomNumber"
+    ).textContent =
+        "?";
+
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "Enter a range and click Generate.";
+
+
+    document.getElementById(
+        "stats"
+    ).innerHTML = "";
+
+
+    document.getElementById(
+        "probability"
+    ).textContent =
+        "Generate numbers to see experimental probabilities.";
+}
+
+
+/* QUIZ */
+
+const questions = [
+
+    {
+        question:
+            "If random numbers from 1 to 5 are generated, how many possible outcomes are there?",
+
+        options: [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+
+        answer: 2
+    },
+
+    {
+        question:
+            "What is the probability of generating a particular number from 1 to 5?",
+
+        options: [
+            "10%",
+            "20%",
+            "25%",
+            "50%"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question:
+            "Which JavaScript function is commonly used to generate a random decimal number?",
+
+        options: [
+            "Math.random()",
+            "Math.number()",
+            "Math.generate()",
+            "Math.randomNumber()"
+        ],
+
+        answer: 0
+    },
+
+    {
+        question:
+            "What happens when many random numbers are generated from an equal range?",
+
+        options: [
+            "All numbers become impossible",
+            "The experimental probabilities tend to become closer",
+            "Only the first number appears",
+            "The range changes automatically"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question:
+            "For numbers 1 to 10, what is the probability of generating 7?",
+
+        options: [
+            "5%",
+            "10%",
+            "20%",
+            "50%"
+        ],
+
+        answer: 1
+    }
+
+];
+
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let answered = false;
+
+
+function loadQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    document.getElementById(
+        "quizNumber"
+    ).textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+
+    document.getElementById(
+        "quizQuestion"
+    ).textContent =
+        question.question;
+
+
+    const options =
+        document.getElementById(
+            "quizOptions"
+        );
+
+
+    options.innerHTML = "";
+
+
+    question.options.forEach(
+        function(option, index) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.textContent =
+                option;
+
+
+            button.onclick =
+                function() {
+
+                    checkAnswer(index);
+
+                };
+
+
+            options.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "quizResult"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "none";
+
+
+    answered = false;
+}
+
+
+function checkAnswer(selected) {
+
+    if (answered) {
+        return;
+    }
+
+
+    answered = true;
+
+
+    const question =
+        questions[currentQuestion];
+
+
+    const result =
+        document.getElementById(
+            "quizResult"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            "#quizOptions button"
+        );
+
+
+    buttons.forEach(
+        function(button) {
+
+            button.disabled =
+                true;
+
+        }
+    );
+
+
+    if (
+        selected ===
+        question.answer
+    ) {
+
+        score++;
+
+
+        result.textContent =
+            "🎉 Correct!";
+
+
+        result.style.color =
+            "#d81b60";
+
+
+        document.getElementById(
+            "quizScore"
+        ).textContent =
+            score;
+
+    } else {
+
+        result.textContent =
+            "❌ Incorrect. Correct answer: " +
+            question.options[
+                question.answer
+            ];
+
+
+        result.style.color =
+            "#c62828";
+    }
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "inline-block";
+}
+
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        document.getElementById(
+            "quizNumber"
+        ).textContent =
+            "Quiz Completed";
+
+
+        document.getElementById(
+            "quizQuestion"
+        ).textContent =
+            "🏆 You completed the Random Number quiz!";
+
+
+        document.getElementById(
+            "quizOptions"
+        ).innerHTML = "";
+
+
+        document.getElementById(
+            "quizResult"
+        ).textContent =
+            "Final Score: " +
+            score +
+            " / " +
+            questions.length;
+
+
+        document.getElementById(
+            "nextButton"
+        ).textContent =
+            "Try Again";
+
+
+        document.getElementById(
+            "nextButton"
+        ).onclick =
+            function() {
+
+                location.reload();
+
+            };
+
+
+        return;
+    }
+
+
+    loadQuestion();
+}
+
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

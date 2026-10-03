@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Statistics | Mathematics Virtual Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fffde7;
+    color: #4e342e;
+}
+
+/* HEADER */
+
+header {
+    background: linear-gradient(135deg, #f9a825, #fdd835);
+    color: #3e2723;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 40px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+/* MAIN */
+
+main {
+    width: 92%;
+    max-width: 1000px;
+    margin: 35px auto;
+}
+
+/* INTRO */
+
+.intro {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    margin-bottom: 30px;
+}
+
+.intro h2 {
+    color: #f57f17;
+    margin-top: 0;
+}
+
+/* EXPERIMENTS */
+
+.experiments {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card .icon {
+    font-size: 45px;
+}
+
+.card h3 {
+    color: #f57f17;
+    font-size: 22px;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.card a {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 22px;
+    background: #fbc02d;
+    color: #3e2723;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.card a:hover {
+    background: #f9a825;
+}
+
+/* BACK BUTTON */
+
+.back-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.back {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #f57f17;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #e65100;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6d4c41;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .experiments {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>📊 Statistics Lab</h1>
+
+    <p>
+        Explore data using statistics and graphs
+    </p>
+
+</header>
+
+<main>
+
+<div class="intro">
+
+    <h2>📚 Choose Your Statistics Experiment</h2>
+
+    <p>
+        Select an experiment below to learn and explore
+        important concepts in statistics.
+    </p>
+
+</div>
+
+
+<div class="experiments">
+
+    <!-- MEAN MEDIAN MODE -->
+
+    <div class="card">
+
+        <div class="icon">📈</div>
+
+        <h3>Mean, Median & Mode</h3>
+
+        <p>
+            Calculate the mean, median and mode
+            of a set of numbers.
+        </p>
+
+        <a href="statistics/mean-median-mode.html">
+            Start Experiment →
+        </a>
+
+    </div>
+
+
+    <!-- BAR GRAPHS -->
+
+    <div class="card">
+
+        <div class="icon">📊</div>
+
+        <h3>Bar Graphs</h3>
+
+        <p>
+            Create and understand bar graphs
+            using different data values.
+        </p>
+
+        <a href="statistics/bar-graphs.html">
+            Start Experiment →
+        </a>
+
+    </div>
+
+
+    <!-- PIE CHARTS -->
+
+    <div class="card">
+
+        <div class="icon">🥧</div>
+
+        <h3>Pie Charts</h3>
+
+        <p>
+            Represent data using sectors
+            and percentages in a pie chart.
+        </p>
+
+        <a href="statistics/pie-charts.html">
+            Start Experiment →
+        </a>
+
+    </div>
+
+
+    <!-- HISTOGRAMS -->
+
+    <div class="card">
+
+        <div class="icon">📉</div>
+
+        <h3>Histograms</h3>
+
+        <p>
+            Understand frequency distributions
+            using histograms.
+        </p>
+
+        <a href="statistics/histograms.html">
+            Start Experiment →
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="back-area">
+
+    <a
+        class="back"
+        href="index.html">
+
+        ← Back to Mathematics Virtual Lab
+
+    </a>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <p>
+        Mathematics Virtual Lab © 2026
+    </p>
+
+</footer>
+
+</body>
+</html>

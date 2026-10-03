@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Sin, Cos & Tan | Trigonometry Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff7ef;
+    color: #4e342e;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background: linear-gradient(
+        135deg,
+        #e65100,
+        #ff9800
+    );
+
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 40px;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: 92%;
+    max-width: 1000px;
+    margin: 35px auto;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    background: white;
+    padding: 30px;
+    margin-bottom: 28px;
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.10);
+}
+
+.card h2 {
+    color: #d84315;
+    text-align: center;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.7;
+}
+
+
+/* =========================
+   FORMULAS
+========================= */
+
+.formula {
+    background: #fff3e0;
+
+    border-left: 5px solid #f57c00;
+
+    padding: 18px;
+
+    margin: 15px 0;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    font-size: 21px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   CALCULATION AREA
+========================= */
+
+.calculation {
+    text-align: center;
+}
+
+.input-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    max-width: 800px;
+
+    margin: 25px auto;
+}
+
+.input-group {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.input-group label {
+    font-weight: bold;
+
+    color: #bf360c;
+
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+
+    max-width: 200px;
+
+    padding: 12px;
+
+    border: 2px solid #ffb74d;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #f57c00;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.button-row {
+    text-align: center;
+
+    margin: 25px 0;
+}
+
+button {
+    border: none;
+
+    padding: 13px 25px;
+
+    background: #f57c00;
+
+    color: white;
+
+    border-radius: 25px;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e65100;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result {
+    background: #fff8e1;
+
+    border: 2px solid #ffcc80;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    max-width: 800px;
+
+    margin: 20px auto;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    min-height: 70px;
+}
+
+.error {
+    background: #ffebee;
+
+    border-color: #ef9a9a;
+
+    color: #c62828;
+}
+
+
+/* =========================
+   RATIO BOXES
+========================= */
+
+.ratios {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    max-width: 800px;
+
+    margin: 25px auto;
+}
+
+.ratio {
+    background: #fff3e0;
+
+    border: 2px solid #ffcc80;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    text-align: center;
+}
+
+.ratio h3 {
+    color: #d84315;
+
+    margin-top: 0;
+
+    font-size: 22px;
+}
+
+.ratio-value {
+    font-size: 28px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   SECOND CALCULATION
+========================= */
+
+.angle-section {
+    text-align: center;
+}
+
+.angle-input {
+    margin: 25px auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.angle-input label {
+    font-weight: bold;
+
+    color: #bf360c;
+
+    margin-bottom: 8px;
+}
+
+.angle-input input {
+    width: 180px;
+
+    padding: 12px;
+
+    border: 2px solid #ffb74d;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-size: 17px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .input-container {
+        grid-template-columns: 1fr;
+    }
+
+    .ratios {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+<h1>
+📐 Sin, Cos & Tan
+</h1>
+
+<p>
+Basic Trigonometric Ratios Laboratory
+</p>
+
+</header>
+
+
+<main>
+
+
+<!-- =========================
+     FORMULAS
+========================= -->
+
+<div class="card">
+
+<h2>
+📖 Trigonometric Formulas
+</h2>
+
+<p>
+For a right-angled triangle, the three
+basic trigonometric ratios are:
+</p>
+
+<div class="formula">
+sin θ = Opposite ÷ Hypotenuse
+</div>
+
+<div class="formula">
+cos θ = Adjacent ÷ Hypotenuse
+</div>
+
+<div class="formula">
+tan θ = Opposite ÷ Adjacent
+</div>
+
+</div>
+
+
+<!-- =========================
+     CALCULATION 1
+========================= -->
+
+<div class="card calculation">
+
+<h2>
+🧮 Calculation 1: Using Triangle Sides
+</h2>
+
+<p>
+Enter the values of the three sides of a
+right-angled triangle. The laboratory will
+calculate sin θ, cos θ and tan θ.
+</p>
+
+
+<div class="input-container">
+
+
+<div class="input-group">
+
+<label for="opposite">
+Opposite
+</label>
+
+<input
+    type="number"
+    id="opposite"
+    min="0"
+    step="any"
+    placeholder="Enter opposite"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label for="adjacent">
+Adjacent
+</label>
+
+<input
+    type="number"
+    id="adjacent"
+    min="0"
+    step="any"
+    placeholder="Enter adjacent"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label for="hypotenuse">
+Hypotenuse
+</label>
+
+<input
+    type="number"
+    id="hypotenuse"
+    min="0"
+    step="any"
+    placeholder="Enter hypotenuse"
+>
+
+</div>
+
+</div>
+
+
+<div class="button-row">
+
+<button
+    type="button"
+    onclick="calculateFromSides()"
+>
+Calculate Ratios
+</button>
+
+</div>
+
+
+<div
+    id="sideResult"
+    class="result"
+>
+Enter all three side values and click
+<strong>Calculate Ratios</strong>.
+</div>
+
+
+<div class="ratios">
+
+
+<div class="ratio">
+
+<h3>
+sin θ
+</h3>
+
+<div
+    id="sideSin"
+    class="ratio-value"
+>
+—
+</div>
+
+</div>
+
+
+<div class="ratio">
+
+<h3>
+cos θ
+</h3>
+
+<div
+    id="sideCos"
+    class="ratio-value"
+>
+—
+</div>
+
+</div>
+
+
+<div class="ratio">
+
+<h3>
+tan θ
+</h3>
+
+<div
+    id="sideTan"
+    class="ratio-value"
+>
+—
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     PART 2 WILL CONTINUE HERE
+========================= -->
+<!-- =========================
+     CALCULATION 2
+========================= -->
+
+<div class="card angle-section">
+
+<h2>
+🧮 Calculation 2: Using the Angle
+</h2>
+
+<p>
+Enter an angle θ between 0° and 90°.
+The laboratory will calculate the values
+of sin θ, cos θ and tan θ.
+</p>
+
+
+<div class="angle-input">
+
+<label for="angle">
+Angle θ (degrees)
+</label>
+
+<input
+    type="number"
+    id="angle"
+    min="0"
+    max="90"
+    step="any"
+    placeholder="Example: 30"
+>
+
+</div>
+
+
+<div class="button-row">
+
+<button
+    type="button"
+    onclick="calculateFromAngle()"
+>
+Calculate sin, cos & tan
+</button>
+
+</div>
+
+
+<div
+    id="angleResult"
+    class="result"
+>
+Enter an angle and click
+<strong>Calculate sin, cos & tan</strong>.
+</div>
+
+
+<div class="ratios">
+
+
+<div class="ratio">
+
+<h3>
+sin θ
+</h3>
+
+<div
+    id="angleSin"
+    class="ratio-value"
+>
+—
+</div>
+
+</div>
+
+
+<div class="ratio">
+
+<h3>
+cos θ
+</h3>
+
+<div
+    id="angleCos"
+    class="ratio-value"
+>
+—
+</div>
+
+</div>
+
+
+<div class="ratio">
+
+<h3>
+tan θ
+</h3>
+
+<div
+    id="angleTan"
+    class="ratio-value"
+>
+—
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+
+/* =================================
+   CALCULATION 1
+   USING OPPOSITE, ADJACENT,
+   AND HYPOTENUSE
+================================= */
+
+
+    /* -----------------------------
+       FIND ANGLE
+    ----------------------------- */
+
+    const angle =
+        Math.atan2(
+            opposite,
+            adjacent
+        ) *
+        180 /
+        Math.PI;
+
+
+    /* -----------------------------
+       DISPLAY SUCCESS
+    ----------------------------- */
+
+    function calculateFromSides() {
+
+    const opposite = Number(
+        document.getElementById("opposite").value
+    );
+
+    const adjacent = Number(
+        document.getElementById("adjacent").value
+    );
+
+    const hypotenuseInput =
+        document.getElementById("hypotenuse").value.trim();
+
+    const result =
+        document.getElementById("sideResult");
+
+
+    /* =========================
+       CHECK OPPOSITE
+    ========================= */
+
+    if (
+        !Number.isFinite(opposite) ||
+        opposite <= 0
+    ) {
+
+        result.className = "result error";
+
+        result.innerHTML =
+            "❌ Please enter a positive value for Opposite.";
+
+        return;
+    }
+
+
+    /* =========================
+       CHECK ADJACENT
+    ========================= */
+
+    if (
+        !Number.isFinite(adjacent) ||
+        adjacent <= 0
+    ) {
+
+        result.className = "result error";
+
+        result.innerHTML =
+            "❌ Please enter a positive value for Adjacent.";
+
+        return;
+    }
+
+
+    /* =========================
+       CALCULATE HYPOTENUSE
+       AUTOMATICALLY
+    ========================= */
+
+    const calculatedHypotenuse =
+        Math.sqrt(
+            (opposite * opposite) +
+            (adjacent * adjacent)
+        );
+
+
+    let hypotenuse;
+
+
+    /*
+       If the user leaves Hypotenuse empty
+       or enters 0, calculate it automatically.
+    */
+
+    if (
+        hypotenuseInput === "" ||
+        Number(hypotenuseInput) === 0
+    ) {
+
+        hypotenuse =
+            calculatedHypotenuse;
+
+        document.getElementById(
+            "hypotenuse"
+        ).value =
+            hypotenuse.toFixed(4);
+
+    }
+
+    else {
+
+        hypotenuse =
+            Number(hypotenuseInput);
+
+
+        if (
+            !Number.isFinite(hypotenuse) ||
+            hypotenuse <= 0
+        ) {
+
+            result.className =
+                "result error";
+
+            result.innerHTML =
+                "❌ Hypotenuse must be positive.";
+
+            return;
+        }
+
+
+        /* =========================
+           CHECK PYTHAGORAS
+        ========================= */
+
+        const difference =
+            Math.abs(
+                calculatedHypotenuse -
+                hypotenuse
+            );
+
+
+        if (difference > 0.01) {
+
+            result.className =
+                "result error";
+
+            result.innerHTML =
+
+                "❌ Invalid right-angled triangle.<br><br>" +
+
+                "For Opposite = " +
+                opposite +
+                " and Adjacent = " +
+                adjacent +
+                ", the correct Hypotenuse is approximately " +
+
+                "<strong>" +
+                calculatedHypotenuse.toFixed(4) +
+                "</strong>.";
+
+            document.getElementById(
+                "sideSin"
+            ).textContent = "—";
+
+            document.getElementById(
+                "sideCos"
+            ).textContent = "—";
+
+            document.getElementById(
+                "sideTan"
+            ).textContent = "—";
+
+            return;
+        }
+
+    }
+
+
+    /* =========================
+       CALCULATE SIN
+    ========================= */
+
+    const sinValue =
+        opposite / hypotenuse;
+
+
+    /* =========================
+       CALCULATE COS
+    ========================= */
+
+    const cosValue =
+        adjacent / hypotenuse;
+
+
+    /* =========================
+       CALCULATE TAN
+    ========================= */
+
+    const tanValue =
+        opposite / adjacent;
+
+
+    /* =========================
+       FIND ANGLE
+    ========================= */
+
+    const angle =
+        Math.atan2(
+            opposite,
+            adjacent
+        ) *
+        180 /
+        Math.PI;
+
+
+    /* =========================
+       DISPLAY SIN
+    ========================= */
+
+    document.getElementById(
+        "sideSin"
+    ).textContent =
+        sinValue.toFixed(4);
+
+
+    /* =========================
+       DISPLAY COS
+    ========================= */
+
+    document.getElementById(
+        "sideCos"
+    ).textContent =
+        cosValue.toFixed(4);
+
+
+    /* =========================
+       DISPLAY TAN
+    ========================= */
+
+    document.getElementById(
+        "sideTan"
+    ).textContent =
+        tanValue.toFixed(4);
+
+
+    /* =========================
+       DISPLAY RESULT
+    ========================= */
+
+    result.className =
+        "result";
+
+
+    result.innerHTML =
+
+        "✅ <strong>Calculation Successful!</strong><br><br>" +
+
+        "Opposite = " +
+        opposite.toFixed(4) +
+        "<br>" +
+
+        "Adjacent = " +
+        adjacent.toFixed(4) +
+        "<br>" +
+
+        "Hypotenuse = " +
+        hypotenuse.toFixed(4) +
+        "<br><br>" +
+
+        "sin θ = Opposite ÷ Hypotenuse<br>" +
+
+        "sin θ = " +
+        opposite.toFixed(4) +
+        " ÷ " +
+        hypotenuse.toFixed(4) +
+        " = " +
+
+        "<strong>" +
+        sinValue.toFixed(4) +
+        "</strong><br><br>" +
+
+        "cos θ = Adjacent ÷ Hypotenuse<br>" +
+
+        "cos θ = " +
+        adjacent.toFixed(4) +
+        " ÷ " +
+        hypotenuse.toFixed(4) +
+        " = " +
+
+        "<strong>" +
+        cosValue.toFixed(4) +
+        "</strong><br><br>" +
+
+        "tan θ = Opposite ÷ Adjacent<br>" +
+
+        "tan θ = " +
+        opposite.toFixed(4) +
+        " ÷ " +
+        adjacent.toFixed(4) +
+        " = " +
+
+        "<strong>" +
+        tanValue.toFixed(4) +
+        "</strong><br><br>" +
+
+        "Angle θ = " +
+
+        "<strong>" +
+        angle.toFixed(2) +
+        "°" +
+        "</strong>";
+
+}
+
+
+/* =================================
+   CALCULATION 2
+   USING ANGLE
+================================= */
+
+function calculateFromAngle() {
+
+    const angle =
+        Number(
+            document.getElementById(
+                "angle"
+            ).value
+        );
+
+
+    const result =
+        document.getElementById(
+            "angleResult"
+        );
+
+
+    /* -----------------------------
+       CHECK ANGLE
+    ----------------------------- */
+
+    if (
+        !Number.isFinite(angle) ||
+        angle <= 0 ||
+        angle >= 90
+    ) {
+
+        result.className =
+            "result error";
+
+        result.innerHTML =
+            "❌ Please enter an angle " +
+            "greater than 0° and less than 90°.";
+
+        return;
+    }
+
+
+    /* -----------------------------
+       CONVERT DEGREES TO RADIANS
+    ----------------------------- */
+
+    const radians =
+        angle *
+        Math.PI /
+        180;
+
+
+    /* -----------------------------
+       CALCULATE RATIOS
+    ----------------------------- */
+
+    const sinValue =
+        Math.sin(radians);
+
+
+    const cosValue =
+        Math.cos(radians);
+
+
+    const tanValue =
+        Math.tan(radians);
+
+
+    /* -----------------------------
+       DISPLAY VALUES
+    ----------------------------- */
+
+    document.getElementById(
+        "angleSin"
+    ).textContent =
+        sinValue.toFixed(4);
+
+
+    document.getElementById(
+        "angleCos"
+    ).textContent =
+        cosValue.toFixed(4);
+
+
+    document.getElementById(
+        "angleTan"
+    ).textContent =
+        tanValue.toFixed(4);
+
+
+    /* -----------------------------
+       DISPLAY CALCULATION
+    ----------------------------- */
+
+    result.className =
+        "result";
+
+
+    result.innerHTML =
+
+        "✅ <strong>Calculation Successful!</strong><br><br>" +
+
+        "For θ = " +
+        "<strong>" +
+        angle.toFixed(2) +
+        "°" +
+        "</strong><br><br>" +
+
+        "sin " +
+        angle.toFixed(2) +
+        "° = " +
+        "<strong>" +
+        sinValue.toFixed(4) +
+        "</strong><br>" +
+
+        "cos " +
+        angle.toFixed(2) +
+        "° = " +
+        "<strong>" +
+        cosValue.toFixed(4) +
+        "</strong><br>" +
+
+        "tan " +
+        angle.toFixed(2) +
+        "° = " +
+        "<strong>" +
+        tanValue.toFixed(4) +
+        "</strong>";
+
+}
+
+</script>
+
+
+<!-- =========================
+     PART 3 WILL CONTINUE HERE
+========================= -->
+<!-- =========================
+     QUIZ SECTION
+========================= -->
+
+<div class="card">
+
+    <h2>
+        🎯 Trigonometry Quiz
+    </h2>
+
+    <p
+        id="questionNumber"
+        style="text-align:center; font-weight:bold;"
+    >
+        Question 1 of 5
+    </p>
+
+    <p
+        id="question"
+        style="text-align:center; font-size:18px;"
+    >
+        Loading question...
+    </p>
+
+    <div id="options"></div>
+
+    <p
+        id="quizResult"
+        style="
+            text-align:center;
+            min-height:28px;
+            font-weight:bold;
+        "
+    ></p>
+
+    <div class="button-row">
+
+        <button
+            id="nextQuestion"
+            type="button"
+            style="display:none;"
+        >
+            Next Question →
+        </button>
+
+    </div>
+
+    <p
+        style="
+            text-align:center;
+            font-size:18px;
+            font-weight:bold;
+        "
+    >
+        Score:
+        <span id="score">0</span>
+        / 5
+    </p>
+
+</div>
+
+
+<!-- =========================
+     BACK BUTTON
+========================= -->
+
+<div
+    style="
+        text-align:center;
+        margin:35px 0;
+    "
+>
+
+    <a
+        href="../trigonometry.html"
+        style="
+            display:inline-block;
+            padding:13px 25px;
+            background:#d84315;
+            color:white;
+            text-decoration:none;
+            border-radius:25px;
+            font-weight:bold;
+        "
+    >
+        ← Back to Trigonometry Lab
+    </a>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        Mathematics Virtual Lab © 2026
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     QUIZ JAVASCRIPT
+========================= -->
+
+<script>
+
+const quizQuestions = [
+
+    {
+        question:
+            "What is sin 30°?",
+
+        options: [
+            "0.5",
+            "0.866",
+            "1",
+            "0"
+        ],
+
+        answer: 0
+    },
+
+
+    {
+        question:
+            "What is cos 60°?",
+
+        options: [
+            "0",
+            "0.5",
+            "0.866",
+            "1"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+            "What is tan 45°?",
+
+        options: [
+            "0",
+            "0.5",
+            "1",
+            "√3"
+        ],
+
+        answer: 2
+    },
+
+
+    {
+        question:
+            "If Opposite = 3 and Hypotenuse = 5, what is sin θ?",
+
+        options: [
+            "0.4",
+            "0.5",
+            "0.6",
+            "0.8"
+        ],
+
+        answer: 2
+    },
+
+
+    {
+        question:
+            "If Opposite = 4 and Adjacent = 3, what is tan θ?",
+
+        options: [
+            "0.75",
+            "1",
+            "1.25",
+            "2"
+        ],
+
+        answer: 2
+    }
+
+];
+
+
+let currentQuizQuestion = 0;
+
+let quizScore = 0;
+
+let quizAnswered = false;
+
+
+/* =========================
+   LOAD QUESTION
+========================= */
+
+function loadQuizQuestion() {
+
+    const question =
+        quizQuestions[
+            currentQuizQuestion
+        ];
+
+
+    document.getElementById(
+        "questionNumber"
+    ).textContent =
+
+        "Question " +
+
+        (currentQuizQuestion + 1) +
+
+        " of " +
+
+        quizQuestions.length;
+
+
+    document.getElementById(
+        "question"
+    ).textContent =
+
+        question.question;
+
+
+    const options =
+        document.getElementById(
+            "options"
+        );
+
+
+    options.innerHTML = "";
+
+
+    question.options.forEach(
+        function(option, index) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type = "button";
+
+            button.textContent =
+                option;
+
+
+            button.style.margin =
+                "6px";
+
+
+            button.onclick =
+                function() {
+
+                    checkQuizAnswer(
+                        index
+                    );
+
+                };
+
+
+            options.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "quizResult"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "nextQuestion"
+    ).style.display =
+        "none";
+
+
+    quizAnswered = false;
+
+}
+
+
+/* =========================
+   CHECK ANSWER
+========================= */
+
+function checkQuizAnswer(selected) {
+
+    if (quizAnswered) {
+        return;
+    }
+
+
+    quizAnswered = true;
+
+
+    const question =
+        quizQuestions[
+            currentQuizQuestion
+        ];
+
+
+    const result =
+        document.getElementById(
+            "quizResult"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            "#options button"
+        );
+
+
+    buttons.forEach(
+        function(button) {
+
+            button.disabled = true;
+
+        }
+    );
+
+
+    if (
+        selected ===
+        question.answer
+    ) {
+
+        quizScore++;
+
+
+        result.textContent =
+            "🎉 Correct!";
+
+
+        result.style.color =
+            "#2e7d32";
+
+
+        document.getElementById(
+            "score"
+        ).textContent =
+            quizScore;
+
+    }
+
+    else {
+
+        result.textContent =
+            "❌ Incorrect. Correct answer: " +
+
+            question.options[
+                question.answer
+            ];
+
+
+        result.style.color =
+            "#c62828";
+
+    }
+
+
+    document.getElementById(
+        "nextQuestion"
+    ).style.display =
+        "inline-block";
+
+}
+
+
+/* =========================
+   NEXT QUESTION
+========================= */
+
+document.getElementById(
+    "nextQuestion"
+).onclick = function() {
+
+    currentQuizQuestion++;
+
+
+    if (
+        currentQuizQuestion >=
+        quizQuestions.length
+    ) {
+
+        showQuizResult();
+
+        return;
+    }
+
+
+    loadQuizQuestion();
+
+};
+
+
+/* =========================
+   FINAL QUIZ RESULT
+========================= */
+
+function showQuizResult() {
+
+    document.getElementById(
+        "questionNumber"
+    ).textContent =
+        "Quiz Completed";
+
+
+    document.getElementById(
+        "question"
+    ).textContent =
+        "You have completed all 5 questions.";
+
+
+    document.getElementById(
+        "options"
+    ).innerHTML = "";
+
+
+    document.getElementById(
+        "quizResult"
+    ).innerHTML =
+
+        "🏆 Final Score: " +
+
+        "<strong>" +
+
+        quizScore +
+
+        " / " +
+
+        quizQuestions.length +
+
+        "</strong>";
+
+
+    document.getElementById(
+        "quizResult"
+    ).style.color =
+        "#d84315";
+
+
+    document.getElementById(
+        "nextQuestion"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =========================
+   START QUIZ
+========================= */
+
+loadQuizQuestion();
+
+</script>
+
+
+</main>
+
+
+</body>
+
+</html>

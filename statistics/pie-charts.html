@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pie Charts | Statistics Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fffde7;
+    color: #4e342e;
+}
+
+header {
+    background: linear-gradient(135deg, #f9a825, #fdd835);
+    color: #3e2723;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+main {
+    width: 92%;
+    max-width: 950px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+    color: #f57f17;
+    text-align: center;
+    margin-top: 0;
+}
+
+.description {
+    text-align: center;
+    line-height: 1.6;
+}
+
+.info {
+    background: #fff8c4;
+    border-left: 5px solid #fbc02d;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.inputs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 18px 0;
+}
+
+input {
+    width: 180px;
+    padding: 12px;
+    border: 2px solid #fbc02d;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.button-area {
+    text-align: center;
+    margin: 18px 0;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 25px;
+    background: #fbc02d;
+    color: #3e2723;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #f9a825;
+}
+
+.chart-area {
+    text-align: center;
+    margin-top: 25px;
+}
+
+canvas {
+    max-width: 100%;
+    background: #fffef5;
+    border: 2px solid #fbc02d;
+    border-radius: 10px;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.legend-item {
+    padding: 8px 12px;
+    background: #fff8c4;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.quiz-question {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.quiz-options {
+    text-align: center;
+}
+
+.quiz-options button {
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+.quiz-result {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    min-height: 25px;
+}
+
+.score {
+    text-align: center;
+    font-weight: bold;
+}
+
+.back-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.back {
+    display: inline-block;
+    background: #f57f17;
+    color: white;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #e65100;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6d4c41;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🥧 Pie Charts</h1>
+
+<p>
+Represent data using sectors and percentages.
+</p>
+
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>📖 Learn the Concept</h2>
+
+<p class="description">
+A pie chart is a circular graph divided into sectors.
+Each sector represents a part of the whole data.
+</p>
+
+<div class="info">
+
+<strong>Formula:</strong>
+
+Percentage =
+(Value ÷ Total) × 100
+
+<br><br>
+
+<strong>Angle:</strong>
+
+Angle =
+(Value ÷ Total) × 360°
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🧮 Create a Pie Chart</h2>
+
+<p class="description">
+Enter up to 6 categories and their values.
+</p>
+
+<div class="inputs">
+
+<input id="label1"
+value="Apples"
+placeholder="Category 1">
+
+<input id="value1"
+type="number"
+value="30"
+min="0">
+
+<input id="label2"
+value="Bananas"
+placeholder="Category 2">
+
+<input id="value2"
+type="number"
+value="20"
+min="0">
+
+<input id="label3"
+value="Oranges"
+placeholder="Category 3">
+
+<input id="value3"
+type="number"
+value="25"
+min="0">
+
+</div>
+
+<div class="inputs">
+
+<input id="label4"
+value="Mangoes"
+placeholder="Category 4">
+
+<input id="value4"
+type="number"
+value="15"
+min="0">
+
+<input id="label5"
+value="Grapes"
+placeholder="Category 5">
+
+<input id="value5"
+type="number"
+value="10"
+min="0">
+
+<input id="label6"
+value="Guava"
+placeholder="Category 6">
+
+<input id="value6"
+type="number"
+value="5"
+min="0">
+
+</div>
+
+<div class="button-area">
+
+<button onclick="drawPieChart()">
+Create Pie Chart
+</button>
+
+<button onclick="clearChart()">
+Clear
+</button>
+
+</div>
+
+<div class="chart-area">
+
+<canvas
+id="pieCanvas"
+width="500"
+height="500">
+</canvas>
+
+<div
+id="legend"
+class="legend">
+</div>
+
+</div>
+
+</div>
+<div class="card">
+
+<h2>🎯 Pie Chart Quiz</h2>
+
+<p id="quizNumber" class="score">
+Question 1 of 5
+</p>
+
+<div id="quizQuestion" class="quiz-question">
+Loading question...
+</div>
+
+<div id="quizOptions" class="quiz-options"></div>
+
+<p id="quizResult" class="quiz-result"></p>
+
+<p class="score">
+Score:
+<span id="quizScore">0</span> / 5
+</p>
+
+<div class="button-area">
+
+<button
+id="nextButton"
+onclick="nextQuestion()"
+style="display:none;">
+
+Next Question →
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="back-area">
+
+<a
+class="back"
+href="../statistics.html">
+
+← Back to Statistics Lab
+
+</a>
+
+</div>
+
+</main>
+
+<footer>
+
+<p>
+Mathematics Virtual Lab © 2026
+</p>
+
+</footer>
+
+<script>
+    const canvas =
+    document.getElementById("pieCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+
+function drawPieChart() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    const labels = [];
+    const values = [];
+
+    for (let i = 1; i <= 6; i++) {
+
+        const label =
+            document.getElementById(
+                "label" + i
+            ).value.trim();
+
+        const value =
+            Number(
+                document.getElementById(
+                    "value" + i
+                ).value
+            );
+
+        if (
+            label !== "" &&
+            Number.isFinite(value) &&
+            value > 0
+        ) {
+
+            labels.push(label);
+            values.push(value);
+        }
+    }
+
+
+    if (values.length === 0) {
+
+        alert(
+            "Please enter at least one valid category and value."
+        );
+
+        return;
+    }
+
+
+    const total =
+        values.reduce(
+            function(sum, value) {
+                return sum + value;
+            },
+            0
+        );
+
+
+    const centerX = 250;
+    const centerY = 250;
+    const radius = 180;
+
+    const colors = [
+        "#fbc02d",
+        "#f9a825",
+        "#ffca28",
+        "#ffd54f",
+        "#ffb300",
+        "#ffe082"
+    ];
+
+
+    let startAngle = -Math.PI / 2;
+
+
+    values.forEach(function(value, index) {
+
+        const sliceAngle =
+            (value / total) * 2 * Math.PI;
+
+        const endAngle =
+            startAngle + sliceAngle;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            centerX,
+            centerY
+        );
+
+        ctx.arc(
+            centerX,
+            centerY,
+            radius,
+            startAngle,
+            endAngle
+        );
+
+        ctx.closePath();
+
+        ctx.fillStyle =
+            colors[index];
+
+        ctx.fill();
+
+        ctx.strokeStyle =
+            "#4e342e";
+
+        ctx.lineWidth = 2;
+
+        ctx.stroke();
+
+
+        /* PERCENTAGE */
+
+        const middleAngle =
+            startAngle +
+            sliceAngle / 2;
+
+        const textX =
+            centerX +
+            Math.cos(middleAngle) *
+            radius *
+            0.65;
+
+        const textY =
+            centerY +
+            Math.sin(middleAngle) *
+            radius *
+            0.65;
+
+
+        const percentage =
+            ((value / total) * 100)
+            .toFixed(1) + "%";
+
+
+        ctx.fillStyle =
+            "#3e2723";
+
+        ctx.font =
+            "bold 15px Arial";
+
+        ctx.textAlign =
+            "center";
+
+        ctx.textBaseline =
+            "middle";
+
+        ctx.fillText(
+            percentage,
+            textX,
+            textY
+        );
+
+
+        startAngle =
+            endAngle;
+    });
+
+
+    /* LEGEND */
+
+    const legend =
+        document.getElementById("legend");
+
+    legend.innerHTML = "";
+
+
+    labels.forEach(function(label, index) {
+
+        const percentage =
+            ((values[index] / total) * 100)
+            .toFixed(1);
+
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "legend-item";
+
+        item.innerHTML =
+            "<span style='color:" +
+            colors[index] +
+            ";'>●</span> " +
+
+            label +
+            ": " +
+            values[index] +
+            " (" +
+            percentage +
+            "%)";
+
+
+        legend.appendChild(item);
+    });
+
+}
+
+
+function clearChart() {
+
+    for (let i = 1; i <= 6; i++) {
+
+        document.getElementById(
+            "label" + i
+        ).value = "";
+
+        document.getElementById(
+            "value" + i
+        ).value = "";
+    }
+
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    document.getElementById(
+        "legend"
+    ).innerHTML = "";
+}
+
+
+/* QUIZ */
+
+const questions = [
+
+    {
+        question:
+            "What does a pie chart represent?",
+
+        options: [
+            "Parts of a whole",
+            "Only averages",
+            "Only numbers",
+            "A timeline"
+        ],
+
+        answer: 0
+    },
+
+    {
+        question:
+            "A complete pie chart represents how many degrees?",
+
+        options: [
+            "90°",
+            "180°",
+            "270°",
+            "360°"
+        ],
+
+        answer: 3
+    },
+
+    {
+        question:
+            "If a category has 25 out of 100 items, what is its percentage?",
+
+        options: [
+            "10%",
+            "20%",
+            "25%",
+            "50%"
+        ],
+
+        answer: 2
+    },
+
+    {
+        question:
+            "What is the formula for the sector angle?",
+
+        options: [
+            "(Value ÷ Total) × 360°",
+            "(Total ÷ Value) × 360°",
+            "Value × Total",
+            "Value + Total"
+        ],
+
+        answer: 0
+    },
+
+    {
+        question:
+            "If a category represents 50% of the data, its sector angle is:",
+
+        options: [
+            "90°",
+            "180°",
+            "270°",
+            "360°"
+        ],
+
+        answer: 1
+    }
+
+];
+
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+
+function loadQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    document.getElementById(
+        "quizNumber"
+    ).textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+
+    document.getElementById(
+        "quizQuestion"
+    ).textContent =
+        question.question;
+
+
+    const options =
+        document.getElementById(
+            "quizOptions"
+        );
+
+    options.innerHTML = "";
+
+
+    question.options.forEach(
+        function(option, index) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.textContent =
+                option;
+
+            button.onclick =
+                function() {
+                    checkAnswer(index);
+                };
+
+            options.appendChild(button);
+
+        }
+    );
+
+
+    document.getElementById(
+        "quizResult"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display = "none";
+
+
+    answered = false;
+}
+
+
+function checkAnswer(selected) {
+
+    if (answered) {
+        return;
+    }
+
+    answered = true;
+
+
+    const question =
+        questions[currentQuestion];
+
+
+    const result =
+        document.getElementById(
+            "quizResult"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            "#quizOptions button"
+        );
+
+
+    buttons.forEach(
+        function(button) {
+            button.disabled = true;
+        }
+    );
+
+
+    if (selected === question.answer) {
+
+        score++;
+
+        result.textContent =
+            "🎉 Correct!";
+
+        result.style.color =
+            "#f57f17";
+
+
+        document.getElementById(
+            "quizScore"
+        ).textContent =
+            score;
+
+    } else {
+
+        result.textContent =
+            "❌ Incorrect. Correct answer: " +
+            question.options[
+                question.answer
+            ];
+
+        result.style.color =
+            "#c62828";
+    }
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "inline-block";
+}
+
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        document.getElementById(
+            "quizNumber"
+        ).textContent =
+            "Quiz Completed";
+
+
+        document.getElementById(
+            "quizQuestion"
+        ).textContent =
+            "🏆 You completed the Pie Chart quiz!";
+
+
+        document.getElementById(
+            "quizOptions"
+        ).innerHTML = "";
+
+
+        document.getElementById(
+            "quizResult"
+        ).textContent =
+            "Final Score: " +
+            score +
+            " / " +
+            questions.length;
+
+
+        document.getElementById(
+            "nextButton"
+        ).textContent =
+            "Try Again";
+
+
+        document.getElementById(
+            "nextButton"
+        ).onclick =
+            function() {
+                location.reload();
+            };
+
+
+        return;
+    }
+
+
+    loadQuestion();
+}
+
+
+/* START */
+
+drawPieChart();
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

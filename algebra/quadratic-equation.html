@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quadratic Equations | Algebra Lab</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        /* =========================================
+           QUADRATIC EQUATION PAGE
+           ========================================= */
+
+        .quadratic-page {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f8f9ff);
+            color: #333;
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           HEADER
+           ========================================= */
+
+        .quadratic-page header {
+            background: linear-gradient(135deg, #172554, #1e3a8a);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .quadratic-page header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .quadratic-page header p {
+            margin-top: 10px;
+            font-size: 17px;
+        }
+
+
+        /* =========================================
+           MAIN
+           ========================================= */
+
+        .quadratic-page main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+
+        /* =========================================
+           THEORY
+           ========================================= */
+
+        .theory-box {
+            background: #e8edff;
+            border-left: 5px solid #1e3a8a;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .theory-box h2 {
+            color: #172554;
+            margin-top: 0;
+        }
+
+        .formula {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin: 18px 0;
+        }
+
+
+        /* =========================================
+           EXPERIMENT BOX
+           ========================================= */
+
+        .experiment-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+            margin-bottom: 30px;
+        }
+
+        .experiment-box h2 {
+            text-align: center;
+            color: #172554;
+            margin-top: 0;
+        }
+
+
+        /* =========================================
+           INPUT AREA
+           ========================================= */
+
+        .input-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .input-group {
+            text-align: center;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            color: #172554;
+            margin-bottom: 8px;
+        }
+
+        .input-group input {
+            width: 75px;
+            padding: 11px;
+            border: 2px solid #a5b4fc;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #1e3a8a;
+        }
+
+        .equation-symbol {
+            font-size: 26px;
+            font-weight: bold;
+            color: #172554;
+            margin-top: 22px;
+        }
+
+
+        /* =========================================
+           EQUATION DISPLAY
+           ========================================= */
+
+        .equation-display {
+            background: #f1f5ff;
+            border: 2px solid #c7d2fe;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #172554;
+            margin: 25px 0;
+        }
+
+
+        /* =========================================
+           SOLVE BUTTON
+           ========================================= */
+
+        .solve-button {
+            display: block;
+            margin: 20px auto;
+            padding: 13px 30px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .solve-button:hover {
+            background: #172554;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(23, 37, 84, 0.25);
+        }
+
+
+        /* =========================================
+           CALCULATION BOX
+           ========================================= */
+
+        .calculation-box {
+            background: #f8f9ff;
+            border: 2px solid #c7d2fe;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .calculation-box h3 {
+            color: #172554;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .step {
+            background: white;
+            padding: 14px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           DISCRIMINANT
+           ========================================= */
+
+        .discriminant-box {
+            background: #e8edff;
+            border: 2px solid #a5b4fc;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .discriminant-box h3 {
+            color: #172554;
+            margin-top: 0;
+        }
+
+        .discriminant-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+
+        /* =========================================
+           ANSWER
+           ========================================= */
+
+        .answer-box {
+            background: #e8edff;
+            border: 2px solid #1e3a8a;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 23px;
+            font-weight: bold;
+            color: #172554;
+        }
+
+
+        /* =========================================
+           PARABOLA
+           ========================================= */
+
+        .graph-box {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .graph-box h3 {
+            color: #172554;
+        }
+
+        #quadraticGraph {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: #fafbff;
+            border: 2px solid #c7d2fe;
+            border-radius: 15px;
+        }
+
+
+        /* =========================================
+           CHALLENGE
+           ========================================= */
+
+        .challenge-box {
+            background: #e8edff;
+            border: 2px solid #a5b4fc;
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .challenge-box h2 {
+            color: #172554;
+            margin-top: 0;
+        }
+
+        .challenge-question {
+            font-size: 19px;
+            font-weight: bold;
+            margin: 22px 0;
+        }
+
+        .challenge-options {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .challenge-options button {
+            padding: 11px 20px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .challenge-options button:hover {
+            background: #172554;
+            transform: translateY(-2px);
+        }
+
+        .challenge-options button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #challengeResult {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 25px;
+        }
+
+        #nextQuestion {
+            margin-top: 18px;
+            padding: 11px 23px;
+            background: #172554;
+            color: white;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #nextQuestion:hover {
+            background: #1e3a8a;
+        }
+
+        .score-box {
+            margin-top: 22px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #172554;
+        }
+
+
+        /* =========================================
+           BACK BUTTON
+           ========================================= */
+
+        .back-section {
+            text-align: center;
+            margin: 35px 0 10px;
+        }
+
+        .back-section a {
+            display: inline-block;
+            color: #172554;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        .back-section a:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+
+        .quadratic-page footer {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .quadratic-page header h1 {
+                font-size: 28px;
+            }
+
+            .equation-display {
+                font-size: 24px;
+            }
+
+            .input-area {
+                gap: 7px;
+            }
+
+            #quadraticGraph {
+                height: 300px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="quadratic-page">
+
+
+    <!-- =========================================
+         HEADER
+         ========================================= -->
+
+    <header>
+
+        <h1>📐 Quadratic Equations</h1>
+
+        <p>
+            Explore roots, discriminants and parabolas
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- =========================================
+             THEORY
+             ========================================= -->
+
+        <div class="theory-box">
+
+            <h2>📖 What is a Quadratic Equation?</h2>
+
+            <p>
+                A quadratic equation is an equation in which
+                the highest power of the variable is 2.
+            </p>
+
+            <p>
+                The standard form of a quadratic equation is:
+            </p>
+
+            <div class="formula">
+                ax² + bx + c = 0
+            </div>
+
+            <p>
+                The roots can be found using the quadratic formula:
+            </p>
+
+            <div class="formula">
+                x = (-b ± √(b² - 4ac)) / 2a
+            </div>
+
+            <p>
+                The expression
+                <strong>b² - 4ac</strong>
+                is called the discriminant.
+            </p>
+
+        </div>
+
+
+        <!-- =========================================
+             INTERACTIVE EXPERIMENT
+             ========================================= -->
+
+        <div class="experiment-box">
+
+            <h2>🧪 Virtual Experiment</h2>
+
+            <p style="text-align:center;">
+                Change the values of a, b and c,
+                then find the roots of the equation.
+            </p>
+
+
+            <!-- INPUTS -->
+
+            <div class="input-area">
+
+
+                <div class="input-group">
+
+                    <label for="aValue">
+                        a
+                    </label>
+
+                    <input
+                        type="number"
+                        id="aValue"
+                        value="1"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="equation-symbol">
+                    x² +
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="bValue">
+                        b
+                    </label>
+
+                    <input
+                        type="number"
+                        id="bValue"
+                        value="-5"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="equation-symbol">
+                    x +
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="cValue">
+                        c
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cValue"
+                        value="6"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="equation-symbol">
+                    = 0
+                </div>
+
+            </div>
+
+
+            <!-- EQUATION -->
+
+            <div
+                class="equation-display"
+                id="equationDisplay">
+
+                x² - 5x + 6 = 0
+
+            </div>
+
+
+            <!-- SOLVE BUTTON -->
+
+            <button
+                class="solve-button"
+                onclick="solveQuadratic()">
+
+                🧮 Solve Quadratic Equation
+
+            </button>
+
+
+            <!-- CALCULATION -->
+
+            <div class="calculation-box">
+
+                <h3>
+                    📝 Step-by-Step Solution
+                </h3>
+
+
+                <div
+                    class="step"
+                    id="step1">
+
+                    Step 1: The equation will appear here.
+
+                </div>
+
+
+                <div
+                    class="step"
+                    id="step2">
+
+                    Step 2: Calculate the discriminant.
+
+                </div>
+
+
+                <div
+                    class="step"
+                    id="step3">
+
+                    Step 3: Apply the quadratic formula.
+
+                </div>
+
+
+                <div
+                    class="step"
+                    id="step4">
+
+                    Step 4: Find the roots.
+
+                </div>
+
+
+                <!-- DISCRIMINANT -->
+
+                <div class="discriminant-box">
+
+                    <h3>
+                        🔢 Discriminant
+                    </h3>
+
+                    <div
+                        class="discriminant-value"
+                        id="discriminantValue">
+
+                        D = ?
+
+                    </div>
+
+                </div>
+
+
+                <!-- ANSWER -->
+
+                <div
+                    class="answer-box"
+                    id="finalAnswer">
+
+                    x₁ = ? &nbsp;&nbsp; x₂ = ?
+
+                </div>
+
+            </div>
+
+
+            <!-- GRAPH -->
+
+            <div class="graph-box">
+
+                <h3>
+                    📊 Quadratic Graph
+                </h3>
+
+                <canvas
+                    id="quadraticGraph"
+                    width="800"
+                    height="400">
+                </canvas>
+
+            </div>
+
+        </div>
+        <!-- =========================================
+             CHALLENGE YOURSELF
+             ========================================= -->
+
+        <div
+            class="challenge-box"
+            id="challengeBox">
+
+            <h2>
+                🎯 Challenge Yourself
+            </h2>
+
+            <p id="questionNumber">
+                Question 1 of 5
+            </p>
+
+            <p
+                class="challenge-question"
+                id="challengeQuestion">
+
+                Solve: x² - 5x + 6 = 0
+
+            </p>
+
+
+            <div
+                class="challenge-options"
+                id="challengeOptions">
+
+                <button onclick="checkChallenge(1)">
+                    x = 2, 3
+                </button>
+
+                <button onclick="checkChallenge(2)">
+                    x = 1, 6
+                </button>
+
+                <button onclick="checkChallenge(3)">
+                    x = 2, 4
+                </button>
+
+                <button onclick="checkChallenge(4)">
+                    x = 3, 5
+                </button>
+
+            </div>
+
+
+            <p id="challengeResult"></p>
+
+
+            <button
+                id="nextQuestion"
+                onclick="nextChallengeQuestion()"
+                style="display:none;">
+
+                Next Question →
+
+            </button>
+
+
+            <div class="score-box">
+
+                🏆 Score:
+                <span id="score">0</span> / 5
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             BACK TO ALGEBRA LAB
+             ========================================= -->
+
+        <div class="back-section">
+
+            <a href="../algebra.html">
+                ← Back to Algebra Lab
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer>
+
+        <p>
+            Mathematics Virtual Lab © 2026
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+    <script>
+
+
+        /* =========================================
+           GET INPUT ELEMENTS
+           ========================================= */
+
+        const aInput =
+            document.getElementById("aValue");
+
+        const bInput =
+            document.getElementById("bValue");
+
+        const cInput =
+            document.getElementById("cValue");
+
+        const equationDisplay =
+            document.getElementById("equationDisplay");
+
+
+        /* =========================================
+           FORMAT NUMBER
+           ========================================= */
+
+        function formatNumber(number) {
+
+            if (Number.isInteger(number)) {
+
+                return number.toString();
+
+            }
+
+            return Number(
+                number.toFixed(2)
+            ).toString();
+
+        }
+
+
+        /* =========================================
+           UPDATE EQUATION DISPLAY
+           ========================================= */
+
+        function updateEquation() {
+
+            let a =
+                parseFloat(aInput.value);
+
+            let b =
+                parseFloat(bInput.value);
+
+            let c =
+                parseFloat(cInput.value);
+
+
+            if (
+                isNaN(a) ||
+                isNaN(b) ||
+                isNaN(c)
+            ) {
+
+                equationDisplay.textContent =
+                    "Enter valid numbers";
+
+                return;
+
+            }
+
+
+            let equation = "";
+
+
+            /* a x² */
+
+            if (a === 1) {
+
+                equation += "x²";
+
+            }
+
+            else if (a === -1) {
+
+                equation += "-x²";
+
+            }
+
+            else {
+
+                equation +=
+                    formatNumber(a) + "x²";
+
+            }
+
+
+            /* b x */
+
+            if (b > 0) {
+
+                if (b === 1) {
+
+                    equation += " + x";
+
+                }
+
+                else {
+
+                    equation +=
+                        " + " +
+                        formatNumber(b) +
+                        "x";
+
+                }
+
+            }
+
+            else if (b < 0) {
+
+                if (b === -1) {
+
+                    equation += " - x";
+
+                }
+
+                else {
+
+                    equation +=
+                        " - " +
+                        formatNumber(Math.abs(b)) +
+                        "x";
+
+                }
+
+            }
+
+
+            /* c */
+
+            if (c > 0) {
+
+                equation +=
+                    " + " +
+                    formatNumber(c);
+
+            }
+
+            else if (c < 0) {
+
+                equation +=
+                    " - " +
+                    formatNumber(Math.abs(c));
+
+            }
+
+
+            equation += " = 0";
+
+
+            equationDisplay.textContent =
+                equation;
+
+        }
+
+
+        /* =========================================
+           INPUT LISTENERS
+           ========================================= */
+
+        aInput.addEventListener(
+            "input",
+            updateEquation
+        );
+
+        bInput.addEventListener(
+            "input",
+            updateEquation
+        );
+
+        cInput.addEventListener(
+            "input",
+            updateEquation
+        );
+
+
+        /* =========================================
+           SOLVE QUADRATIC EQUATION
+           ========================================= */
+
+        function solveQuadratic() {
+
+            let a =
+                parseFloat(aInput.value);
+
+            let b =
+                parseFloat(bInput.value);
+
+            let c =
+                parseFloat(cInput.value);
+
+
+            if (
+                isNaN(a) ||
+                isNaN(b) ||
+                isNaN(c)
+            ) {
+
+                alert(
+                    "Please enter valid numbers."
+                );
+
+                return;
+
+            }
+
+
+            if (a === 0) {
+
+                document.getElementById(
+                    "step1"
+                ).textContent =
+                    "The value of a cannot be 0 for a quadratic equation.";
+
+                document.getElementById(
+                    "step2"
+                ).textContent =
+                    "Please enter a value other than 0 for a.";
+
+                document.getElementById(
+                    "step3"
+                ).textContent = "";
+
+                document.getElementById(
+                    "step4"
+                ).textContent = "";
+
+                document.getElementById(
+                    "discriminantValue"
+                ).textContent =
+                    "D = Not applicable";
+
+                document.getElementById(
+                    "finalAnswer"
+                ).textContent =
+                    "Please enter a ≠ 0";
+
+                clearGraph();
+
+                return;
+
+            }
+
+
+            /* =====================================
+               DISCRIMINANT
+               ===================================== */
+
+            let discriminant =
+                b * b - 4 * a * c;
+
+
+            document.getElementById(
+                "step1"
+            ).innerHTML =
+                "Step 1: " +
+                formatNumber(a) +
+                "x² + " +
+                formatSignedNumber(b) +
+                "x + " +
+                formatSignedNumber(c) +
+                " = 0";
+
+
+            document.getElementById(
+                "step2"
+            ).innerHTML =
+                "Step 2: D = b² - 4ac = " +
+                formatNumber(b) +
+                "² - 4(" +
+                formatNumber(a) +
+                ")(" +
+                formatNumber(c) +
+                ") = " +
+                formatNumber(discriminant);
+
+
+            document.getElementById(
+                "discriminantValue"
+            ).textContent =
+                "D = " +
+                formatNumber(discriminant);
+
+
+            /* =====================================
+               ROOTS
+               ===================================== */
+
+            if (discriminant > 0) {
+
+                let sqrtD =
+                    Math.sqrt(discriminant);
+
+                let x1 =
+                    (-b + sqrtD) /
+                    (2 * a);
+
+                let x2 =
+                    (-b - sqrtD) /
+                    (2 * a);
+
+
+                document.getElementById(
+                    "step3"
+                ).innerHTML =
+                    "Step 3: x = (-b ± √D) / 2a";
+
+
+                document.getElementById(
+                    "step4"
+                ).innerHTML =
+                    "Step 4: x₁ = " +
+                    formatNumber(x1) +
+                    " and x₂ = " +
+                    formatNumber(x2);
+
+
+                document.getElementById(
+                    "finalAnswer"
+                ).innerHTML =
+                    "✅ x₁ = " +
+                    formatNumber(x1) +
+                    "&nbsp;&nbsp;&nbsp; x₂ = " +
+                    formatNumber(x2);
+
+
+                drawGraph(
+                    a,
+                    b,
+                    c,
+                    [x1, x2]
+                );
+
+            }
+
+
+            else if (discriminant === 0) {
+
+                let x =
+                    -b / (2 * a);
+
+
+                document.getElementById(
+                    "step3"
+                ).innerHTML =
+                    "Step 3: x = -b / 2a";
+
+
+                document.getElementById(
+                    "step4"
+                ).innerHTML =
+                    "Step 4: x = " +
+                    formatNumber(x);
+
+
+                document.getElementById(
+                    "finalAnswer"
+                ).innerHTML =
+                    "✅ One repeated root: x = " +
+                    formatNumber(x);
+
+
+                drawGraph(
+                    a,
+                    b,
+                    c,
+                    [x]
+                );
+
+            }
+
+
+            else {
+
+                let realPart =
+                    -b / (2 * a);
+
+                let imaginaryPart =
+                    Math.sqrt(
+                        Math.abs(discriminant)
+                    ) / (2 * Math.abs(a));
+
+
+                document.getElementById(
+                    "step3"
+                ).innerHTML =
+                    "Step 3: Since D < 0, the equation has no real roots.";
+
+
+                document.getElementById(
+                    "step4"
+                ).innerHTML =
+                    "Step 4: The roots are complex numbers.";
+
+
+                document.getElementById(
+                    "finalAnswer"
+                ).innerHTML =
+                    "No real roots";
+
+
+                drawGraph(
+                    a,
+                    b,
+                    c,
+                    []
+                );
+
+            }
+
+        }
+
+
+        /* =========================================
+           FORMAT SIGNED NUMBER
+           ========================================= */
+
+        function formatSignedNumber(number) {
+
+            if (number >= 0) {
+
+                return formatNumber(number);
+
+            }
+
+            return "(" +
+                formatNumber(number) +
+                ")";
+
+        }
+
+
+        /* =========================================
+           GRAPH FUNCTIONS
+           ========================================= */
+
+        function clearGraph() {
+
+            let canvas =
+                document.getElementById(
+                    "quadraticGraph"
+                );
+
+            let ctx =
+                canvas.getContext("2d");
+
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+        }
+
+
+        function drawGraph(
+            a,
+            b,
+            c,
+            roots
+        ) {
+
+            let canvas =
+                document.getElementById(
+                    "quadraticGraph"
+                );
+
+            let ctx =
+                canvas.getContext("2d");
+
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            let width =
+                canvas.width;
+
+            let height =
+                canvas.height;
+
+
+            /* =====================================
+               GRAPH SCALE
+               ===================================== */
+
+            let xMin = -10;
+            let xMax = 10;
+
+            let yMin = -20;
+            let yMax = 20;
+
+
+            function mapX(x) {
+
+                return (
+                    (x - xMin) /
+                    (xMax - xMin)
+                ) * width;
+
+            }
+
+
+            function mapY(y) {
+
+                return (
+                    height -
+                    ((y - yMin) /
+                    (yMax - yMin)) *
+                    height
+                );
+
+            }
+
+
+            /* =====================================
+               GRID
+               ===================================== */
+
+            ctx.strokeStyle =
+                "#dbe2f5";
+
+            ctx.lineWidth = 1;
+
+
+            for (
+                let x = xMin;
+                x <= xMax;
+                x++
+            ) {
+
+                let px =
+                    mapX(x);
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    px,
+                    0
+                );
+
+                ctx.lineTo(
+                    px,
+                    height
+                );
+
+                ctx.stroke();
+
+            }
+
+
+            for (
+                let y = yMin;
+                y <= yMax;
+                y += 2
+            ) {
+
+                let py =
+                    mapY(y);
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    0,
+                    py
+                );
+
+                ctx.lineTo(
+                    width,
+                    py
+                );
+
+                ctx.stroke();
+
+            }
+
+
+            /* =====================================
+               AXES
+               ===================================== */
+
+            ctx.strokeStyle =
+                "#172554";
+
+            ctx.lineWidth = 2;
+
+
+            /* X axis */
+
+            let xAxis =
+                mapY(0);
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                0,
+                xAxis
+            );
+
+            ctx.lineTo(
+                width,
+                xAxis
+            );
+
+            ctx.stroke();
+
+
+            /* Y axis */
+
+            let yAxis =
+                mapX(0);
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                yAxis,
+                0
+            );
+
+            ctx.lineTo(
+                yAxis,
+                height
+            );
+
+            ctx.stroke();
+
+
+            /* =====================================
+               LABELS
+               ===================================== */
+
+            ctx.fillStyle =
+                "#172554";
+
+            ctx.font =
+                "13px Arial";
+
+
+            for (
+                let x = -10;
+                x <= 10;
+                x += 2
+            ) {
+
+                if (x === 0) {
+                    continue;
+                }
+
+                ctx.fillText(
+                    x,
+                    mapX(x) - 5,
+                    xAxis + 18
+                );
+
+            }
+
+
+            for (
+                let y = -20;
+                y <= 20;
+                y += 4
+            ) {
+
+                if (y === 0) {
+                    continue;
+                }
+
+                ctx.fillText(
+                    y,
+                    yAxis + 7,
+                    mapY(y) + 4
+                );
+
+            }
+
+
+            /* =====================================
+               PARABOLA
+               ===================================== */
+
+            ctx.beginPath();
+
+            ctx.lineWidth = 3;
+
+            ctx.strokeStyle =
+                "#1e3a8a";
+
+
+            let started = false;
+
+
+            for (
+                let x = xMin;
+                x <= xMax;
+                x += 0.02
+            ) {
+
+                let y =
+                    a * x * x +
+                    b * x +
+                    c;
+
+
+                let px =
+                    mapX(x);
+
+                let py =
+                    mapY(y);
+
+
+                if (
+                    py < -1000 ||
+                    py > height + 1000
+                ) {
+
+                    started = false;
+
+                    continue;
+
+                }
+
+
+                if (!started) {
+
+                    ctx.moveTo(
+                        px,
+                        py
+                    );
+
+                    started = true;
+
+                }
+
+                else {
+
+                    ctx.lineTo(
+                        px,
+                        py
+                    );
+
+                }
+
+            }
+
+
+            ctx.stroke();
+
+
+            /* =====================================
+               ROOT POINTS
+               ===================================== */
+
+            ctx.fillStyle =
+                "#c62828";
+
+
+            roots.forEach(
+                function(root) {
+
+                    if (
+                        root >= xMin &&
+                        root <= xMax
+                    ) {
+
+                        let px =
+                            mapX(root);
+
+                        let py =
+                            mapY(0);
+
+
+                        ctx.beginPath();
+
+                        ctx.arc(
+                            px,
+                            py,
+                            7,
+                            0,
+                            Math.PI * 2
+                        );
+
+                        ctx.fill();
+
+
+                        ctx.fillStyle =
+                            "#172554";
+
+                        ctx.font =
+                            "bold 14px Arial";
+
+
+                        ctx.fillText(
+                            "x = " +
+                            formatNumber(root),
+                            px - 25,
+                            py - 12
+                        );
+
+
+                        ctx.fillStyle =
+                            "#c62828";
+
+                    }
+
+                }
+            );
+
+        }
+        /* =========================================
+           CHALLENGE QUESTIONS
+           ========================================= */
+
+        const challengeQuestions = [
+
+            {
+                question: "Solve: x² - 5x + 6 = 0",
+
+                options: [
+                    "x = 2, 3",
+                    "x = 1, 6",
+                    "x = 2, 4",
+                    "x = 3, 5"
+                ],
+
+                answer: 1
+            },
+
+
+            {
+                question: "Solve: x² - 7x + 12 = 0",
+
+                options: [
+                    "x = 2, 6",
+                    "x = 3, 4",
+                    "x = 1, 12",
+                    "x = 4, 5"
+                ],
+
+                answer: 2
+            },
+
+
+            {
+                question: "Solve: x² + 5x + 6 = 0",
+
+                options: [
+                    "x = -2, -3",
+                    "x = 2, 3",
+                    "x = -1, -6",
+                    "x = 1, 6"
+                ],
+
+                answer: 1
+            },
+
+
+            {
+                question: "Solve: x² - 9x + 20 = 0",
+
+                options: [
+                    "x = 2, 10",
+                    "x = 4, 5",
+                    "x = 3, 6",
+                    "x = 1, 20"
+                ],
+
+                answer: 2
+            },
+
+
+            {
+                question: "Solve: x² - 4x + 4 = 0",
+
+                options: [
+                    "x = 1, 4",
+                    "x = 2",
+                    "x = -2",
+                    "x = 3, 4"
+                ],
+
+                answer: 2
+            }
+
+        ];
+
+
+        let currentChallenge = 0;
+
+        let challengeScore = 0;
+
+        let questionAnswered = false;
+
+
+        /* =========================================
+           CHECK CHALLENGE ANSWER
+           ========================================= */
+
+        function checkChallenge(selectedAnswer) {
+
+            if (questionAnswered) {
+                return;
+            }
+
+
+            let current =
+                challengeQuestions[currentChallenge];
+
+
+            questionAnswered = true;
+
+
+            let result =
+                document.getElementById(
+                    "challengeResult"
+                );
+
+
+            let buttons =
+                document.querySelectorAll(
+                    "#challengeOptions button"
+                );
+
+
+            buttons.forEach(
+                function(button) {
+
+                    button.disabled = true;
+
+                }
+            );
+
+
+            if (
+                selectedAnswer ===
+                current.answer
+            ) {
+
+                result.textContent =
+                    "🎉 Correct! Excellent work!";
+
+                result.style.color =
+                    "#1e3a8a";
+
+
+                challengeScore++;
+
+
+                document.getElementById(
+                    "score"
+                ).textContent =
+                    challengeScore;
+
+            }
+
+            else {
+
+                result.textContent =
+                    "❌ Not quite. The correct answer is " +
+                    current.options[
+                        current.answer - 1
+                    ];
+
+                result.style.color =
+                    "#c62828";
+
+            }
+
+
+            document.getElementById(
+                "nextQuestion"
+            ).style.display =
+                "inline-block";
+
+        }
+
+
+        /* =========================================
+           NEXT CHALLENGE QUESTION
+           ========================================= */
+
+        function nextChallengeQuestion() {
+
+            currentChallenge++;
+
+
+            if (
+                currentChallenge >=
+                challengeQuestions.length
+            ) {
+
+                document.getElementById(
+                    "challengeBox"
+                ).innerHTML = `
+
+                    <h2>🏆 Challenge Completed!</h2>
+
+                    <p>
+                        You completed all 5 questions.
+                    </p>
+
+                    <div class="score-box">
+
+                        Final Score
+
+                        <br><br>
+
+                        <strong>
+                            ${challengeScore} / 5
+                        </strong>
+
+                    </div>
+
+                    <button
+                        id="nextQuestion"
+                        onclick="restartChallenge()"
+                        style="
+                            display:inline-block;
+                            margin-top:20px;
+                        ">
+
+                        🔄 Try Again
+
+                    </button>
+
+                `;
+
+                return;
+
+            }
+
+
+            let current =
+                challengeQuestions[
+                    currentChallenge
+                ];
+
+
+            document.getElementById(
+                "questionNumber"
+            ).textContent =
+                "Question " +
+                (currentChallenge + 1) +
+                " of 5";
+
+
+            document.getElementById(
+                "challengeQuestion"
+            ).textContent =
+                current.question;
+
+
+            let container =
+                document.getElementById(
+                    "challengeOptions"
+                );
+
+
+            container.innerHTML = "";
+
+
+            current.options.forEach(
+                function(option, index) {
+
+                    let button =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    button.textContent =
+                        option;
+
+
+                    button.onclick =
+                        function() {
+
+                            checkChallenge(
+                                index + 1
+                            );
+
+                        };
+
+
+                    container.appendChild(
+                        button
+                    );
+
+                }
+            );
+
+
+            document.getElementById(
+                "challengeResult"
+            ).textContent = "";
+
+
+            document.getElementById(
+                "nextQuestion"
+            ).style.display =
+                "none";
+
+
+            questionAnswered = false;
+
+        }
+
+
+        /* =========================================
+           RESTART CHALLENGE
+           ========================================= */
+
+        function restartChallenge() {
+
+            location.reload();
+
+        }
+
+
+        /* =========================================
+           INITIALIZE PAGE
+           ========================================= */
+
+        updateEquation();
+
+        solveQuadratic();
+
+
+    </script>
+
+
+</body>
+
+</html>

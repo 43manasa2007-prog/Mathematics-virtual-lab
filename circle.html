@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Circle Area & Circumference - Mathematics Virtual Lab
+    </title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ==============================
+           EXPERIMENT BOX
+        ============================== */
+
+        .experiment-box {
+            max-width: 950px;
+            margin: 30px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 22px;
+            box-shadow:
+                0 8px 25px
+                rgba(100, 50, 90, 0.10);
+        }
+
+
+        /* ==============================
+           THEORY
+        ============================== */
+
+        .theory {
+            background: #f4eafa;
+            padding: 22px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .theory h3 {
+            color: #7c1d3c;
+            margin-bottom: 12px;
+        }
+
+        .formula {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            color: #8f1838;
+            margin: 15px 0;
+        }
+
+
+        /* ==============================
+           CONTROLS
+        ============================== */
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .input-group {
+            text-align: center;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #6f1735;
+            font-size: 17px;
+        }
+
+        .input-group input {
+            width: 130px;
+            padding: 11px;
+            border: 2px solid #d7b8dc;
+            border-radius: 10px;
+            font-size: 17px;
+            text-align: center;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #8f1838;
+        }
+
+
+        /* ==============================
+           CIRCLE AREA
+        ============================== */
+
+        .circle-area {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .circle-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+
+            min-height: 390px;
+
+            overflow: hidden;
+        }
+
+        #circleSVG {
+            width: 500px;
+            max-width: 100%;
+            height: 380px;
+        }
+
+        /*
+           Smooth movement of circle
+        */
+
+        #circleShape {
+            transition:
+                r 0.45s ease-in-out;
+        }
+
+        /*
+           Smooth movement of radius line
+        */
+
+        #radiusLine {
+            transition:
+                x2 0.45s ease-in-out;
+        }
+
+        /*
+           Smooth movement of radius label
+        */
+
+        #radiusLabel {
+            transition:
+                x 0.45s ease-in-out;
+        }
+
+        .circle-caption {
+            margin-top: 5px;
+            color: #6f1735;
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           CALCULATION BOX
+        ============================== */
+
+        .result {
+            background: #fff0f4;
+
+            border: 2px solid #d99aaa;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            max-width: 800px;
+
+            margin: 30px auto 0;
+        }
+
+        .result h3 {
+            color: #7c1d3c;
+            margin-bottom: 20px;
+        }
+
+        .calculation-line {
+            margin: 10px 0;
+            font-size: 17px;
+        }
+
+        .answer {
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #8f1838;
+
+            margin: 8px 0 20px;
+        }
+
+        .result hr {
+            border: none;
+
+            border-top:
+                1px solid #d9b8df;
+
+            margin: 20px 0;
+        }
+
+
+        /* ==============================
+           CHALLENGE BOX
+        ============================== */
+
+        .challenge-box {
+
+            margin-top: 35px;
+
+            padding: 28px;
+
+            background: #f4eafa;
+
+            border:
+                2px solid #d7b8dc;
+
+            border-radius: 18px;
+
+            text-align: center;
+        }
+
+        .challenge-box h2 {
+
+            color: #7c1d3c;
+
+            margin-bottom: 12px;
+        }
+
+        .challenge-question {
+
+            font-size: 18px;
+
+            margin: 20px 0;
+        }
+
+        .challenge-options {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .challenge-options button {
+
+            padding:
+                11px 20px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            background: #8f1838;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .challenge-options button:hover {
+
+            background: #6f1735;
+
+            transform: scale(1.04);
+        }
+
+        .challenge-options button:disabled {
+
+            opacity: 0.55;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        #challengeResult {
+
+            margin-top: 20px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            min-height: 25px;
+        }
+
+        #nextQuestion {
+
+            margin-top: 18px;
+
+            padding:
+                11px 22px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            background: #8f1838;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 15px;
+        }
+
+        #nextQuestion:hover {
+
+            background: #6f1735;
+        }
+
+        .score-box {
+
+            margin-top: 22px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #7c1d3c;
+        }
+
+
+        /* ==============================
+           BACK SECTION
+        ============================== */
+
+        .back-section {
+
+            text-align: center;
+
+            margin-top: 30px;
+        }
+
+        .back-section a {
+
+            color: #7c1d3c;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        .back-section a:hover {
+
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="circle-page">
+
+    <header class="circle-header">
+        <h1>⭕ Circle Area & Circumference</h1>
+        <p>Explore how changing the radius affects a circle</p>
+    </header>
+
+    <main>
+
+        <div class="experiment-box">
+
+
+            <!-- ==============================
+                 THEORY
+            ============================== -->
+
+            <div class="theory">
+
+                <h3>
+                    📖 Circle Formulas
+                </h3>
+
+                <p>
+                    The area of a circle tells us
+                    how much space is inside the circle.
+                </p>
+
+                <div class="formula">
+                    Area = πr²
+                </div>
+
+                <p>
+                    The circumference is the distance
+                    around the circle.
+                </p>
+
+                <div class="formula">
+                    Circumference = 2πr
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 EXPERIMENT
+            ============================== -->
+
+            <h2>
+                🧪 Virtual Experiment
+            </h2>
+
+            <p style="text-align:center;">
+
+                Change the radius and watch
+                the circle change!
+
+            </p>
+
+
+            <!-- ==============================
+                 RADIUS INPUT
+            ============================== -->
+
+            <div class="controls">
+
+                <div class="input-group">
+
+                    <label for="radius">
+                        Radius (cm)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="radius"
+                        value="5"
+                        min="1"
+                        max="50"
+                        step="1"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 CIRCLE
+            ============================== -->
+
+            <div class="circle-area">
+
+                <div class="circle-wrapper">
+
+                    <svg
+                        id="circleSVG"
+                        viewBox="0 0 500 380"
+                        preserveAspectRatio="xMidYMid meet"
+                    >
+
+                        <!-- Circle -->
+
+                        <circle
+                            id="circleShape"
+                            cx="250"
+                            cy="190"
+                            r="60"
+                            fill="#d9b8df"
+                            stroke="#8f1838"
+                            stroke-width="4"
+                        >
+                        </circle>
+
+
+                        <!-- Centre Point -->
+
+                        <circle
+                            id="centrePoint"
+                            cx="250"
+                            cy="190"
+                            r="5"
+                            fill="#8f1838"
+                        >
+                        </circle>
+
+
+                        <!-- Radius Line -->
+
+                        <line
+                            id="radiusLine"
+                            x1="250"
+                            y1="190"
+                            x2="310"
+                            y2="190"
+                            stroke="#8f1838"
+                            stroke-width="4"
+                            stroke-linecap="round"
+                        >
+                        </line>
+
+
+                        <!-- Radius Label -->
+
+                        <text
+                            id="radiusLabel"
+                            x="280"
+                            y="178"
+                            text-anchor="middle"
+                            font-size="19"
+                            font-weight="bold"
+                            fill="#7c1d3c"
+                        >
+                            r
+                        </text>
+
+                    </svg>
+
+                </div>
+
+
+                <p class="circle-caption">
+                    ⭕ Circle
+                </p>
+
+            </div>
+
+
+            <!-- ==============================
+                 CALCULATION
+            ============================== -->
+
+            <div class="result">
+
+                <h3>
+                    🧮 Calculation
+                </h3>
+
+
+                <p
+                    class="calculation-line"
+                    id="areaCalculation"
+                >
+                    Area = π × 5²
+                </p>
+
+
+                <p
+                    class="answer"
+                    id="areaAnswer"
+                >
+                    Area = 78.54 cm²
+                </p>
+
+
+                <hr>
+
+
+                <p
+                    class="calculation-line"
+                    id="circumferenceCalculation"
+                >
+                    Circumference = 2 × π × 5
+                </p>
+
+
+                <p
+                    class="answer"
+                    id="circumferenceAnswer"
+                >
+                    Circumference = 31.42 cm
+                </p>
+
+            </div>
+
+
+            <!-- ==============================
+                 CHALLENGE YOURSELF
+            ============================== -->
+
+            <div
+                class="challenge-box"
+                id="challengeBox"
+            >
+
+                <h2>
+                    🎯 Challenge Yourself
+                </h2>
+
+                <p id="questionNumber">
+                    Question 1 of 5
+                </p>
+
+                <p
+                    class="challenge-question"
+                    id="challengeQuestion"
+                >
+                    What is the area of a circle
+                    with radius 5 cm?
+                </p>
+
+                <div
+                    class="challenge-options"
+                    id="challengeOptions"
+                >
+
+                    <!-- Buttons will be created by JavaScript -->
+
+                </div>
+
+                <p id="challengeResult"></p>
+
+                <button
+                    id="nextQuestion"
+                    style="display:none;"
+                >
+                    Next Question →
+                </button>
+
+                <div class="score-box">
+
+                    🏆 Score:
+
+                    <span id="score">
+                        0
+                    </span>
+
+                    / 5
+
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 BACK
+            ============================== -->
+
+            <div class="back-section">
+
+                <a href="geometry.html">
+                    ← Back to Geometry Lab
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Mathematics Virtual Lab © 2026
+        </p>
+
+    </footer>
+
+
+    <!-- ==============================
+         JAVASCRIPT
+    ============================== -->
+
+    <script>
+
+        /* ==============================
+           GET ELEMENTS
+        ============================== */
+
+        const radiusInput =
+            document.getElementById("radius");
+
+        const circleShape =
+            document.getElementById("circleShape");
+
+        const radiusLine =
+            document.getElementById("radiusLine");
+
+        const radiusLabel =
+            document.getElementById("radiusLabel");
+
+        const areaCalculation =
+            document.getElementById("areaCalculation");
+
+        const areaAnswer =
+            document.getElementById("areaAnswer");
+
+        const circumferenceCalculation =
+            document.getElementById(
+                "circumferenceCalculation"
+            );
+
+        const circumferenceAnswer =
+            document.getElementById(
+                "circumferenceAnswer"
+            );
+
+
+        /* ==============================
+           CIRCLE SETTINGS
+        ============================== */
+
+        const centerX = 250;
+
+        const centerY = 190;
+
+        const maxDisplayRadius = 140;
+
+        const minDisplayRadius = 25;
+
+        const maxInputRadius = 50;
+
+
+        /* ==============================
+           CALCULATE CIRCLE
+        ============================== */
+
+        function calculateCircle() {
+
+            let radius =
+                parseFloat(
+                    radiusInput.value
+                );
+
+
+            /* Invalid input */
+
+            if (
+                isNaN(radius) ||
+                radius <= 0
+            ) {
+
+                return;
+            }
+
+
+            /* Maximum value */
+
+            if (
+                radius > maxInputRadius
+            ) {
+
+                radius =
+                    maxInputRadius;
+
+                radiusInput.value =
+                    maxInputRadius;
+            }
+
+
+            /* ==========================
+               MATHEMATICS
+            ========================== */
+
+            const area =
+                Math.PI *
+                radius *
+                radius;
+
+
+            const circumference =
+                2 *
+                Math.PI *
+                radius;
+
+
+            /* ==========================
+               UPDATE CALCULATIONS
+            ========================== */
+
+            areaCalculation.textContent =
+                "Area = π × " +
+                radius +
+                "²";
+
+
+            areaAnswer.textContent =
+                "Area = " +
+                area.toFixed(2) +
+                " cm²";
+
+
+            circumferenceCalculation.textContent =
+                "Circumference = 2 × π × " +
+                radius;
+
+
+            circumferenceAnswer.textContent =
+                "Circumference = " +
+                circumference.toFixed(2) +
+                " cm";
+
+
+            /* ==========================
+               CALCULATE VISUAL SIZE
+            ========================== */
+
+            let displayRadius =
+                (radius / maxInputRadius) *
+                maxDisplayRadius;
+
+
+            /*
+               Keep circle visible
+               even for very small values
+            */
+
+            displayRadius =
+                Math.max(
+                    minDisplayRadius,
+                    displayRadius
+                );
+
+
+            /* ==========================
+               UPDATE CIRCLE
+            ========================== */
+
+            circleShape.setAttribute(
+                "r",
+                displayRadius
+            );
+
+
+            /* ==========================
+               UPDATE RADIUS LINE
+            ========================== */
+
+            radiusLine.setAttribute(
+                "x1",
+                centerX
+            );
+
+            radiusLine.setAttribute(
+                "y1",
+                centerY
+            );
+
+            radiusLine.setAttribute(
+                "x2",
+                centerX +
+                displayRadius
+            );
+
+            radiusLine.setAttribute(
+                "y2",
+                centerY
+            );
+
+
+            /* ==========================
+               UPDATE RADIUS LABEL
+            ========================== */
+
+            radiusLabel.setAttribute(
+                "x",
+                centerX +
+                (displayRadius / 2)
+            );
+
+            radiusLabel.setAttribute(
+                "y",
+                centerY - 12
+            );
+
+        }
+
+
+        /* ==============================
+           RADIUS INPUT EVENT
+        ============================== */
+
+        radiusInput.addEventListener(
+            "input",
+            calculateCircle
+        );
+
+
+        radiusInput.addEventListener(
+            "change",
+            calculateCircle
+        );
+
+
+        /* Start with radius 5 */
+
+        calculateCircle();
+        /* ==============================
+           CHALLENGE QUESTIONS
+        ============================== */
+
+        const challengeQuestions = [
+
+            {
+                question:
+                    "What is the area of a circle with radius 5 cm?",
+
+                options: [
+                    78.54,
+                    31.42,
+                    25,
+                    15.70
+                ],
+
+                answer: 78.54
+            },
+
+
+            {
+                question:
+                    "What is the circumference of a circle with radius 5 cm?",
+
+                options: [
+                    31.42,
+                    78.54,
+                    15.70,
+                    25
+                ],
+
+                answer: 31.42
+            },
+
+
+            {
+                question:
+                    "What is the area of a circle with radius 3 cm?",
+
+                options: [
+                    28.27,
+                    18.85,
+                    9,
+                    14.14
+                ],
+
+                answer: 28.27
+            },
+
+
+            {
+                question:
+                    "What is the circumference of a circle with radius 7 cm?",
+
+                options: [
+                    43.98,
+                    49,
+                    21.99,
+                    38.50
+                ],
+
+                answer: 43.98
+            },
+
+
+            {
+                question:
+                    "What is the area of a circle with radius 4 cm?",
+
+                options: [
+                    50.27,
+                    25.13,
+                    16,
+                    12.56
+                ],
+
+                answer: 50.27
+            }
+
+        ];
+
+
+        /* ==============================
+           QUIZ VARIABLES
+        ============================== */
+
+        let currentChallenge = 0;
+
+        let challengeScore = 0;
+
+        let questionAnswered = false;
+
+
+        /* ==============================
+           QUIZ ELEMENTS
+        ============================== */
+
+        const questionNumber =
+            document.getElementById(
+                "questionNumber"
+            );
+
+        const challengeQuestion =
+            document.getElementById(
+                "challengeQuestion"
+            );
+
+        const challengeOptions =
+            document.getElementById(
+                "challengeOptions"
+            );
+
+        const challengeResult =
+            document.getElementById(
+                "challengeResult"
+            );
+
+        const nextQuestion =
+            document.getElementById(
+                "nextQuestion"
+            );
+
+        const score =
+            document.getElementById(
+                "score"
+            );
+
+        const challengeBox =
+            document.getElementById(
+                "challengeBox"
+            );
+
+
+        /* ==============================
+           CREATE QUESTION
+        ============================== */
+
+        function loadChallengeQuestion() {
+
+            const current =
+                challengeQuestions[
+                    currentChallenge
+                ];
+
+
+            /* Question number */
+
+            questionNumber.textContent =
+                "Question " +
+                (currentChallenge + 1) +
+                " of " +
+                challengeQuestions.length;
+
+
+            /* Question */
+
+            challengeQuestion.textContent =
+                current.question;
+
+
+            /* Remove old buttons */
+
+            challengeOptions.innerHTML = "";
+
+
+            /* Create answer buttons */
+
+            current.options.forEach(
+                function(option) {
+
+                    const button =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    button.textContent =
+                        option.toFixed(2) +
+                        " cm²";
+
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            checkChallenge(
+                                option
+                            );
+
+                        }
+                    );
+
+
+                    challengeOptions.appendChild(
+                        button
+                    );
+
+                }
+            );
+
+
+            /* Reset result */
+
+            challengeResult.textContent = "";
+
+            challengeResult.style.color = "";
+
+
+            /* Hide next button */
+
+            nextQuestion.style.display =
+                "none";
+
+
+            questionAnswered = false;
+
+        }
+
+
+        /* ==============================
+           CHECK CHALLENGE ANSWER
+        ============================== */
+
+        function checkChallenge(
+            selectedAnswer
+        ) {
+
+            /*
+               Prevent clicking
+               multiple times
+            */
+
+            if (questionAnswered) {
+
+                return;
+
+            }
+
+
+            questionAnswered = true;
+
+
+            const current =
+                challengeQuestions[
+                    currentChallenge
+                ];
+
+
+            /* Disable all buttons */
+
+            const buttons =
+                challengeOptions.querySelectorAll(
+                    "button"
+                );
+
+
+            buttons.forEach(
+                function(button) {
+
+                    button.disabled = true;
+
+                }
+            );
+
+
+            /* ==========================
+               CORRECT ANSWER
+            ========================== */
+
+            if (
+                Math.abs(
+                    selectedAnswer -
+                    current.answer
+                ) < 0.01
+            ) {
+
+                challengeResult.textContent =
+                    "🎉 Correct! Excellent work!";
+
+
+                challengeResult.style.color =
+                    "#8f1838";
+
+
+                challengeScore++;
+
+
+                score.textContent =
+                    challengeScore;
+
+            }
+
+
+            /* ==========================
+               WRONG ANSWER
+            ========================== */
+
+            else {
+
+                challengeResult.textContent =
+                    "❌ Not quite. Keep learning!";
+
+
+                challengeResult.style.color =
+                    "#8f1838";
+
+            }
+
+
+            /* Show next question */
+
+            nextQuestion.style.display =
+                "inline-block";
+
+        }
+
+
+        /* ==============================
+           NEXT QUESTION
+        ============================== */
+
+        function goToNextQuestion() {
+
+            currentChallenge++;
+
+
+            /*
+               Check if quiz is complete
+            */
+
+            if (
+                currentChallenge >=
+                challengeQuestions.length
+            ) {
+
+                showQuizCompleted();
+
+                return;
+
+            }
+
+
+            loadChallengeQuestion();
+
+        }
+
+
+        /* ==============================
+           QUIZ COMPLETED
+        ============================== */
+
+        function showQuizCompleted() {
+
+            challengeBox.innerHTML = `
+
+                <h2>
+                    🏆 Quiz Completed!
+                </h2>
+
+                <p>
+                    Amazing! You completed
+                    all 5 questions.
+                </p>
+
+                <div class="score-box">
+
+                    Your Final Score
+
+                    <br><br>
+
+                    <strong>
+                        ${challengeScore} / 5
+                    </strong>
+
+                </div>
+
+                <button
+                    id="nextQuestion"
+                    style="
+                        display:inline-block;
+                        margin-top:20px;
+                    "
+                >
+                    🔄 Try Again
+                </button>
+
+            `;
+
+
+            /*
+               Add restart functionality
+            */
+
+            document
+                .getElementById("nextQuestion")
+                .addEventListener(
+                    "click",
+                    restartChallenge
+                );
+
+        }
+
+
+        /* ==============================
+           RESTART QUIZ
+        ============================== */
+
+        function restartChallenge() {
+
+            currentChallenge = 0;
+
+            challengeScore = 0;
+
+            questionAnswered = false;
+
+
+            /*
+               Rebuild challenge box
+            */
+
+            challengeBox.innerHTML = `
+
+                <h2>
+                    🎯 Challenge Yourself
+                </h2>
+
+                <p id="questionNumber">
+                    Question 1 of 5
+                </p>
+
+                <p
+                    class="challenge-question"
+                    id="challengeQuestion"
+                >
+                </p>
+
+                <div
+                    class="challenge-options"
+                    id="challengeOptions"
+                >
+                </div>
+
+                <p id="challengeResult"></p>
+
+                <button
+                    id="nextQuestion"
+                    style="display:none;"
+                >
+                    Next Question →
+                </button>
+
+                <div class="score-box">
+
+                    🏆 Score:
+
+                    <span id="score">
+                        0
+                    </span>
+
+                    / 5
+
+                </div>
+
+            `;
+
+
+            /*
+               Get the newly created elements
+            */
+
+            window.questionNumber =
+                document.getElementById(
+                    "questionNumber"
+                );
+
+            window.challengeQuestion =
+                document.getElementById(
+                    "challengeQuestion"
+                );
+
+            window.challengeOptions =
+                document.getElementById(
+                    "challengeOptions"
+                );
+
+            window.challengeResult =
+                document.getElementById(
+                    "challengeResult"
+                );
+
+            window.nextQuestion =
+                document.getElementById(
+                    "nextQuestion"
+                );
+
+            window.score =
+                document.getElementById(
+                    "score"
+                );
+
+
+            /*
+               Connect Next Question button
+            */
+
+            nextQuestion.addEventListener(
+                "click",
+                goToNextQuestion
+            );
+
+
+            loadChallengeQuestion();
+
+        }
+
+
+        /* ==============================
+           NEXT BUTTON EVENT
+        ============================== */
+
+        nextQuestion.addEventListener(
+            "click",
+            goToNextQuestion
+        );
+
+
+        /* ==============================
+           LOAD FIRST QUESTION
+        ============================== */
+
+        loadChallengeQuestion();
+
+
+    </script>
+
+</body>
+
+</html>

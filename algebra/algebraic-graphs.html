@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Algebraic Graphs | Algebra Lab</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        /* =========================================
+           ALGEBRAIC GRAPHS PAGE
+           ========================================= */
+
+        .graphs-page {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f8f9ff);
+            color: #333;
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           HEADER
+           ========================================= */
+
+        .graphs-page header {
+            background: linear-gradient(135deg, #172554, #1e3a8a);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .graphs-page header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .graphs-page header p {
+            margin-top: 10px;
+            font-size: 17px;
+        }
+
+
+        /* =========================================
+           MAIN
+           ========================================= */
+
+        .graphs-page main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+
+        /* =========================================
+           THEORY
+           ========================================= */
+
+        .theory-box {
+            background: #e8edff;
+            border-left: 5px solid #1e3a8a;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .theory-box h2 {
+            color: #172554;
+            margin-top: 0;
+        }
+
+        .formula {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin: 18px 0;
+        }
+
+
+        /* =========================================
+           EXPERIMENT BOX
+           ========================================= */
+
+        .experiment-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+            margin-bottom: 30px;
+        }
+
+        .experiment-box h2 {
+            text-align: center;
+            color: #172554;
+            margin-top: 0;
+        }
+
+
+        /* =========================================
+           INPUT
+           ========================================= */
+
+        .input-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .equation-input {
+            width: min(500px, 90%);
+            padding: 14px 18px;
+            border: 2px solid #a5b4fc;
+            border-radius: 12px;
+            font-size: 18px;
+            text-align: center;
+            outline: none;
+        }
+
+        .equation-input:focus {
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30,58,138,0.10);
+        }
+
+
+        /* =========================================
+           EXAMPLES
+           ========================================= */
+
+        .examples {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .examples p {
+            color: #172554;
+            font-weight: bold;
+        }
+
+        .example-button {
+            padding: 9px 16px;
+            margin: 5px;
+            background: #e8edff;
+            color: #172554;
+            border: 1px solid #a5b4fc;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .example-button:hover {
+            background: #c7d2fe;
+        }
+
+
+        /* =========================================
+           GRAPH BUTTON
+           ========================================= */
+
+        .graph-button {
+            display: block;
+            margin: 20px auto;
+            padding: 13px 30px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .graph-button:hover {
+            background: #172554;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(23,37,84,0.25);
+        }
+
+
+        /* =========================================
+           GRAPH AREA
+           ========================================= */
+
+        .graph-container {
+            background: #f8f9ff;
+            border: 2px solid #c7d2fe;
+            border-radius: 18px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .graph-container h3 {
+            text-align: center;
+            color: #172554;
+            margin-top: 0;
+        }
+
+        #graphCanvas {
+            display: block;
+            width: 100%;
+            max-width: 850px;
+            height: 500px;
+            margin: auto;
+            background: white;
+            border: 2px solid #a5b4fc;
+            border-radius: 12px;
+        }
+
+
+        /* =========================================
+           RESULT
+           ========================================= */
+
+        .result-box {
+            background: #e8edff;
+            border: 2px solid #1e3a8a;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #172554;
+        }
+
+
+        /* =========================================
+           CHALLENGE
+           ========================================= */
+
+        .challenge-box {
+            background: #e8edff;
+            border: 2px solid #a5b4fc;
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .challenge-box h2 {
+            color: #172554;
+            margin-top: 0;
+        }
+
+        .challenge-question {
+            font-size: 19px;
+            font-weight: bold;
+            margin: 22px 0;
+        }
+
+        .challenge-options {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .challenge-options button {
+            padding: 11px 20px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .challenge-options button:hover {
+            background: #172554;
+            transform: translateY(-2px);
+        }
+
+        .challenge-options button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #challengeResult {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 25px;
+        }
+
+        #nextQuestion {
+            margin-top: 18px;
+            padding: 11px 23px;
+            background: #172554;
+            color: white;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #nextQuestion:hover {
+            background: #1e3a8a;
+        }
+
+        .score-box {
+            margin-top: 22px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #172554;
+        }
+
+
+        /* =========================================
+           BACK BUTTON
+           ========================================= */
+
+        .back-section {
+            text-align: center;
+            margin: 35px 0 10px;
+        }
+
+        .back-section a {
+            display: inline-block;
+            color: #172554;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        .back-section a:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+
+        .graphs-page footer {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .graphs-page header h1 {
+                font-size: 28px;
+            }
+
+            #graphCanvas {
+                height: 400px;
+            }
+
+            .formula {
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="graphs-page">
+
+
+    <!-- =========================================
+         HEADER
+         ========================================= -->
+
+    <header>
+
+        <h1>📊 Algebraic Graphs</h1>
+
+        <p>
+            Visualize algebraic equations on a graph
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- =========================================
+             THEORY
+             ========================================= -->
+
+        <div class="theory-box">
+
+            <h2>📖 What are Algebraic Graphs?</h2>
+
+            <p>
+                An algebraic graph represents an equation
+                visually using points on a coordinate plane.
+            </p>
+
+            <p>
+                For example:
+            </p>
+
+            <div class="formula">
+                y = x + 2
+            </div>
+
+            <p>
+                forms a straight line, while:
+            </p>
+
+            <div class="formula">
+                y = x²
+            </div>
+
+            <p>
+                forms a parabola.
+            </p>
+
+        </div>
+
+
+        <!-- =========================================
+             INTERACTIVE EXPERIMENT
+             ========================================= -->
+
+        <div class="experiment-box">
+
+            <h2>🧪 Virtual Graph Experiment</h2>
+
+            <p style="text-align:center;">
+                Enter an equation and visualize it on the graph.
+            </p>
+
+
+        <!-- INPUT -->
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="equationInput"
+                class="equation-input"
+                value="y = x + 2"
+                placeholder="Example: y = x + 2"
+            >
+
+        </div>
+
+
+        <!-- EXAMPLES -->
+
+        <div class="examples">
+
+            <p>Try an example:</p>
+
+            <button
+                class="example-button"
+                onclick="setEquation('y = x + 2')">
+
+                y = x + 2
+
+            </button>
+
+            <button
+                class="example-button"
+                onclick="setEquation('y = 2x + 1')">
+
+                y = 2x + 1
+
+            </button>
+
+            <button
+                class="example-button"
+                onclick="setEquation('y = x²')">
+
+                y = x²
+
+            </button>
+
+            <button
+                class="example-button"
+                onclick="setEquation('y = x² - 4x + 3')">
+
+                y = x² - 4x + 3
+
+            </button>
+
+        </div>
+
+
+        <!-- PLOT BUTTON -->
+
+        <button
+            class="graph-button"
+            onclick="plotGraph()">
+
+            📊 Plot Graph
+
+        </button>
+        <!-- =========================================
+             GRAPH
+             ========================================= -->
+
+        <div class="graph-container">
+
+            <h3>
+                📈 Your Graph
+            </h3>
+
+            <canvas
+                id="graphCanvas"
+                width="850"
+                height="500">
+            </canvas>
+
+        </div>
+
+
+        <!-- =========================================
+             RESULT
+             ========================================= -->
+
+        <div
+            class="result-box"
+            id="resultBox">
+
+            Enter an equation and click
+            <strong>Plot Graph</strong>.
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         CHALLENGE YOURSELF
+         ========================================= -->
+
+    <div
+        class="challenge-box"
+        id="challengeBox">
+
+        <h2>
+            🎯 Challenge Yourself
+        </h2>
+
+        <p id="questionNumber">
+            Question 1 of 5
+        </p>
+
+        <p
+            class="challenge-question"
+            id="challengeQuestion">
+
+            What type of graph is y = x²?
+
+        </p>
+
+
+        <div
+            class="challenge-options"
+            id="challengeOptions">
+
+            <button onclick="checkChallenge(1)">
+                Straight Line
+            </button>
+
+            <button onclick="checkChallenge(2)">
+                Parabola
+            </button>
+
+            <button onclick="checkChallenge(3)">
+                Circle
+            </button>
+
+            <button onclick="checkChallenge(4)">
+                Triangle
+            </button>
+
+        </div>
+
+
+        <p id="challengeResult"></p>
+
+
+        <button
+            id="nextQuestion"
+            onclick="nextChallengeQuestion()"
+            style="display:none;">
+
+            Next Question →
+
+        </button>
+
+
+        <div class="score-box">
+
+            🏆 Score:
+            <span id="score">0</span> / 5
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         BACK TO ALGEBRA LAB
+         ========================================= -->
+
+    <div class="back-section">
+
+        <a href="../algebra.html">
+            ← Back to Algebra Lab
+        </a>
+
+    </div>
+
+
+</main>
+
+
+<!-- =========================================
+     FOOTER
+     ========================================= -->
+
+<footer>
+
+    <p>
+        Mathematics Virtual Lab © 2026
+    </p>
+
+</footer>
+
+
+<!-- =========================================
+     JAVASCRIPT
+     ========================================= -->
+
+<script>
+
+    /* =========================================
+       ELEMENTS
+       ========================================= */
+
+    const canvas =
+        document.getElementById("graphCanvas");
+
+    const ctx =
+        canvas.getContext("2d");
+
+    const equationInput =
+        document.getElementById("equationInput");
+
+    const resultBox =
+        document.getElementById("resultBox");
+
+
+    /* =========================================
+       SET EQUATION
+       ========================================= */
+
+    function setEquation(equation) {
+
+        equationInput.value =
+            equation;
+
+        plotGraph();
+
+    }
+
+
+    /* =========================================
+       CLEAN EQUATION
+       ========================================= */
+
+    function cleanEquation(equation) {
+
+        equation =
+            equation
+                .toLowerCase()
+                .replace(/\s+/g, "")
+                .replace(/²/g, "^2")
+                .replace(/−/g, "-");
+
+
+        if (equation.startsWith("y=")) {
+
+            equation =
+                equation.substring(2);
+
+        }
+
+
+        return equation;
+
+    }
+
+
+    /* =========================================
+       CALCULATE Y
+       ========================================= */
+
+    function calculateY(
+        expression,
+        x
+    ) {
+
+        let value =
+            expression;
+
+
+        value =
+            value.replace(
+                /x\^2/g,
+                `(${x}*${x})`
+            );
+
+
+        value =
+            value.replace(
+                /x/g,
+                `(${x})`
+            );
+
+
+        value =
+            value.replace(
+                /(\d)\(/g,
+                "$1*("
+            );
+
+
+        try {
+
+            return Function(
+                "return " + value
+            )();
+
+        }
+
+        catch {
+
+            return NaN;
+
+        }
+
+    }
+
+
+    /* =========================================
+       DRAW GRID
+       ========================================= */
+
+    function drawGrid() {
+
+        const width =
+            canvas.width;
+
+        const height =
+            canvas.height;
+
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        /* GRID */
+
+        ctx.lineWidth = 1;
+
+
+        for (
+            let x = 0;
+            x <= width;
+            x += 25
+        ) {
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                x,
+                0
+            );
+
+            ctx.lineTo(
+                x,
+                height
+            );
+
+            ctx.stroke();
+
+        }
+
+
+        for (
+            let y = 0;
+            y <= height;
+            y += 25
+        ) {
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                0,
+                y
+            );
+
+            ctx.lineTo(
+                width,
+                y
+            );
+
+            ctx.stroke();
+
+        }
+
+
+        /* AXES */
+
+        const centerX =
+            width / 2;
+
+        const centerY =
+            height / 2;
+
+
+        ctx.lineWidth = 2;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            centerX,
+            0
+        );
+
+        ctx.lineTo(
+            centerX,
+            height
+        );
+
+        ctx.stroke();
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            0,
+            centerY
+        );
+
+        ctx.lineTo(
+            width,
+            centerY
+        );
+
+        ctx.stroke();
+
+
+        /* LABELS */
+
+        ctx.font =
+            "14px Arial";
+
+
+        ctx.fillText(
+            "Y",
+            centerX + 8,
+            18
+        );
+
+
+        ctx.fillText(
+            "X",
+            width - 20,
+            centerY - 8
+        );
+
+
+        /* NUMBERS */
+
+        for (
+            let i = -16;
+            i <= 16;
+            i++
+        ) {
+
+            if (i === 0) {
+                continue;
+            }
+
+
+            const pixelX =
+                centerX + i * 25;
+
+            const pixelY =
+                centerY - i * 25;
+
+
+            if (
+                pixelX >= 0 &&
+                pixelX <= width
+            ) {
+
+                ctx.fillText(
+                    i,
+                    pixelX - 5,
+                    centerY + 18
+                );
+
+            }
+
+
+            if (
+                pixelY >= 0 &&
+                pixelY <= height
+            ) {
+
+                ctx.fillText(
+                    i,
+                    centerX + 7,
+                    pixelY + 4
+                );
+
+            }
+
+        }
+
+    }
+
+
+    /* =========================================
+       PLOT GRAPH
+       ========================================= */
+
+    function plotGraph() {
+
+        const originalEquation =
+            equationInput.value.trim();
+
+
+        if (
+            originalEquation === ""
+        ) {
+
+            resultBox.textContent =
+                "Please enter an equation.";
+
+            drawGrid();
+
+            return;
+
+        }
+
+
+        const expression =
+            cleanEquation(
+                originalEquation
+            );
+
+
+        drawGrid();
+
+
+        const width =
+            canvas.width;
+
+        const height =
+            canvas.height;
+
+
+        const centerX =
+            width / 2;
+
+        const centerY =
+            height / 2;
+
+        const scale =
+            25;
+
+
+        ctx.beginPath();
+
+
+        let started = false;
+
+
+        for (
+            let pixelX = 0;
+            pixelX <= width;
+            pixelX++
+        ) {
+
+            const x =
+                (pixelX - centerX) /
+                scale;
+
+
+            const y =
+                calculateY(
+                    expression,
+                    x
+                );
+
+
+            if (
+                !Number.isFinite(y)
+            ) {
+
+                started = false;
+
+                continue;
+
+            }
+
+
+            const pixelY =
+                centerY -
+                y * scale;
+
+
+            if (
+                pixelY < -10000 ||
+                pixelY > height + 10000
+            ) {
+
+                started = false;
+
+                continue;
+
+            }
+
+
+            if (!started) {
+
+                ctx.moveTo(
+                    pixelX,
+                    pixelY
+                );
+
+                started = true;
+
+            }
+
+            else {
+
+                ctx.lineTo(
+                    pixelX,
+                    pixelY
+                );
+
+            }
+
+        }
+
+
+        ctx.stroke();
+
+
+        resultBox.innerHTML = `
+            📊 Graph plotted successfully:
+            <strong>${originalEquation}</strong>
+        `;
+
+    }
+
+
+    /* =========================================
+       INITIAL GRAPH
+       ========================================= */
+
+    plotGraph();
+
+
+    /* =========================================
+       ENTER KEY
+       ========================================= */
+
+    equationInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                plotGraph();
+
+            }
+
+        }
+    );
+    /* =========================================
+       CHALLENGE QUESTIONS
+       ========================================= */
+
+    const challengeQuestions = [
+
+        {
+            question:
+                "What type of graph is y = x²?",
+
+            options: [
+                "Straight Line",
+                "Parabola",
+                "Circle",
+                "Triangle"
+            ],
+
+            answer: 2
+        },
+
+
+        {
+            question:
+                "What is the slope of y = 3x + 2?",
+
+            options: [
+                "1",
+                "2",
+                "3",
+                "5"
+            ],
+
+            answer: 3
+        },
+
+
+        {
+            question:
+                "What is the y-intercept of y = 2x + 4?",
+
+            options: [
+                "2",
+                "4",
+                "6",
+                "0"
+            ],
+
+            answer: 2
+        },
+
+
+        {
+            question:
+                "Which equation represents a horizontal line?",
+
+            options: [
+                "y = 5",
+                "y = x",
+                "y = x²",
+                "y = 2x + 1"
+            ],
+
+            answer: 1
+        },
+
+
+        {
+            question:
+                "Which equation represents a straight line?",
+
+            options: [
+                "y = x²",
+                "y = x³",
+                "y = 2x + 1",
+                "y = x² + 3"
+            ],
+
+            answer: 3
+        }
+
+    ];
+
+
+    let currentChallenge = 0;
+
+    let challengeScore = 0;
+
+    let questionAnswered = false;
+
+
+    /* =========================================
+       CHECK CHALLENGE
+       ========================================= */
+
+    function checkChallenge(
+        selectedAnswer
+    ) {
+
+        if (questionAnswered) {
+
+            return;
+
+        }
+
+
+        const current =
+            challengeQuestions[
+                currentChallenge
+            ];
+
+
+        questionAnswered = true;
+
+
+        const result =
+            document.getElementById(
+                "challengeResult"
+            );
+
+
+        const buttons =
+            document.querySelectorAll(
+                "#challengeOptions button"
+            );
+
+
+        buttons.forEach(
+            function(button) {
+
+                button.disabled = true;
+
+            }
+        );
+
+
+        if (
+            selectedAnswer ===
+            current.answer
+        ) {
+
+            result.textContent =
+                "🎉 Correct! Excellent work!";
+
+            result.style.color =
+                "#1e3a8a";
+
+
+            challengeScore++;
+
+
+            document.getElementById(
+                "score"
+            ).textContent =
+                challengeScore;
+
+        }
+
+        else {
+
+            result.textContent =
+                "❌ Not quite. The correct answer is " +
+                current.options[
+                    current.answer - 1
+                ];
+
+            result.style.color =
+                "#c62828";
+
+        }
+
+
+        document.getElementById(
+            "nextQuestion"
+        ).style.display =
+            "inline-block";
+
+    }
+
+
+    /* =========================================
+       NEXT QUESTION
+       ========================================= */
+
+    function nextChallengeQuestion() {
+
+        currentChallenge++;
+
+
+        if (
+            currentChallenge >=
+            challengeQuestions.length
+        ) {
+
+            document.getElementById(
+                "challengeBox"
+            ).innerHTML = `
+
+                <h2>
+                    🏆 Challenge Completed!
+                </h2>
+
+                <p>
+                    You completed all 5
+                    algebraic graph questions.
+                </p>
+
+                <div class="score-box">
+
+                    Final Score
+
+                    <br><br>
+
+                    <strong>
+                        ${challengeScore} / 5
+                    </strong>
+
+                </div>
+
+                <button
+                    id="nextQuestion"
+                    onclick="restartChallenge()"
+                    style="
+                        display:inline-block;
+                        margin-top:20px;
+                    ">
+
+                    🔄 Try Again
+
+                </button>
+
+            `;
+
+            return;
+
+        }
+
+
+        const current =
+            challengeQuestions[
+                currentChallenge
+            ];
+
+
+        document.getElementById(
+            "questionNumber"
+        ).textContent =
+            "Question " +
+            (currentChallenge + 1) +
+            " of 5";
+
+
+        document.getElementById(
+            "challengeQuestion"
+        ).textContent =
+            current.question;
+
+
+        const container =
+            document.getElementById(
+                "challengeOptions"
+            );
+
+
+        container.innerHTML = "";
+
+
+        current.options.forEach(
+            function(
+                option,
+                index
+            ) {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.textContent =
+                    option;
+
+
+                button.onclick =
+                    function() {
+
+                        checkChallenge(
+                            index + 1
+                        );
+
+                    };
+
+
+                container.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+        document.getElementById(
+            "challengeResult"
+        ).textContent = "";
+
+
+        document.getElementById(
+            "nextQuestion"
+        ).style.display =
+            "none";
+
+
+        questionAnswered = false;
+
+    }
+
+
+    /* =========================================
+       RESTART CHALLENGE
+       ========================================= */
+
+    function restartChallenge() {
+
+        location.reload();
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

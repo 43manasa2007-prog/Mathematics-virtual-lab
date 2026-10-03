@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trigonometric Graphs | Mathematics Virtual Lab</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff7ef;
+    color: #4e342e;
+}
+
+header {
+    background: linear-gradient(135deg, #e65100, #ff9800);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 38px;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+main {
+    width: 94%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+    text-align: center;
+    color: #d84315;
+    margin-top: 0;
+}
+
+.controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.controls label {
+    display: block;
+    font-weight: bold;
+    color: #bf360c;
+    margin-bottom: 8px;
+}
+
+.controls input {
+    width: 130px;
+    padding: 11px;
+    border: 2px solid #ffb74d;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 17px;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    margin: 8px 4px;
+    border-radius: 25px;
+    background: #f57c00;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e65100;
+}
+
+.graph-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    max-width: 1000px;
+    height: 500px;
+    margin: auto;
+    border: 2px solid #ffcc80;
+    border-radius: 12px;
+    background: #fffdf9;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.line {
+    width: 28px;
+    height: 5px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.sin-line {
+    background: #c62828;
+}
+
+.cos-line {
+    background: #1565c0;
+}
+
+.tan-line {
+    background: #2e7d32;
+}
+
+.result {
+    text-align: center;
+    background: #fff3e0;
+    border: 2px solid #ffcc80;
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.back {
+    display: block;
+    width: fit-content;
+    margin: 30px auto 0;
+    padding: 12px 22px;
+    background: #d84315;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #bf360c;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #795548;
+}
+
+@media (max-width: 700px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    canvas {
+        height: 400px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📈 Trigonometric Graphs</h1>
+    <p>Explore the graphs of sine, cosine and tangent functions.</p>
+</header>
+
+<main>
+
+<div class="card">
+
+    <h2>🧪 Interactive Graph</h2>
+
+    <div class="controls">
+
+        <label for="angle">
+            Angle θ (degrees)
+        </label>
+
+        <input
+            type="number"
+            id="angle"
+            value="30"
+            min="-360"
+            max="360"
+            step="1"
+        >
+
+        <br>
+
+        <button onclick="calculateGraph()">
+            Calculate
+        </button>
+
+        <button onclick="resetGraph()">
+            Reset
+        </button>
+
+    </div>
+
+    <div class="legend">
+
+        <span>
+            <i class="line sin-line"></i>
+            sin θ
+        </span>
+
+        <span>
+            <i class="line cos-line"></i>
+            cos θ
+        </span>
+
+        <span>
+            <i class="line tan-line"></i>
+            tan θ
+        </span>
+
+    </div>
+
+    <div class="graph-container">
+        <canvas id="graph"></canvas>
+    </div>
+
+    <div class="result" id="result">
+        Enter an angle and click Calculate.
+    </div>
+
+</div>
+
+<a class="back" href="../trigonometry.html">
+    ← Back to Trigonometry Lab
+</a>
+
+</main>
+
+<footer>
+    Mathematics Virtual Lab © 2026
+</footer>
+<script>
+
+const canvas = document.getElementById("graph");
+const ctx = canvas.getContext("2d");
+
+function setupCanvas() {
+
+    const width = 1000;
+    const height = 500;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    return {
+        width: width,
+        height: height
+    };
+}
+
+function drawGraph(selectedAngle = 30) {
+
+    const size = setupCanvas();
+
+    const width = size.width;
+    const height = size.height;
+
+    ctx.clearRect(0, 0, width, height);
+
+    const left = 60;
+    const right = width - 25;
+    const top = 35;
+    const bottom = height - 45;
+
+    const graphWidth = right - left;
+    const graphHeight = bottom - top;
+
+    const xMin = -360;
+    const xMax = 360;
+
+    const yMin = -2;
+    const yMax = 2;
+
+    function xPixel(degrees) {
+        return left +
+            ((degrees - xMin) / (xMax - xMin)) *
+            graphWidth;
+    }
+
+    function yPixel(value) {
+        return bottom -
+            ((value - yMin) / (yMax - yMin)) *
+            graphHeight;
+    }
+
+    /* Grid */
+
+    ctx.strokeStyle = "#e0e0e0";
+    ctx.lineWidth = 1;
+
+    for (let deg = -360; deg <= 360; deg += 30) {
+
+        const x = xPixel(deg);
+
+        ctx.beginPath();
+        ctx.moveTo(x, top);
+        ctx.lineTo(x, bottom);
+        ctx.stroke();
+    }
+
+    for (let value = -2; value <= 2; value += 0.5) {
+
+        const y = yPixel(value);
+
+        ctx.beginPath();
+        ctx.moveTo(left, y);
+        ctx.lineTo(right, y);
+        ctx.stroke();
+    }
+
+    /* Axes */
+
+    ctx.strokeStyle = "#4e342e";
+    ctx.lineWidth = 2;
+
+    const xAxis = yPixel(0);
+    const yAxis = xPixel(0);
+
+    ctx.beginPath();
+    ctx.moveTo(left, xAxis);
+    ctx.lineTo(right, xAxis);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(yAxis, top);
+    ctx.lineTo(yAxis, bottom);
+    ctx.stroke();
+
+    /* X-axis labels */
+
+    ctx.fillStyle = "#5d4037";
+    ctx.font = "13px Arial";
+    ctx.textAlign = "center";
+
+    for (let deg = -360; deg <= 360; deg += 90) {
+
+        ctx.fillText(
+            deg + "°",
+            xPixel(deg),
+            xAxis + 22
+        );
+    }
+
+    /* Y-axis labels */
+
+    ctx.textAlign = "right";
+
+    for (let value = -2; value <= 2; value += 0.5) {
+
+        if (value !== 0) {
+
+            ctx.fillText(
+                value.toFixed(1),
+                yAxis - 8,
+                yPixel(value) + 4
+            );
+        }
+    }
+
+    /* Draw Sine */
+
+    drawFunction(
+        function(rad) {
+            return Math.sin(rad);
+        },
+        "#c62828",
+        false
+    );
+
+    /* Draw Cosine */
+
+    drawFunction(
+        function(rad) {
+            return Math.cos(rad);
+        },
+        "#1565c0",
+        false
+    );
+
+    /* Draw Tangent */
+
+    drawFunction(
+        function(rad) {
+            return Math.tan(rad);
+        },
+        "#2e7d32",
+        true
+    );
+
+    /* Selected angle points */
+
+    const rad = selectedAngle * Math.PI / 180;
+
+    drawPoint(
+        selectedAngle,
+        Math.sin(rad),
+        "#c62828"
+    );
+
+    drawPoint(
+        selectedAngle,
+        Math.cos(rad),
+        "#1565c0"
+    );
+
+    if (Math.abs(Math.cos(rad)) > 0.05) {
+
+        const tanValue = Math.tan(rad);
+
+        if (Math.abs(tanValue) <= 2) {
+
+            drawPoint(
+                selectedAngle,
+                tanValue,
+                "#2e7d32"
+            );
+        }
+    }
+}
+
+function drawFunction(fn, color, tangent) {
+
+    const left = 60;
+    const right = canvas.width - 25;
+    const top = 35;
+    const bottom = canvas.height - 45;
+
+    const xMin = -360;
+    const xMax = 360;
+
+    const yMin = -2;
+    const yMax = 2;
+
+    function xPixel(degrees) {
+        return left +
+            ((degrees - xMin) / (xMax - xMin)) *
+            (right - left);
+    }
+
+    function yPixel(value) {
+        return bottom -
+            ((value - yMin) / (yMax - yMin)) *
+            (bottom - top);
+    }
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+
+    let drawing = false;
+
+    ctx.beginPath();
+
+    for (
+        let degrees = xMin;
+        degrees <= xMax;
+        degrees += 0.5
+    ) {
+
+        const radians =
+            degrees * Math.PI / 180;
+
+        const value = fn(radians);
+
+        /*
+         * Tangent becomes extremely large near
+         * 90°, 270°, etc.
+         */
+        const valid =
+            Number.isFinite(value) &&
+            Math.abs(value) <= 2.2;
+
+        if (!valid) {
+
+            drawing = false;
+            continue;
+        }
+
+        const x = xPixel(degrees);
+        const y = yPixel(value);
+
+        if (!drawing) {
+
+            ctx.moveTo(x, y);
+            drawing = true;
+
+        } else {
+
+            ctx.lineTo(x, y);
+        }
+    }
+
+    ctx.stroke();
+}
+
+function drawPoint(degrees, value, color) {
+
+    const left = 60;
+    const right = canvas.width - 25;
+    const top = 35;
+    const bottom = canvas.height - 45;
+
+    const x =
+        left +
+        ((degrees + 360) / 720) *
+        (right - left);
+
+    const y =
+        bottom -
+        ((value + 2) / 4) *
+        (bottom - top);
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        6,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
+function calculateGraph() {
+
+    const angle =
+        parseFloat(
+            document.getElementById("angle").value
+        );
+
+    if (
+        !Number.isFinite(angle) ||
+        angle < -360 ||
+        angle > 360
+    ) {
+
+        document.getElementById("result").innerHTML =
+            "⚠️ Please enter an angle between -360° and 360°.";
+
+        return;
+    }
+
+    const radians =
+        angle * Math.PI / 180;
+
+    const sinValue =
+        Math.sin(radians);
+
+    const cosValue =
+        Math.cos(radians);
+
+    const tanValue =
+        Math.tan(radians);
+
+    let tanText;
+
+    if (Math.abs(cosValue) < 0.000001) {
+
+        tanText = "undefined";
+
+    } else {
+
+        tanText = tanValue.toFixed(4);
+    }
+
+    document.getElementById("result").innerHTML =
+
+        "<strong>For angle θ = " +
+        angle +
+        "°</strong><br><br>" +
+
+        "🔴 sin θ = " +
+        sinValue.toFixed(4) +
+        "<br>" +
+
+        "🔵 cos θ = " +
+        cosValue.toFixed(4) +
+        "<br>" +
+
+        "🟢 tan θ = " +
+        tanText;
+
+    drawGraph(angle);
+}
+
+function resetGraph() {
+
+    document.getElementById("angle").value = 30;
+
+    document.getElementById("result").innerHTML =
+
+        "Enter an angle and click Calculate.";
+
+    drawGraph(30);
+}
+
+/* Draw graph when page opens */
+
+drawGraph(30);
+
+</script>
+
+</body>
+</html>

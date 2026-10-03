@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Triangle Angle Sum - Mathematics Virtual Lab</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =================================
+           MAIN EXPERIMENT BOX
+        ================================= */
+
+        .experiment-box {
+            max-width: 950px;
+            margin: 30px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 22px;
+            box-shadow: 0 8px 25px rgba(100, 50, 90, 0.10);
+        }
+
+
+        /* =================================
+           THEORY
+        ================================= */
+
+        .theory {
+            background: #f4eafa;
+            padding: 22px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .theory h3 {
+            color: #7c1d3c;
+            margin-bottom: 12px;
+        }
+
+        .formula {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            color: #8f1838;
+            margin: 18px 0;
+        }
+
+
+        /* =================================
+           CONTROLS
+        ================================= */
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .input-group {
+            text-align: center;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #6f1735;
+        }
+
+        .input-group input {
+            width: 100px;
+            padding: 11px;
+            border: 2px solid #d7b8dc;
+            border-radius: 10px;
+            font-size: 17px;
+            text-align: center;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #8f1838;
+        }
+
+
+        /* =================================
+           TRIANGLE AREA
+        ================================= */
+
+        .triangle-area {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .triangle-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 350px;
+        }
+
+        #triangleSVG {
+            width: 500px;
+            max-width: 100%;
+            height: 350px;
+        }
+
+        #triangleShape {
+            transition: all 0.3s ease;
+        }
+
+        #angleAArc,
+        #angleBArc,
+        #angleCArc {
+            transition: all 0.3s ease;
+        }
+
+
+        /* =================================
+           ANGLE LABELS
+        ================================= */
+
+        .angle-label {
+            font-size: 18px;
+            font-weight: bold;
+            fill: #7c1d3c;
+        }
+
+
+        /* =================================
+           RESULT BOX
+        ================================= */
+
+        .result {
+            background: #fff0f4;
+            border: 2px solid #d99aaa;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .result h3 {
+            color: #7c1d3c;
+            margin-bottom: 20px;
+        }
+
+        .calculation-line {
+            margin: 10px 0;
+            font-size: 17px;
+        }
+
+        .answer {
+            font-size: 22px;
+            font-weight: bold;
+            color: #8f1838;
+            margin: 8px 0;
+        }
+
+
+        /* =================================
+           CHALLENGE BOX
+        ================================= */
+
+        .challenge-box {
+            margin-top: 35px;
+            padding: 28px;
+            background: #f4eafa;
+            border: 2px solid #d7b8dc;
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        .challenge-box h2 {
+            color: #7c1d3c;
+            margin-bottom: 12px;
+        }
+
+        .challenge-question {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .challenge-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .challenge-options button {
+            padding: 11px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #8f1838;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .challenge-options button:hover {
+            background: #6f1735;
+            transform: scale(1.04);
+        }
+
+        .challenge-options button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+
+        /* =================================
+           CHALLENGE RESULT
+        ================================= */
+
+        #challengeResult {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #nextQuestion {
+            margin-top: 18px;
+            padding: 11px 22px;
+            border: none;
+            border-radius: 25px;
+            background: #8f1838;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        #nextQuestion:hover {
+            background: #6f1735;
+        }
+
+
+        /* =================================
+           SCORE
+        ================================= */
+
+        .score-box {
+            margin-top: 22px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #7c1d3c;
+        }
+
+
+        /* =================================
+           BACK BUTTON
+        ================================= */
+
+        .back-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-section a {
+            color: #7c1d3c;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back-section a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+<body class="triangle-page">
+
+    <header class="triangle-header">
+        <h1>📐 Triangle Angle Sum</h1>
+        <p>Explore the angles of a triangle</p>
+    </header>
+    <main>
+
+        <div class="experiment-box">
+
+
+            <!-- ==============================
+                 THEORY
+            ============================== -->
+
+            <div class="theory">
+
+                <h3>📖 Triangle Angle Sum Theorem</h3>
+
+                <p>
+                    The sum of the three interior angles
+                    of every triangle is always equal to
+                    <strong>180°</strong>.
+                </p>
+
+                <div class="formula">
+                    A + B + C = 180°
+                </div>
+
+                <p>
+                    Change any two angles and the third angle
+                    will automatically adjust so that the total
+                    remains 180°.
+                </p>
+
+            </div>
+
+
+            <!-- ==============================
+                 EXPERIMENT
+            ============================== -->
+
+            <h2>🧪 Virtual Experiment</h2>
+
+            <p style="text-align:center;">
+                Enter two angles and observe how the triangle
+                changes.
+            </p>
+
+
+            <!-- ==============================
+                 ANGLE INPUTS
+            ============================== -->
+
+            <div class="controls">
+
+                <div class="input-group">
+
+                    <label for="angleA">
+                        Angle A (°)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="angleA"
+                        value="60"
+                        min="1"
+                        max="178"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="angleB">
+                        Angle B (°)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="angleB"
+                        value="60"
+                        min="1"
+                        max="178"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Angle C (°)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="angleC"
+                        value="60"
+                        readonly
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 TRIANGLE DIAGRAM
+            ============================== -->
+
+            <div class="triangle-area">
+
+                <div class="triangle-wrapper">
+
+                    <svg
+                        id="triangleSVG"
+                        viewBox="0 0 500 350"
+                        preserveAspectRatio="xMidYMid meet"
+                    >
+
+                        <!-- Triangle -->
+
+                        <polygon
+                            id="triangleShape"
+                            points="100,280 400,280 250,70"
+                            fill="#d9b8df"
+                            stroke="#8f1838"
+                            stroke-width="4"
+                            stroke-linejoin="round"
+                        >
+                        </polygon>
+
+
+                        <!-- Angle A arc -->
+
+                        <path
+                            id="angleAArc"
+                            d=""
+                            fill="none"
+                            stroke="#8f1838"
+                            stroke-width="3"
+                        >
+                        </path>
+
+
+                        <!-- Angle B arc -->
+
+                        <path
+                            id="angleBArc"
+                            d=""
+                            fill="none"
+                            stroke="#8f1838"
+                            stroke-width="3"
+                        >
+                        </path>
+
+
+                        <!-- Angle C arc -->
+
+                        <path
+                            id="angleCArc"
+                            d=""
+                            fill="none"
+                            stroke="#8f1838"
+                            stroke-width="3"
+                        >
+                        </path>
+
+
+                        <!-- Angle A label -->
+
+                        <text
+                            id="labelA"
+                            class="angle-label"
+                            x="125"
+                            y="265"
+                            text-anchor="middle"
+                        >
+                            60°
+                        </text>
+
+
+                        <!-- Angle B label -->
+
+                        <text
+                            id="labelB"
+                            class="angle-label"
+                            x="375"
+                            y="265"
+                            text-anchor="middle"
+                        >
+                            60°
+                        </text>
+
+
+                        <!-- Angle C label -->
+
+                        <text
+                            id="labelC"
+                            class="angle-label"
+                            x="250"
+                            y="110"
+                            text-anchor="middle"
+                        >
+                            60°
+                        </text>
+
+                    </svg>
+
+                </div>
+
+
+                <p class="circle-caption">
+                    🔺 Triangle
+                </p>
+
+            </div>
+
+
+            <!-- ==============================
+                 CALCULATION
+            ============================== -->
+
+            <div class="result">
+
+                <h3>🧮 Calculation</h3>
+
+
+                <p
+                    class="calculation-line"
+                    id="calculation">
+                    A + B + C = 180°
+                </p>
+
+
+                <p
+                    class="calculation-line"
+                    id="calculation2">
+                    60° + 60° + 60° = 180°
+                </p>
+
+
+                <p
+                    class="answer"
+                    id="answer">
+                    ✓ Triangle Angle Sum = 180°
+                </p>
+
+            </div>
+
+
+            <!-- ==============================
+                 CHALLENGE YOURSELF
+            ============================== -->
+
+            <div
+                class="challenge-box"
+                id="challengeBox">
+
+                <h2>🎯 Challenge Yourself</h2>
+
+                <p id="questionNumber">
+                    Question 1 of 5
+                </p>
+
+
+                <p
+                    class="challenge-question"
+                    id="challengeQuestion">
+
+                    If two angles of a triangle are
+                    60° and 70°, what is the third angle?
+
+                </p>
+
+
+                <div
+                    class="challenge-options"
+                    id="challengeOptions">
+
+                    <button
+                        onclick="checkChallenge(50)">
+                        50°
+                    </button>
+
+                    <button
+                        onclick="checkChallenge(60)">
+                        60°
+                    </button>
+
+                    <button
+                        onclick="checkChallenge(70)">
+                        70°
+                    </button>
+
+                    <button
+                        onclick="checkChallenge(80)">
+                        80°
+                    </button>
+
+                </div>
+
+
+                <p id="challengeResult"></p>
+
+
+                <button
+                    id="nextQuestion"
+                    onclick="nextChallengeQuestion()"
+                    style="display:none;">
+
+                    Next Question →
+
+                </button>
+
+
+                <div class="score-box">
+
+                    🏆 Score:
+                    <span id="score">0</span> / 5
+
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 BACK TO GEOMETRY
+            ============================== -->
+
+            <div class="back-section">
+
+                <a href="geometry.html">
+                    ← Back to Geometry Lab
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Mathematics Virtual Lab © 2026
+        </p>
+
+    </footer>
+    <script>
+
+/* =========================================
+   TRIANGLE ANGLE CALCULATION
+========================================= */
+
+const angleAInput = document.getElementById("angleA");
+const angleBInput = document.getElementById("angleB");
+const angleCInput = document.getElementById("angleC");
+
+const triangleShape = document.getElementById("triangleShape");
+
+const labelA = document.getElementById("labelA");
+const labelB = document.getElementById("labelB");
+const labelC = document.getElementById("labelC");
+
+const calculation = document.getElementById("calculation");
+const calculation2 = document.getElementById("calculation2");
+const answer = document.getElementById("answer");
+
+
+/* =========================================
+   UPDATE TRIANGLE
+========================================= */
+
+function updateTriangle() {
+
+    let A = Number(angleAInput.value);
+    let B = Number(angleBInput.value);
+
+    /* Keep angles valid */
+
+    if (A < 1) {
+        A = 1;
+        angleAInput.value = 1;
+    }
+
+    if (B < 1) {
+        B = 1;
+        angleBInput.value = 1;
+    }
+
+
+    /* Third angle */
+
+    let C = 180 - A - B;
+
+
+    /*
+       If the two entered angles are
+       impossible, show an error.
+    */
+
+    if (C <= 0) {
+
+        angleCInput.value = "";
+
+        calculation.innerHTML =
+            "A + B must be less than 180°";
+
+        calculation2.innerHTML =
+            "Please enter smaller angles.";
+
+        answer.innerHTML =
+            "⚠️ Invalid triangle";
+
+        answer.style.color = "#8f1838";
+
+        return;
+    }
+
+
+    /* Update C */
+
+    angleCInput.value = C;
+
+
+    /* =====================================
+       UPDATE CALCULATION
+    ===================================== */
+
+    calculation.innerHTML =
+        "A + B + C = 180°";
+
+    calculation2.innerHTML =
+        A + "° + " +
+        B + "° + " +
+        C + "° = 180°";
+
+    answer.innerHTML =
+        "✓ Triangle Angle Sum = 180°";
+
+    answer.style.color = "#8f1838";
+
+
+    /* =====================================
+       CREATE TRIANGLE SHAPE
+    ===================================== */
+
+    /*
+       We use the sine rule to create a
+       triangle that visually responds
+       to the entered angles.
+    */
+
+    const base = 300;
+
+    const angleARad = A * Math.PI / 180;
+    const angleBRad = B * Math.PI / 180;
+    const angleCRad = C * Math.PI / 180;
+
+
+    /*
+       Side lengths opposite the angles.
+    */
+
+    const sideA =
+        Math.sin(angleARad);
+
+    const sideB =
+        Math.sin(angleBRad);
+
+    const sideC =
+        Math.sin(angleCRad);
+
+
+    /*
+       Coordinates.
+
+       BOTTOM LEFT  = angle A
+       BOTTOM RIGHT = angle B
+       TOP          = angle C
+    */
+
+    const x1 = 100;
+    const y1 = 280;
+
+    const x2 = 400;
+    const y2 = 280;
+
+
+    /*
+       Calculate the top vertex.
+
+       Using the cosine rule geometry.
+    */
+
+    const topX =
+        x1 +
+        (base * sideB * Math.cos(angleARad));
+
+    const height =
+        base *
+        sideB *
+        Math.sin(angleARad);
+
+
+    let topY =
+        y1 - height;
+
+
+    /*
+       Keep the triangle inside SVG.
+    */
+
+    if (topX < 80) {
+        topY = topY;
+    }
+
+    if (topX > 420) {
+        topY = topY;
+    }
+
+    if (topY < 45) {
+        topY = 45;
+    }
+
+    if (topY > 260) {
+        topY = 260;
+    }
+
+
+    /* Update triangle */
+
+    triangleShape.setAttribute(
+        "points",
+        `${x1},${y1} ${x2},${y2} ${topX},${topY}`
+    );
+
+
+    /* =====================================
+       UPDATE LABELS
+    ===================================== */
+
+    labelA.textContent =
+        A + "°";
+
+    labelB.textContent =
+        B + "°";
+
+    labelC.textContent =
+        C + "°";
+
+
+    /*
+       Angle A label
+    */
+
+    labelA.setAttribute(
+        "x",
+        x1 + 35
+    );
+
+    labelA.setAttribute(
+        "y",
+        y1 - 18
+    );
+
+
+    /*
+       Angle B label
+    */
+
+    labelB.setAttribute(
+        "x",
+        x2 - 35
+    );
+
+    labelB.setAttribute(
+        "y",
+        y2 - 18
+    );
+
+
+    /*
+       Angle C label
+    */
+
+    labelC.setAttribute(
+        "x",
+        topX
+    );
+
+    labelC.setAttribute(
+        "y",
+        topY + 30
+    );
+
+}
+
+
+/* =========================================
+   INPUT EVENTS
+========================================= */
+
+angleAInput.addEventListener(
+    "input",
+    updateTriangle
+);
+
+angleBInput.addEventListener(
+    "input",
+    updateTriangle
+);
+
+
+/* =========================================
+   INITIAL TRIANGLE
+========================================= */
+
+updateTriangle();
+
+
+/* =========================================
+   TRIANGLE ANGLE QUIZ
+========================================= */
+
+const challengeQuestions = [
+
+    {
+        question:
+            "If two angles of a triangle are 60° and 70°, what is the third angle?",
+
+        options: [
+            50,
+            60,
+            70,
+            80
+        ],
+
+        answer: 50
+    },
+
+
+    {
+        question:
+            "A triangle has angles 90° and 40°. What is the third angle?",
+
+        options: [
+            30,
+            40,
+            50,
+            60
+        ],
+
+        answer: 50
+    },
+
+
+    {
+        question:
+            "Two angles of a triangle are 45° and 65°. What is the third angle?",
+
+        options: [
+            60,
+            70,
+            80,
+            90
+        ],
+
+        answer: 70
+    },
+
+
+    {
+        question:
+            "A triangle has angles 30° and 80°. What is the third angle?",
+
+        options: [
+            60,
+            70,
+            80,
+            90
+        ],
+
+        answer: 70
+    },
+
+
+    {
+        question:
+            "Two angles of a triangle are 75° and 45°. What is the third angle?",
+
+        options: [
+            50,
+            60,
+            70,
+            80
+        ],
+
+        answer: 60
+    }
+
+];
+
+
+let currentChallenge = 0;
+
+let challengeScore = 0;
+
+let questionAnswered = false;
+
+
+/* =========================================
+   CHECK QUIZ ANSWER
+========================================= */
+
+function checkChallenge(selectedAnswer) {
+
+    if (questionAnswered) {
+        return;
+    }
+
+
+    const current =
+        challengeQuestions[currentChallenge];
+
+
+    const result =
+        document.getElementById(
+            "challengeResult"
+        );
+
+
+    questionAnswered = true;
+
+
+    /* Disable all option buttons */
+
+    const buttons =
+        document.querySelectorAll(
+            "#challengeOptions button"
+        );
+
+
+    buttons.forEach(function(button) {
+
+        button.disabled = true;
+
+    });
+
+
+    /* Check answer */
+
+    if (
+        selectedAnswer ===
+        current.answer
+    ) {
+
+        result.innerHTML =
+            "🎉 Correct! Excellent work!";
+
+        result.style.color =
+            "#8f1838";
+
+        challengeScore++;
+
+
+        document.getElementById(
+            "score"
+        ).textContent =
+            challengeScore;
+
+    }
+
+    else {
+
+        result.innerHTML =
+            "❌ Not quite! The correct answer is " +
+            current.answer +
+            "°.";
+
+        result.style.color =
+            "#8f1838";
+
+    }
+
+
+    /* Show next button */
+
+    document.getElementById(
+        "nextQuestion"
+    ).style.display =
+        "inline-block";
+
+}
+
+
+/* =========================================
+   NEXT QUESTION
+========================================= */
+
+function nextChallengeQuestion() {
+
+    currentChallenge++;
+
+
+    /* Quiz finished */
+
+    if (
+        currentChallenge >=
+        challengeQuestions.length
+    ) {
+
+        document.getElementById(
+            "challengeBox"
+        ).innerHTML = `
+
+            <h2>🏆 Quiz Completed!</h2>
+
+            <p>
+                You completed all 5 questions.
+            </p>
+
+            <div class="score-box">
+
+                Final Score
+
+                <br><br>
+
+                <strong>
+                    ${challengeScore} / 5
+                </strong>
+
+            </div>
+
+            <button
+                id="nextQuestion"
+                onclick="restartChallenge()"
+                style="display:inline-block;">
+
+                🔄 Try Again
+
+            </button>
+
+        `;
+
+        return;
+    }
+
+
+    const current =
+        challengeQuestions[
+            currentChallenge
+        ];
+
+
+    /* Question number */
+
+    document.getElementById(
+        "questionNumber"
+    ).textContent =
+        "Question " +
+        (currentChallenge + 1) +
+        " of 5";
+
+
+    /* Question */
+
+    document.getElementById(
+        "challengeQuestion"
+    ).textContent =
+        current.question;
+
+
+    /* Create answer buttons */
+
+    const container =
+        document.getElementById(
+            "challengeOptions"
+        );
+
+
+    container.innerHTML = "";
+
+
+    current.options.forEach(
+        function(option) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.textContent =
+                option + "°";
+
+
+            button.onclick =
+                function() {
+
+                    checkChallenge(
+                        option
+                    );
+
+                };
+
+
+            container.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    /* Clear result */
+
+    document.getElementById(
+        "challengeResult"
+    ).textContent = "";
+
+
+    /* Hide next button */
+
+    document.getElementById(
+        "nextQuestion"
+    ).style.display =
+        "none";
+
+
+    /* Allow new answer */
+
+    questionAnswered = false;
+
+}
+
+
+/* =========================================
+   RESTART QUIZ
+========================================= */
+
+function restartChallenge() {
+
+    currentChallenge = 0;
+
+    challengeScore = 0;
+
+    questionAnswered = false;
+
+    location.reload();
+
+}
+
+</script>
+
+</body>
+</html>

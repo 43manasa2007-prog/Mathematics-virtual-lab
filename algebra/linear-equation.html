@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Linear Equations | Algebra Lab</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        /* =========================================
+           LINEAR EQUATION PAGE
+           ========================================= */
+
+        .linear-page {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f8f9ff);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+
+        .linear-page header {
+            background: linear-gradient(135deg, #172554, #1e3a8a);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .linear-page header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .linear-page header p {
+            margin-top: 10px;
+            font-size: 17px;
+        }
+
+        /* MAIN */
+
+        .linear-page main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        /* THEORY */
+
+        .theory-box {
+            background: #e8edff;
+            border-left: 5px solid #1e3a8a;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .theory-box h2 {
+            color: #172554;
+            margin-top: 0;
+        }
+
+        .formula {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin: 18px 0;
+        }
+
+        /* EXPERIMENT */
+
+        .experiment-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+            margin-bottom: 30px;
+        }
+
+        .experiment-box h2 {
+            text-align: center;
+            color: #172554;
+            margin-top: 0;
+        }
+
+        /* INPUTS */
+
+        .input-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .input-group {
+            text-align: center;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            color: #172554;
+            margin-bottom: 8px;
+        }
+
+        .input-group input {
+            width: 75px;
+            padding: 11px;
+            border: 2px solid #a5b4fc;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #1e3a8a;
+        }
+
+        .equation-symbol {
+            font-size: 26px;
+            font-weight: bold;
+            color: #172554;
+            margin-top: 22px;
+        }
+
+        /* EQUATION */
+
+        .equation-display {
+            background: #f1f5ff;
+            border: 2px solid #c7d2fe;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #172554;
+            margin: 25px 0;
+        }
+
+        /* SOLVE BUTTON */
+
+        .solve-button {
+            display: block;
+            margin: 20px auto;
+            padding: 13px 30px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .solve-button:hover {
+            background: #172554;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(23, 37, 84, 0.25);
+        }
+
+        /* STEPS */
+
+        .steps-box {
+            background: #f8f9ff;
+            border: 2px solid #c7d2fe;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .steps-box h3 {
+            color: #172554;
+            text-align: center;
+        }
+
+        .step {
+            background: white;
+            padding: 14px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .answer-box {
+            background: #e8edff;
+            border: 2px solid #1e3a8a;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #172554;
+        }
+
+        /* NUMBER LINE */
+
+        .number-line-box {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .number-line-box h3 {
+            color: #172554;
+        }
+
+        #numberLine {
+            width: 100%;
+            max-width: 800px;
+            height: 150px;
+        }
+
+        /* CHALLENGE */
+
+        .challenge-box {
+            background: #e8edff;
+            border: 2px solid #a5b4fc;
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .challenge-box h2 {
+            color: #172554;
+            margin-top: 0;
+        }
+
+        .challenge-question {
+            font-size: 19px;
+            font-weight: bold;
+            margin: 22px 0;
+        }
+
+        .challenge-options {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .challenge-options button {
+            padding: 11px 20px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .challenge-options button:hover {
+            background: #172554;
+            transform: translateY(-2px);
+        }
+
+        .challenge-options button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #challengeResult {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 25px;
+        }
+
+        #nextQuestion {
+            margin-top: 18px;
+            padding: 11px 23px;
+            background: #172554;
+            color: white;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #nextQuestion:hover {
+            background: #1e3a8a;
+        }
+
+        .score-box {
+            margin-top: 22px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #172554;
+        }
+
+        /* BACK BUTTON */
+
+        .back-section {
+            text-align: center;
+            margin: 35px 0 10px;
+        }
+
+        .back-section a {
+            display: inline-block;
+            color: #172554;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        .back-section a:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        /* FOOTER */
+
+        .linear-page footer {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .linear-page header h1 {
+                font-size: 28px;
+            }
+
+            .equation-display {
+                font-size: 24px;
+            }
+
+            .input-area {
+                gap: 7px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="linear-page">
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>🔢 Linear Equations</h1>
+
+        <p>
+            Explore equations and discover the value of x
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- THEORY -->
+
+        <div class="theory-box">
+
+            <h2>📖 What is a Linear Equation?</h2>
+
+            <p>
+                A linear equation is an equation in which
+                the highest power of the variable is 1.
+            </p>
+
+            <p>
+                A simple linear equation can be written as:
+            </p>
+
+            <div class="formula">
+                ax + b = c
+            </div>
+
+            <p>
+                To solve it, we perform the same operation
+                on both sides of the equation until x is alone.
+            </p>
+
+        </div>
+
+
+        <!-- INTERACTIVE EXPERIMENT -->
+
+        <div class="experiment-box">
+
+            <h2>🧪 Virtual Experiment</h2>
+
+            <p style="text-align:center;">
+                Change the values below and solve the equation.
+            </p>
+
+
+            <!-- INPUTS -->
+
+            <div class="input-area">
+
+
+                <div class="input-group">
+
+                    <label for="aValue">
+                        a
+                    </label>
+
+                    <input
+                        type="number"
+                        id="aValue"
+                        value="2"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="equation-symbol">
+                    x +
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="bValue">
+                        b
+                    </label>
+
+                    <input
+                        type="number"
+                        id="bValue"
+                        value="5"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="equation-symbol">
+                    =
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="cValue">
+                        c
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cValue"
+                        value="15"
+                        step="1"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- EQUATION -->
+
+            <div
+                class="equation-display"
+                id="equationDisplay">
+
+                2x + 5 = 15
+
+            </div>
+
+
+            <!-- SOLVE BUTTON -->
+
+            <button
+                class="solve-button"
+                onclick="solveEquation()">
+
+                🧮 Solve Equation
+
+            </button>
+
+
+            <!-- STEPS -->
+
+            <div class="steps-box">
+
+                <h3>
+                    📝 Step-by-Step Solution
+                </h3>
+
+
+                <div
+                    class="step"
+                    id="step1">
+
+                    Step 1 will appear here.
+
+                </div>
+
+
+                <div
+                    class="step"
+                    id="step2">
+
+                    Step 2 will appear here.
+
+                </div>
+
+
+                <div
+                    class="step"
+                    id="step3">
+
+                    Step 3 will appear here.
+
+                </div>
+
+
+                <div
+                    class="answer-box"
+                    id="finalAnswer">
+
+                    x = ?
+
+                </div>
+
+            </div>
+
+
+            <!-- NUMBER LINE -->
+
+            <div class="number-line-box">
+
+                <h3>
+                    📊 Solution on Number Line
+                </h3>
+
+                <svg
+                    id="numberLine"
+                    viewBox="0 0 800 150">
+
+                    <line
+                        x1="50"
+                        y1="75"
+                        x2="750"
+                        y2="75"
+                        stroke="#172554"
+                        stroke-width="3"
+                    />
+
+                    <g id="ticks"></g>
+
+                    <circle
+                        id="solutionPoint"
+                        cx="400"
+                        cy="75"
+                        r="9"
+                        fill="#c62828"
+                    />
+
+                    <text
+                        id="solutionLabel"
+                        x="400"
+                        y="45"
+                        text-anchor="middle"
+                        font-size="18"
+                        font-weight="bold"
+                        fill="#172554">
+
+                        x
+
+                    </text>
+
+                </svg>
+
+            </div>
+
+        </div>
+        <!-- =========================================
+             CHALLENGE YOURSELF
+             ========================================= -->
+
+        <div
+            class="challenge-box"
+            id="challengeBox">
+
+            <h2>
+                🎯 Challenge Yourself
+            </h2>
+
+            <p id="questionNumber">
+                Question 1 of 5
+            </p>
+
+            <p
+                class="challenge-question"
+                id="challengeQuestion">
+
+                Solve: 3x + 6 = 18
+
+            </p>
+
+
+            <div
+                class="challenge-options"
+                id="challengeOptions">
+
+                <button onclick="checkChallenge(4)">
+                    x = 4
+                </button>
+
+                <button onclick="checkChallenge(6)">
+                    x = 6
+                </button>
+
+                <button onclick="checkChallenge(3)">
+                    x = 3
+                </button>
+
+                <button onclick="checkChallenge(2)">
+                    x = 2
+                </button>
+
+            </div>
+
+
+            <p id="challengeResult"></p>
+
+
+            <button
+                id="nextQuestion"
+                onclick="nextChallengeQuestion()"
+                style="display:none;">
+
+                Next Question →
+
+            </button>
+
+
+            <div class="score-box">
+
+                🏆 Score:
+                <span id="score">0</span> / 5
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             BACK TO ALGEBRA LAB
+             ========================================= -->
+
+        <div class="back-section">
+
+            <a href="../algebra.html">
+                ← Back to Algebra Lab
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer>
+
+        <p>
+            Mathematics Virtual Lab © 2026
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+    <script>
+
+
+        /* =========================================
+           GET ELEMENTS
+           ========================================= */
+
+        const aInput =
+            document.getElementById("aValue");
+
+        const bInput =
+            document.getElementById("bValue");
+
+        const cInput =
+            document.getElementById("cValue");
+
+        const equationDisplay =
+            document.getElementById("equationDisplay");
+
+
+        /* =========================================
+           FORMAT NUMBER
+           ========================================= */
+
+        function formatNumber(number) {
+
+            if (Number.isInteger(number)) {
+                return number.toString();
+            }
+
+            return Number(number.toFixed(2)).toString();
+
+        }
+
+
+        /* =========================================
+           UPDATE EQUATION
+           ========================================= */
+
+        function updateEquation() {
+
+            let a =
+                parseFloat(aInput.value);
+
+            let b =
+                parseFloat(bInput.value);
+
+            let c =
+                parseFloat(cInput.value);
+
+
+            if (
+                isNaN(a) ||
+                isNaN(b) ||
+                isNaN(c)
+            ) {
+
+                equationDisplay.textContent =
+                    "Enter valid numbers";
+
+                return;
+
+            }
+
+
+            let aText =
+                formatNumber(a);
+
+            let bText =
+                formatNumber(Math.abs(b));
+
+
+            let bPart;
+
+
+            if (b > 0) {
+
+                bPart =
+                    " + " + bText;
+
+            }
+
+            else if (b < 0) {
+
+                bPart =
+                    " - " + bText;
+
+            }
+
+            else {
+
+                bPart = "";
+
+            }
+
+
+            equationDisplay.textContent =
+                aText + "x" +
+                bPart +
+                " = " +
+                formatNumber(c);
+
+        }
+
+
+        /* =========================================
+           INPUT LISTENERS
+           ========================================= */
+
+        aInput.addEventListener(
+            "input",
+            updateEquation
+        );
+
+        bInput.addEventListener(
+            "input",
+            updateEquation
+        );
+
+        cInput.addEventListener(
+            "input",
+            updateEquation
+        );
+
+
+        /* =========================================
+           SOLVE EQUATION
+           ========================================= */
+
+        function solveEquation() {
+
+            let a =
+                parseFloat(aInput.value);
+
+            let b =
+                parseFloat(bInput.value);
+
+            let c =
+                parseFloat(cInput.value);
+
+
+            if (
+                isNaN(a) ||
+                isNaN(b) ||
+                isNaN(c)
+            ) {
+
+                alert(
+                    "Please enter valid numbers."
+                );
+
+                return;
+
+            }
+
+
+            if (a === 0) {
+
+                document.getElementById(
+                    "step1"
+                ).textContent =
+                    "The coefficient of x cannot be 0.";
+
+                document.getElementById(
+                    "step2"
+                ).textContent =
+                    "Please enter a value other than 0 for a.";
+
+                document.getElementById(
+                    "step3"
+                ).textContent =
+                    "";
+
+                document.getElementById(
+                    "finalAnswer"
+                ).textContent =
+                    "No unique solution";
+
+                return;
+
+            }
+
+
+            let x =
+                (c - b) / a;
+
+
+            let bSign =
+                b >= 0
+                    ? "+ " + formatNumber(b)
+                    : "- " + formatNumber(Math.abs(b));
+
+
+            /* Step 1 */
+
+            document.getElementById(
+                "step1"
+            ).textContent =
+                "Step 1: " +
+                formatNumber(a) +
+                "x " +
+                bSign +
+                " = " +
+                formatNumber(c);
+
+
+            /* Step 2 */
+
+            document.getElementById(
+                "step2"
+            ).textContent =
+                "Step 2: " +
+                formatNumber(a) +
+                "x = " +
+                formatNumber(c - b);
+
+
+            /* Step 3 */
+
+            document.getElementById(
+                "step3"
+            ).textContent =
+                "Step 3: x = " +
+                formatNumber(c - b) +
+                " ÷ " +
+                formatNumber(a);
+
+
+            /* Final answer */
+
+            document.getElementById(
+                "finalAnswer"
+            ).textContent =
+                "✅ x = " +
+                formatNumber(x);
+
+
+            updateNumberLine(x);
+
+        }
+
+
+        /* =========================================
+           NUMBER LINE
+           ========================================= */
+
+        function createNumberLine() {
+
+            const ticks =
+                document.getElementById("ticks");
+
+            ticks.innerHTML = "";
+
+
+            for (
+                let i = -10;
+                i <= 10;
+                i++
+            ) {
+
+                let x =
+                    400 + i * 32;
+
+
+                let line =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "line"
+                    );
+
+                line.setAttribute(
+                    "x1",
+                    x
+                );
+
+                line.setAttribute(
+                    "y1",
+                    "68"
+                );
+
+                line.setAttribute(
+                    "x2",
+                    x
+                );
+
+                line.setAttribute(
+                    "y2",
+                    "82"
+                );
+
+                line.setAttribute(
+                    "stroke",
+                    "#172554"
+                );
+
+                line.setAttribute(
+                    "stroke-width",
+                    "2"
+                );
+
+
+                let text =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "text"
+                    );
+
+                text.setAttribute(
+                    "x",
+                    x
+                );
+
+                text.setAttribute(
+                    "y",
+                    "108"
+                );
+
+                text.setAttribute(
+                    "text-anchor",
+                    "middle"
+                );
+
+                text.setAttribute(
+                    "font-size",
+                    "13"
+                );
+
+                text.setAttribute(
+                    "fill",
+                    "#172554"
+                );
+
+                text.textContent = i;
+
+
+                ticks.appendChild(line);
+
+                ticks.appendChild(text);
+
+            }
+
+        }
+
+
+        /* =========================================
+           UPDATE NUMBER LINE
+           ========================================= */
+
+        function updateNumberLine(value) {
+
+            let clamped =
+                Math.max(
+                    -10,
+                    Math.min(10, value)
+                );
+
+
+            let x =
+                400 + clamped * 32;
+
+
+            document.getElementById(
+                "solutionPoint"
+            ).setAttribute(
+                "cx",
+                x
+            );
+
+
+            document.getElementById(
+                "solutionLabel"
+            ).setAttribute(
+                "x",
+                x
+            );
+
+
+            document.getElementById(
+                "solutionLabel"
+            ).textContent =
+                "x = " +
+                formatNumber(value);
+
+        }
+
+
+        /* =========================================
+           CHALLENGE QUESTIONS
+           ========================================= */
+
+        const challengeQuestions = [
+
+            {
+                question:
+                    "Solve: 3x + 6 = 18",
+
+                options: [
+                    4,
+                    6,
+                    3,
+                    2
+                ],
+
+                answer: 4
+            },
+
+
+            {
+                question:
+                    "Solve: 2x + 8 = 20",
+
+                options: [
+                    6,
+                    4,
+                    8,
+                    10
+                ],
+
+                answer: 6
+            },
+
+
+            {
+                question:
+                    "Solve: 5x - 10 = 15",
+
+                options: [
+                    3,
+                    5,
+                    7,
+                    2
+                ],
+
+                answer: 5
+            },
+
+
+            {
+                question:
+                    "Solve: 4x + 4 = 20",
+
+                options: [
+                    4,
+                    5,
+                    6,
+                    3
+                ],
+
+                answer: 4
+            },
+
+
+            {
+                question:
+                    "Solve: 6x - 12 = 24",
+
+                options: [
+                    4,
+                    5,
+                    6,
+                    8
+                ],
+
+                answer: 6
+            }
+
+        ];
+
+
+        let currentChallenge = 0;
+
+        let challengeScore = 0;
+
+        let questionAnswered = false;
+
+
+        /* =========================================
+           CHECK CHALLENGE
+           ========================================= */
+
+        function checkChallenge(selectedAnswer) {
+
+            if (questionAnswered) {
+                return;
+            }
+
+
+            let current =
+                challengeQuestions[currentChallenge];
+
+
+            questionAnswered = true;
+
+
+            let result =
+                document.getElementById(
+                    "challengeResult"
+                );
+
+
+            let buttons =
+                document.querySelectorAll(
+                    "#challengeOptions button"
+                );
+
+
+            buttons.forEach(
+                function(button) {
+
+                    button.disabled = true;
+
+                }
+            );
+
+
+            if (
+                selectedAnswer ===
+                current.answer
+            ) {
+
+                result.textContent =
+                    "🎉 Correct! Excellent work!";
+
+                result.style.color =
+                    "#1e3a8a";
+
+                challengeScore++;
+
+
+                document.getElementById(
+                    "score"
+                ).textContent =
+                    challengeScore;
+
+            }
+
+            else {
+
+                result.textContent =
+                    "❌ Not quite. The correct answer is x = " +
+                    current.answer;
+
+                result.style.color =
+                    "#c62828";
+
+            }
+
+
+            document.getElementById(
+                "nextQuestion"
+            ).style.display =
+                "inline-block";
+
+        }
+
+
+        /* =========================================
+           NEXT QUESTION
+           ========================================= */
+
+        function nextChallengeQuestion() {
+
+            currentChallenge++;
+
+
+            if (
+                currentChallenge >=
+                challengeQuestions.length
+            ) {
+
+                document.getElementById(
+                    "challengeBox"
+                ).innerHTML = `
+
+                    <h2>🏆 Quiz Completed!</h2>
+
+                    <p>
+                        You completed all 5 questions.
+                    </p>
+
+                    <div class="score-box">
+
+                        Final Score
+
+                        <br><br>
+
+                        <strong>
+                            ${challengeScore} / 5
+                        </strong>
+
+                    </div>
+
+                    <button
+                        id="nextQuestion"
+                        onclick="restartChallenge()"
+                        style="
+                            display:inline-block;
+                            margin-top:20px;
+                        ">
+
+                        🔄 Try Again
+
+                    </button>
+
+                `;
+
+                return;
+
+            }
+
+
+            let current =
+                challengeQuestions[currentChallenge];
+
+
+            document.getElementById(
+                "questionNumber"
+            ).textContent =
+                "Question " +
+                (currentChallenge + 1) +
+                " of 5";
+
+
+            document.getElementById(
+                "challengeQuestion"
+            ).textContent =
+                current.question;
+
+
+            let container =
+                document.getElementById(
+                    "challengeOptions"
+                );
+
+
+            container.innerHTML = "";
+
+
+            current.options.forEach(
+                function(option) {
+
+                    let button =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    button.textContent =
+                        "x = " + option;
+
+
+                    button.onclick =
+                        function() {
+
+                            checkChallenge(
+                                option
+                            );
+
+                        };
+
+
+                    container.appendChild(
+                        button
+                    );
+
+                }
+            );
+
+
+            document.getElementById(
+                "challengeResult"
+            ).textContent = "";
+
+
+            document.getElementById(
+                "nextQuestion"
+            ).style.display =
+                "none";
+
+
+            questionAnswered = false;
+
+        }
+
+
+        /* =========================================
+           RESTART QUIZ
+           ========================================= */
+
+        function restartChallenge() {
+
+            location.reload();
+
+        }
+
+
+        /* =========================================
+           INITIALIZE
+           ========================================= */
+
+        updateEquation();
+
+        createNumberLine();
+
+        solveEquation();
+
+    </script>
+    </body>
+
+</html>

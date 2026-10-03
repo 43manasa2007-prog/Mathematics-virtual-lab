@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heights & Distances | Trigonometry Lab</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff7ef;
+    color: #4e342e;
+}
+
+header {
+    background: linear-gradient(135deg, #e65100, #ff9800);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+main {
+    width: 92%;
+    max-width: 950px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+    color: #d84315;
+    text-align: center;
+    margin-top: 0;
+}
+
+.formula {
+    background: #fff3e0;
+    border-left: 5px solid #f57c00;
+    padding: 15px;
+    margin: 15px 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.description {
+    text-align: center;
+    line-height: 1.6;
+}
+
+.inputs {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group label {
+    font-weight: bold;
+    color: #bf360c;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 150px;
+    padding: 12px;
+    border: 2px solid #ffb74d;
+    border-radius: 9px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.button-area {
+    text-align: center;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    background: #f57c00;
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background: #e65100;
+}
+
+.result {
+    margin-top: 18px;
+    padding: 18px;
+    background: #fff8e1;
+    border: 2px solid #ffcc80;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    min-height: 55px;
+}
+
+.quiz-question {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.quiz-options {
+    text-align: center;
+}
+
+.quiz-options button {
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+.quiz-result {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 25px;
+}
+
+.score {
+    text-align: center;
+    font-weight: bold;
+}
+
+.back-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.back {
+    display: inline-block;
+    background: #d84315;
+    color: white;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.back:hover {
+    background: #bf360c;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📐 Heights & Distances</h1>
+    <p>Use trigonometry to calculate heights and distances.</p>
+</header>
+
+<main>
+
+<div class="card">
+
+    <h2>📖 Learn the Concept</h2>
+
+    <p class="description">
+        Heights and distances can be calculated using the
+        tangent ratio in a right-angled triangle.
+    </p>
+
+    <div class="formula">
+        tan θ = Opposite ÷ Adjacent
+    </div>
+
+    <div class="formula">
+        Height = Distance × tan θ
+    </div>
+
+    <div class="formula">
+        Distance = Height ÷ tan θ
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2>🧮 Calculation 1: Find Height</h2>
+
+    <p class="description">
+        Enter the angle of elevation and the horizontal distance
+        to calculate the height.
+    </p>
+
+    <div class="inputs">
+
+        <div class="input-group">
+            <label for="heightAngle">Angle θ (degrees)</label>
+            <input
+                type="number"
+                id="heightAngle"
+                value="45"
+                min="1"
+                max="89"
+                step="0.1">
+        </div>
+
+        <div class="input-group">
+            <label for="heightDistance">Distance</label>
+            <input
+                type="number"
+                id="heightDistance"
+                value="10"
+                min="0.1"
+                step="0.1">
+        </div>
+
+    </div>
+
+    <div class="button-area">
+        <button onclick="calculateHeight()">
+            Calculate Height
+        </button>
+    </div>
+
+    <div id="heightResult" class="result">
+        Enter the values and click Calculate Height.
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2>📏 Calculation 2: Find Distance</h2>
+
+    <p class="description">
+        Enter the angle of elevation and the height
+        to calculate the horizontal distance.
+    </p>
+
+    <div class="inputs">
+
+        <div class="input-group">
+            <label for="distanceAngle">Angle θ (degrees)</label>
+            <input
+                type="number"
+                id="distanceAngle"
+                value="45"
+                min="1"
+                max="89"
+                step="0.1">
+        </div>
+
+        <div class="input-group">
+            <label for="objectHeight">Height</label>
+            <input
+                type="number"
+                id="objectHeight"
+                value="10"
+                min="0.1"
+                step="0.1">
+        </div>
+
+    </div>
+
+    <div class="button-area">
+        <button onclick="calculateDistance()">
+            Calculate Distance
+        </button>
+    </div>
+
+    <div id="distanceResult" class="result">
+        Enter the values and click Calculate Distance.
+    </div>
+
+</div>
+<div class="card">
+
+    <h2>🎯 Trigonometry Quiz</h2>
+
+    <p id="quizNumber" class="score">
+        Question 1 of 5
+    </p>
+
+    <div id="quizQuestion" class="quiz-question">
+        Loading question...
+    </div>
+
+    <div id="quizOptions" class="quiz-options"></div>
+
+    <p id="quizResult" class="quiz-result"></p>
+
+    <p class="score">
+        Score:
+        <span id="quizScore">0</span> / 5
+    </p>
+
+    <div class="button-area">
+
+        <button
+            id="nextButton"
+            onclick="nextQuestion()"
+            style="display:none;">
+            Next Question →
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="back-area">
+
+    <a
+        class="back"
+        href="../trigonometry.html">
+        ← Back to Trigonometry Lab
+    </a>
+
+</div>
+
+</main>
+
+<footer>
+    <p>Mathematics Virtual Lab © 2026</p>
+</footer>
+
+<script>
+    function calculateHeight() {
+
+    const angle = Number(
+        document.getElementById("heightAngle").value
+    );
+
+    const distance = Number(
+        document.getElementById("heightDistance").value
+    );
+
+    const result =
+        document.getElementById("heightResult");
+
+    if (!Number.isFinite(angle) || angle <= 0 || angle >= 90) {
+        result.textContent =
+            "Please enter an angle between 1° and 89°.";
+        return;
+    }
+
+    if (!Number.isFinite(distance) || distance <= 0) {
+        result.textContent =
+            "Please enter a positive distance.";
+        return;
+    }
+
+    const radians = angle * Math.PI / 180;
+
+    const height =
+        distance * Math.tan(radians);
+
+    result.innerHTML =
+        "<strong>Height = " +
+        height.toFixed(3) +
+        " units</strong><br>" +
+        "tan " + angle + "° = " +
+        Math.tan(radians).toFixed(4);
+}
+
+
+function calculateDistance() {
+
+    const angle = Number(
+        document.getElementById("distanceAngle").value
+    );
+
+    const height = Number(
+        document.getElementById("objectHeight").value
+    );
+
+    const result =
+        document.getElementById("distanceResult");
+
+    if (!Number.isFinite(angle) || angle <= 0 || angle >= 90) {
+        result.textContent =
+            "Please enter an angle between 1° and 89°.";
+        return;
+    }
+
+    if (!Number.isFinite(height) || height <= 0) {
+        result.textContent =
+            "Please enter a positive height.";
+        return;
+    }
+
+    const radians = angle * Math.PI / 180;
+
+    const distance =
+        height / Math.tan(radians);
+
+    result.innerHTML =
+        "<strong>Distance = " +
+        distance.toFixed(3) +
+        " units</strong><br>" +
+        "tan " + angle + "° = " +
+        Math.tan(radians).toFixed(4);
+}
+
+
+/* QUIZ */
+
+const questions = [
+
+    {
+        question:
+            "If θ = 45° and the distance is 10 m, what is the height?",
+
+        options: [
+            "5 m",
+            "10 m",
+            "15 m",
+            "20 m"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question:
+            "Which formula is used to find height?",
+
+        options: [
+            "Height = Distance × tan θ",
+            "Height = Distance ÷ tan θ",
+            "Height = Distance + tan θ",
+            "Height = Distance − tan θ"
+        ],
+
+        answer: 0
+    },
+
+    {
+        question:
+            "If height = 20 m and θ = 45°, what is the distance?",
+
+        options: [
+            "10 m",
+            "20 m",
+            "30 m",
+            "40 m"
+        ],
+
+        answer: 1
+    },
+
+    {
+        question:
+            "In tan θ = Opposite ÷ Adjacent, which side represents height?",
+
+        options: [
+            "Adjacent",
+            "Hypotenuse",
+            "Opposite",
+            "None"
+        ],
+
+        answer: 2
+    },
+
+    {
+        question:
+            "A building is 30 m away and θ = 45°. What is its height?",
+
+        options: [
+            "15 m",
+            "20 m",
+            "30 m",
+            "60 m"
+        ],
+
+        answer: 2
+    }
+
+];
+
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+
+function loadQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+    document.getElementById("quizNumber").textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+    document.getElementById("quizQuestion").textContent =
+        question.question;
+
+    const options =
+        document.getElementById("quizOptions");
+
+    options.innerHTML = "";
+
+    question.options.forEach(function(option, index) {
+
+        const button =
+            document.createElement("button");
+
+        button.textContent = option;
+
+        button.onclick = function() {
+            checkAnswer(index);
+        };
+
+        options.appendChild(button);
+    });
+
+    document.getElementById("quizResult").textContent = "";
+
+    document.getElementById("nextButton").style.display =
+        "none";
+
+    answered = false;
+}
+
+
+function checkAnswer(selected) {
+
+    if (answered) {
+        return;
+    }
+
+    answered = true;
+
+    const question =
+        questions[currentQuestion];
+
+    const result =
+        document.getElementById("quizResult");
+
+    const buttons =
+        document.querySelectorAll(
+            "#quizOptions button"
+        );
+
+    buttons.forEach(function(button) {
+        button.disabled = true;
+    });
+
+    if (selected === question.answer) {
+
+        score++;
+
+        result.textContent =
+            "🎉 Correct!";
+
+        result.style.color =
+            "#e65100";
+
+        document.getElementById("quizScore").textContent =
+            score;
+
+    } else {
+
+        result.textContent =
+            "❌ Incorrect. Correct answer: " +
+            question.options[question.answer];
+
+        result.style.color =
+            "#c62828";
+    }
+
+    document.getElementById("nextButton").style.display =
+        "inline-block";
+}
+
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+    if (currentQuestion >= questions.length) {
+
+        document.getElementById("quizNumber").textContent =
+            "Quiz Completed";
+
+        document.getElementById("quizQuestion").textContent =
+            "🏆 Well done! You completed the quiz.";
+
+        document.getElementById("quizOptions").innerHTML =
+            "";
+
+        document.getElementById("quizResult").innerHTML =
+            "Final Score: " +
+            score +
+            " / " +
+            questions.length;
+
+        document.getElementById("nextButton").textContent =
+            "Try Again";
+
+        document.getElementById("nextButton").onclick =
+            function() {
+                location.reload();
+            };
+
+        return;
+    }
+
+    loadQuestion();
+}
+
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Factorization | Algebra Lab</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        /* =========================================
+           FACTORIZATION PAGE
+           ========================================= */
+
+        .factorization-page {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f8f9ff);
+            color: #333;
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           HEADER
+           ========================================= */
+
+        .factorization-page header {
+            background: linear-gradient(135deg, #172554, #1e3a8a);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .factorization-page header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .factorization-page header p {
+            margin-top: 10px;
+            font-size: 17px;
+        }
+
+
+        /* =========================================
+           MAIN
+           ========================================= */
+
+        .factorization-page main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+
+        /* =========================================
+           THEORY
+           ========================================= */
+
+        .theory-box {
+            background: #e8edff;
+            border-left: 5px solid #1e3a8a;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .theory-box h2 {
+            color: #172554;
+            margin-top: 0;
+        }
+
+        .formula {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin: 18px 0;
+        }
+
+
+        /* =========================================
+           EXPERIMENT BOX
+           ========================================= */
+
+        .experiment-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+            margin-bottom: 30px;
+        }
+
+        .experiment-box h2 {
+            text-align: center;
+            color: #172554;
+            margin-top: 0;
+        }
+
+
+        /* =========================================
+           INPUT AREA
+           ========================================= */
+
+        .input-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .input-group {
+            text-align: center;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            color: #172554;
+            margin-bottom: 8px;
+        }
+
+        .input-group input {
+            width: 80px;
+            padding: 11px;
+            border: 2px solid #a5b4fc;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #1e3a8a;
+        }
+
+        .equation-symbol {
+            font-size: 26px;
+            font-weight: bold;
+            color: #172554;
+            margin-top: 22px;
+        }
+
+
+        /* =========================================
+           EQUATION DISPLAY
+           ========================================= */
+
+        .equation-display {
+            background: #f1f5ff;
+            border: 2px solid #c7d2fe;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #172554;
+            margin: 25px 0;
+        }
+
+
+        /* =========================================
+           BUTTON
+           ========================================= */
+
+        .factor-button {
+            display: block;
+            margin: 20px auto;
+            padding: 13px 30px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .factor-button:hover {
+            background: #172554;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(23,37,84,0.25);
+        }
+
+
+        /* =========================================
+           CALCULATION
+           ========================================= */
+
+        .calculation-box {
+            background: #f8f9ff;
+            border: 2px solid #c7d2fe;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .calculation-box h3 {
+            color: #172554;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .step {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    margin: 12px 0;
+    font-size: 21px;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: bold;
+    color: #172554;
+    border: 1px solid #c7d2fe;
+}
+.step .math-line {
+    margin-top: 6px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+        /* =========================================
+           ANSWER
+           ========================================= */
+
+        .answer-box {
+            background: #e8edff;
+            border: 2px solid #1e3a8a;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 23px;
+            font-weight: bold;
+            color: #172554;
+        }
+
+
+        /* =========================================
+           CHALLENGE
+           ========================================= */
+
+        .challenge-box {
+            background: #e8edff;
+            border: 2px solid #a5b4fc;
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .challenge-box h2 {
+            color: #172554;
+            margin-top: 0;
+        }
+
+        .challenge-question {
+            font-size: 19px;
+            font-weight: bold;
+            margin: 22px 0;
+        }
+
+        .challenge-options {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .challenge-options button {
+            padding: 11px 20px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .challenge-options button:hover {
+            background: #172554;
+            transform: translateY(-2px);
+        }
+
+        .challenge-options button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #challengeResult {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 25px;
+        }
+
+        #nextQuestion {
+            margin-top: 18px;
+            padding: 11px 23px;
+            background: #172554;
+            color: white;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .score-box {
+            margin-top: 22px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #172554;
+        }
+
+
+        /* =========================================
+           BACK BUTTON
+           ========================================= */
+
+        .back-section {
+            text-align: center;
+            margin: 35px 0 10px;
+        }
+
+        .back-section a {
+            display: inline-block;
+            color: #172554;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        .back-section a:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+
+        .factorization-page footer {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .factorization-page header h1 {
+                font-size: 28px;
+            }
+
+            .equation-display {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="factorization-page">
+
+
+    <!-- =========================================
+         HEADER
+         ========================================= -->
+
+    <header>
+
+        <h1>✖️ Factorization</h1>
+
+        <p>
+            Break algebraic expressions into simpler factors
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- =========================================
+             THEORY
+             ========================================= -->
+
+        <div class="theory-box">
+
+            <h2>📖 What is Factorization?</h2>
+
+            <p>
+                Factorization is the process of writing an
+                algebraic expression as a product of its factors.
+            </p>
+
+            <p>
+                For example:
+            </p>
+
+            <div class="formula">
+                x² + 5x + 6 = (x + 2)(x + 3)
+            </div>
+
+            <p>
+                We look for two numbers whose product is
+                <strong>6</strong> and whose sum is
+                <strong>5</strong>.
+            </p>
+
+        </div>
+
+
+        <!-- =========================================
+             INTERACTIVE EXPERIMENT
+             ========================================= -->
+
+        <div class="experiment-box">
+
+            <h2>🧪 Virtual Factorization Experiment</h2>
+
+            <p style="text-align:center;">
+                Enter the coefficients of a quadratic expression
+                and factorize it.
+            </p>
+
+
+            <!-- INPUTS -->
+
+            <div class="input-area">
+
+
+                <div class="input-group">
+
+                    <label for="aValue">
+                        a
+                    </label>
+
+                    <input
+                        type="number"
+                        id="aValue"
+                        value="1"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="equation-symbol">
+                    x² +
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="bValue">
+                        b
+                    </label>
+
+                    <input
+                        type="number"
+                        id="bValue"
+                        value="5"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="equation-symbol">
+                    x +
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="cValue">
+                        c
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cValue"
+                        value="6"
+                        step="1"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <!-- EQUATION -->
+
+            <div
+                class="equation-display"
+                id="equationDisplay">
+
+                x² + 5x + 6
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                class="factor-button"
+                onclick="factorize()">
+
+                ✖️ Factorize Expression
+
+            </button>
+
+
+            <!-- CALCULATION -->
+
+            <div class="calculation-box">
+
+                <h3>
+                    📝 Step-by-Step Factorization
+                </h3>
+
+
+                <div
+                    class="step"
+                    id="step1">
+
+                    Step 1: The expression will appear here.
+
+                </div>
+
+
+                <div
+                    class="step"
+                    id="step2">
+
+                    Step 2: Find two numbers whose product is ac.
+
+                </div>
+
+
+                <div
+                    class="step"
+                    id="step3">
+
+                    Step 3: Find two numbers whose sum is b.
+
+                </div>
+
+
+                <div
+                    class="step"
+                    id="step4">
+
+                    Step 4: Write the factors.
+
+                </div>
+
+
+                <!-- ANSWER -->
+
+                <div
+                    class="answer-box"
+                    id="finalAnswer">
+
+                    Factorization will appear here.
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- =========================================
+             CHALLENGE YOURSELF
+             ========================================= -->
+
+        <div
+            class="challenge-box"
+            id="challengeBox">
+
+            <h2>
+                🎯 Challenge Yourself
+            </h2>
+
+            <p id="questionNumber">
+                Question 1 of 5
+            </p>
+
+            <p
+                class="challenge-question"
+                id="challengeQuestion">
+
+                Factorize: x² + 5x + 6
+
+            </p>
+
+
+            <div
+                class="challenge-options"
+                id="challengeOptions">
+
+                <button onclick="checkChallenge(1)">
+                    (x + 2)(x + 3)
+                </button>
+
+                <button onclick="checkChallenge(2)">
+                    (x + 1)(x + 6)
+                </button>
+
+                <button onclick="checkChallenge(3)">
+                    (x + 2)(x + 4)
+                </button>
+
+                <button onclick="checkChallenge(4)">
+                    (x + 3)(x + 4)
+                </button>
+
+            </div>
+
+
+            <p id="challengeResult"></p>
+
+
+            <button
+                id="nextQuestion"
+                onclick="nextChallengeQuestion()"
+                style="display:none;">
+
+                Next Question →
+
+            </button>
+
+
+            <div class="score-box">
+
+                🏆 Score:
+                <span id="score">0</span> / 5
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             BACK TO ALGEBRA LAB
+             ========================================= -->
+
+        <div class="back-section">
+
+            <a href="../algebra.html">
+                ← Back to Algebra Lab
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer>
+
+        <p>
+            Mathematics Virtual Lab © 2026
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+    <script>
+
+        /* =========================================
+           INPUT ELEMENTS
+           ========================================= */
+
+        const aInput =
+            document.getElementById("aValue");
+
+        const bInput =
+            document.getElementById("bValue");
+
+        const cInput =
+            document.getElementById("cValue");
+
+        const equationDisplay =
+            document.getElementById("equationDisplay");
+
+
+        /* =========================================
+           FORMAT NUMBER
+           ========================================= */
+
+        function formatNumber(number) {
+
+            if (Number.isInteger(number)) {
+                return number.toString();
+            }
+
+            return Number(
+                number.toFixed(2)
+            ).toString();
+
+        }
+
+
+        /* =========================================
+           FORMAT SIGN
+           ========================================= */
+
+        function signedNumber(number) {
+
+            if (number >= 0) {
+                return "+ " + formatNumber(number);
+            }
+
+            return "- " +
+                formatNumber(Math.abs(number));
+
+        }
+
+
+        /* =========================================
+           UPDATE EQUATION
+           ========================================= */
+
+        function updateEquation() {
+
+            let a =
+                parseFloat(aInput.value);
+
+            let b =
+                parseFloat(bInput.value);
+
+            let c =
+                parseFloat(cInput.value);
+
+
+            if (
+                isNaN(a) ||
+                isNaN(b) ||
+                isNaN(c)
+            ) {
+
+                equationDisplay.textContent =
+                    "Enter valid numbers";
+
+                return;
+
+            }
+
+
+            let equation = "";
+
+
+            /* a x² */
+
+            if (a === 1) {
+
+                equation += "x²";
+
+            }
+
+            else if (a === -1) {
+
+                equation += "-x²";
+
+            }
+
+            else {
+
+                equation +=
+                    formatNumber(a) +
+                    "x²";
+
+            }
+
+
+            /* b x */
+
+            if (b > 0) {
+
+                if (b === 1) {
+
+                    equation += " + x";
+
+                }
+
+                else {
+
+                    equation +=
+                        " + " +
+                        formatNumber(b) +
+                        "x";
+
+                }
+
+            }
+
+            else if (b < 0) {
+
+                if (b === -1) {
+
+                    equation += " - x";
+
+                }
+
+                else {
+
+                    equation +=
+                        " - " +
+                        formatNumber(Math.abs(b)) +
+                        "x";
+
+                }
+
+            }
+
+
+            /* c */
+
+            if (c > 0) {
+
+                equation +=
+                    " + " +
+                    formatNumber(c);
+
+            }
+
+            else if (c < 0) {
+
+                equation +=
+                    " - " +
+                    formatNumber(Math.abs(c));
+
+            }
+
+
+            equationDisplay.textContent =
+                equation;
+
+        }
+
+
+        /* =========================================
+           INPUT LISTENERS
+           ========================================= */
+
+        aInput.addEventListener(
+            "input",
+            updateEquation
+        );
+
+        bInput.addEventListener(
+            "input",
+            updateEquation
+        );
+
+        cInput.addEventListener(
+            "input",
+            updateEquation
+        );
+
+
+        /* =========================================
+           FIND INTEGER FACTORS
+           ========================================= */
+
+        function findFactors(number) {
+
+            let factors = [];
+
+
+            if (number === 0) {
+
+                return factors;
+
+            }
+
+
+            let absolute =
+                Math.abs(number);
+
+
+            for (
+                let i = 1;
+                i <= absolute;
+                i++
+            ) {
+
+                if (
+                    absolute % i === 0
+                ) {
+
+                    let j =
+                        absolute / i;
+
+
+                    factors.push([
+                        i,
+                        j
+                    ]);
+
+                }
+
+            }
+
+
+            return factors;
+
+        }
+
+
+        /* =========================================
+           FACTORIZE
+           ========================================= */
+
+        function factorize() {
+
+            let a =
+                parseInt(aInput.value);
+
+            let b =
+                parseInt(bInput.value);
+
+            let c =
+                parseInt(cInput.value);
+
+
+            if (
+                isNaN(a) ||
+                isNaN(b) ||
+                isNaN(c)
+            ) {
+
+                alert(
+                    "Please enter valid numbers."
+                );
+
+                return;
+
+            }
+
+
+            if (a === 0) {
+
+                document.getElementById(
+                    "step1"
+                ).textContent =
+                    "This is not a quadratic expression because a = 0.";
+
+                document.getElementById(
+                    "step2"
+                ).textContent =
+                    "For this experiment, enter a value other than 0.";
+
+                document.getElementById(
+                    "step3"
+                ).textContent = "";
+
+                document.getElementById(
+                    "step4"
+                ).textContent = "";
+
+                document.getElementById(
+                    "finalAnswer"
+                ).textContent =
+                    "Cannot factorize as a quadratic";
+
+                return;
+
+            }
+
+
+            /* =====================================
+               SPECIAL CASE: a = 1
+               ===================================== */
+
+            if (a === 1) {
+
+                factorizeMonic(
+                    b,
+                    c
+                );
+
+                return;
+
+            }
+
+
+            /* =====================================
+               GENERAL CASE
+               ===================================== */
+
+            factorizeGeneral(
+                a,
+                b,
+                c
+            );
+
+        }
+
+
+        /* =========================================
+           MONIC QUADRATIC
+           x² + bx + c
+           ========================================= */
+           function factorizeMonic(
+    b,
+    c
+) {
+
+    let found = false;
+
+    let factor1 = 0;
+    let factor2 = 0;
+
+
+    for (
+        let i = -100;
+        i <= 100;
+        i++
+    ) {
+
+        for (
+            let j = -100;
+            j <= 100;
+            j++
+        ) {
+
+            if (
+                i + j === b &&
+                i * j === c
+            ) {
+
+                factor1 = i;
+                factor2 = j;
+
+                found = true;
+
+                break;
+            }
+        }
+
+        if (found) {
+            break;
+        }
+    }
+
+
+    /* STEP 1 */
+
+    document.getElementById(
+        "step1"
+    ).innerHTML = `
+        <div>Step 1</div>
+        <div class="math-line">
+            ${equationText(1, b, c)}
+        </div>
+    `;
+
+
+    /* STEP 2 */
+
+    document.getElementById(
+        "step2"
+    ).innerHTML = `
+        <div>Step 2</div>
+        <div class="math-line">
+            ${factor1} × ${factor2} = ${c}
+        </div>
+    `;
+
+
+    if (!found) {
+
+        document.getElementById(
+            "step3"
+        ).innerHTML = `
+            <div>Step 3</div>
+            <div class="math-line">
+                No integer pair found
+            </div>
+        `;
+
+        document.getElementById(
+            "step4"
+        ).innerHTML = `
+            <div>Step 4</div>
+            <div class="math-line">
+                Not factorable over integers
+            </div>
+        `;
+
+        document.getElementById(
+            "finalAnswer"
+        ).textContent =
+            "Not factorable over integers";
+
+        return;
+    }
+
+
+    /* STEP 3 */
+
+    document.getElementById(
+        "step3"
+    ).innerHTML = `
+        <div>Step 3</div>
+        <div class="math-line">
+            ${factor1} + ${factor2} = ${b}
+        </div>
+    `;
+
+
+    /* STEP 4 */
+
+    document.getElementById(
+        "step4"
+    ).innerHTML = `
+        <div>Step 4</div>
+        <div class="math-line">
+            ${factorForm(factor1, factor2)}
+        </div>
+    `;
+
+
+    /* FINAL ANSWER */
+
+    document.getElementById(
+        "finalAnswer"
+    ).innerHTML = `
+        ✅ ${factorForm(factor1, factor2)}
+    `;
+
+}
+        
+
+
+            
+      
+
+
+        /* =========================================
+           GENERAL QUADRATIC
+           ========================================= */
+
+        function factorizeGeneral(
+            a,
+            b,
+            c
+        ) {
+
+            let ac =
+                a * c;
+
+
+            let m = 0;
+
+            let n = 0;
+
+            let found = false;
+
+
+            for (
+                let i = -1000;
+                i <= 1000;
+                i++
+            ) {
+
+                for (
+                    let j = -1000;
+                    j <= 1000;
+                    j++
+                ) {
+
+                    if (
+                        i + j === b &&
+                        i * j === ac
+                    ) {
+
+                        m = i;
+
+                        n = j;
+
+                        found = true;
+
+                        break;
+
+                    }
+
+                }
+
+
+                if (found) {
+                    break;
+                }
+
+            }
+
+
+            document.getElementById(
+                "step1"
+            ).innerHTML =
+                "Step 1: " +
+                equationText(
+                    a,
+                    b,
+                    c
+                );
+
+
+            document.getElementById(
+                "step2"
+            ).innerHTML =
+                "Step 2: Calculate ac = " +
+                a +
+                " × " +
+                c +
+                " = " +
+                ac;
+
+
+            if (!found) {
+
+                document.getElementById(
+                    "step3"
+                ).innerHTML =
+                    "Step 3: No suitable integer pair was found.";
+
+                document.getElementById(
+                    "step4"
+                ).innerHTML =
+                    "This expression may not factorize over integers.";
+
+                document.getElementById(
+                    "finalAnswer"
+                ).textContent =
+                    "Not factorable over integers";
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "step3"
+            ).innerHTML =
+                "Step 3: Find m and n such that m + n = " +
+                b +
+                " and mn = " +
+                ac +
+                ". Therefore m = " +
+                m +
+                " and n = " +
+                n +
+                ".";
+
+
+            let factorResult =
+                factorizeByGrouping(
+                    a,
+                    m,
+                    n,
+                    c
+                );
+
+
+            document.getElementById(
+                "step4"
+            ).innerHTML =
+                "Step 4: Split the middle term and factor by grouping.";
+
+
+            document.getElementById(
+                "finalAnswer"
+            ).innerHTML =
+                factorResult;
+
+        }
+
+
+        /* =========================================
+           FACTOR BY GROUPING
+           ========================================= */
+
+        function factorizeByGrouping(
+            a,
+            m,
+            n,
+            c
+        ) {
+
+            /*
+             * For simple integer examples,
+             * try possible factor pairs of a and c.
+             */
+
+            let aFactors =
+                findFactors(a);
+
+            let cFactors =
+                findFactors(c);
+
+
+            for (
+                let i = 0;
+                i < aFactors.length;
+                i++
+            ) {
+
+                for (
+                    let j = 0;
+                    j < cFactors.length;
+                    j++
+                ) {
+
+                    let p =
+                        aFactors[i][0];
+
+                    let q =
+                        aFactors[i][1];
+
+                    let r =
+                        cFactors[j][0];
+
+                    let s =
+                        cFactors[j][1];
+
+
+                    let possibilities = [
+
+                        [p, q, r, s],
+
+                        [q, p, r, s],
+
+                        [p, q, s, r],
+
+                        [q, p, s, r]
+
+                    ];
+
+
+                    for (
+                        let k = 0;
+                        k < possibilities.length;
+                        k++
+                    ) {
+
+                        let values =
+                            possibilities[k];
+
+
+                        let A =
+                            values[0];
+
+                        let B =
+                            values[1];
+
+                        let C =
+                            values[2];
+
+                        let D =
+                            values[3];
+
+
+                        let option1 =
+                            A * C;
+
+                        let option2 =
+                            B * D;
+
+
+                        if (
+                            option1 +
+                            option2 ===
+                            m
+                        ) {
+
+                            let signM =
+                                m >= 0
+                                    ? "+"
+                                    : "-";
+
+
+                            return `
+                                <strong>
+                                    ✅ ${factorExpression(
+                                        A,
+                                        B,
+                                        C,
+                                        D
+                                    )}
+                                </strong>
+                            `;
+
+                        }
+
+
+                        if (
+                            option1 -
+                            option2 ===
+                            m
+                        ) {
+
+                            return `
+                                <strong>
+                                    ✅ Factorization found by grouping.
+                                </strong>
+                            `;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+
+            return `
+                <strong>
+                    The expression needs a more advanced
+                    factorization method.
+                </strong>
+            `;
+
+        }
+
+
+        /* =========================================
+           EQUATION TEXT
+           ========================================= */
+
+        function equationText(
+            a,
+            b,
+            c
+        ) {
+
+            let text = "";
+
+
+            if (a === 1) {
+
+                text = "x²";
+
+            }
+
+            else if (a === -1) {
+
+                text = "-x²";
+
+            }
+
+            else {
+
+                text =
+                    a +
+                    "x²";
+
+            }
+
+
+            if (b > 0) {
+
+                text +=
+                    " + " +
+                    (b === 1 ? "" : b) +
+                    "x";
+
+            }
+
+            else if (b < 0) {
+
+                text +=
+                    " - " +
+                    (Math.abs(b) === 1
+                        ? ""
+                        : Math.abs(b)) +
+                    "x";
+
+            }
+
+
+            if (c > 0) {
+
+                text +=
+                    " + " +
+                    c;
+
+            }
+
+            else if (c < 0) {
+
+                text +=
+                    " - " +
+                    Math.abs(c);
+
+            }
+
+
+            return text;
+
+        }
+
+
+        /* =========================================
+           SIMPLE FACTOR FORM
+           ========================================= */
+
+        function factorForm(
+            first,
+            second
+        ) {
+
+            let firstPart =
+                first >= 0
+                    ? "x + " + first
+                    : "x - " + Math.abs(first);
+
+
+            let secondPart =
+                second >= 0
+                    ? "x + " + second
+                    : "x - " + Math.abs(second);
+
+
+            return "(" +
+                firstPart +
+                ")(" +
+                secondPart +
+                ")";
+
+        }
+
+
+        /* =========================================
+           FACTOR EXPRESSION
+           ========================================= */
+
+        function factorExpression(
+            A,
+            B,
+            C,
+            D
+        ) {
+
+            return "Factorization completed";
+
+        }
+        /* =========================================
+           CHALLENGE QUESTIONS
+           ========================================= */
+
+        const challengeQuestions = [
+
+            {
+                question: "Factorize: x² + 5x + 6",
+
+                options: [
+                    "(x + 2)(x + 3)",
+                    "(x + 1)(x + 6)",
+                    "(x + 2)(x + 4)",
+                    "(x + 3)(x + 4)"
+                ],
+
+                answer: 1
+            },
+
+
+            {
+                question: "Factorize: x² + 7x + 12",
+
+                options: [
+                    "(x + 2)(x + 6)",
+                    "(x + 3)(x + 4)",
+                    "(x + 1)(x + 12)",
+                    "(x + 5)(x + 2)"
+                ],
+
+                answer: 2
+            },
+
+
+            {
+                question: "Factorize: x² - 5x + 6",
+
+                options: [
+                    "(x - 2)(x - 3)",
+                    "(x + 2)(x + 3)",
+                    "(x - 1)(x - 6)",
+                    "(x + 1)(x + 6)"
+                ],
+
+                answer: 1
+            },
+
+
+            {
+                question: "Factorize: x² - 9x + 20",
+
+                options: [
+                    "(x - 2)(x - 10)",
+                    "(x - 4)(x - 5)",
+                    "(x + 4)(x + 5)",
+                    "(x - 1)(x - 20)"
+                ],
+
+                answer: 2
+            },
+
+
+            {
+                question: "Factorize: x² + 3x - 10",
+
+                options: [
+                    "(x + 5)(x - 2)",
+                    "(x + 2)(x - 5)",
+                    "(x + 10)(x - 1)",
+                    "(x - 5)(x - 2)"
+                ],
+
+                answer: 1
+            }
+
+        ];
+
+
+        let currentChallenge = 0;
+
+        let challengeScore = 0;
+
+        let questionAnswered = false;
+
+
+        /* =========================================
+           CHECK CHALLENGE ANSWER
+           ========================================= */
+
+        function checkChallenge(
+            selectedAnswer
+        ) {
+
+            if (questionAnswered) {
+
+                return;
+
+            }
+
+
+            let current =
+                challengeQuestions[
+                    currentChallenge
+                ];
+
+
+            questionAnswered = true;
+
+
+            let result =
+                document.getElementById(
+                    "challengeResult"
+                );
+
+
+            let buttons =
+                document.querySelectorAll(
+                    "#challengeOptions button"
+                );
+
+
+            buttons.forEach(
+                function(button) {
+
+                    button.disabled = true;
+
+                }
+            );
+
+
+            if (
+                selectedAnswer ===
+                current.answer
+            ) {
+
+                result.textContent =
+                    "🎉 Correct! Excellent work!";
+
+                result.style.color =
+                    "#1e3a8a";
+
+
+                challengeScore++;
+
+
+                document.getElementById(
+                    "score"
+                ).textContent =
+                    challengeScore;
+
+            }
+
+            else {
+
+                result.textContent =
+                    "❌ Not quite. The correct answer is " +
+                    current.options[
+                        current.answer - 1
+                    ];
+
+                result.style.color =
+                    "#c62828";
+
+            }
+
+
+            document.getElementById(
+                "nextQuestion"
+            ).style.display =
+                "inline-block";
+
+        }
+
+
+        /* =========================================
+           NEXT QUESTION
+           ========================================= */
+
+        function nextChallengeQuestion() {
+
+            currentChallenge++;
+
+
+            if (
+                currentChallenge >=
+                challengeQuestions.length
+            ) {
+
+                document.getElementById(
+                    "challengeBox"
+                ).innerHTML = `
+
+                    <h2>
+                        🏆 Challenge Completed!
+                    </h2>
+
+                    <p>
+                        You completed all 5
+                        factorization questions.
+                    </p>
+
+                    <div class="score-box">
+
+                        Final Score
+
+                        <br><br>
+
+                        <strong>
+                            ${challengeScore} / 5
+                        </strong>
+
+                    </div>
+
+                    <button
+                        id="nextQuestion"
+                        onclick="restartChallenge()"
+                        style="
+                            display:inline-block;
+                            margin-top:20px;
+                        ">
+
+                        🔄 Try Again
+
+                    </button>
+
+                `;
+
+                return;
+
+            }
+
+
+            let current =
+                challengeQuestions[
+                    currentChallenge
+                ];
+
+
+            document.getElementById(
+                "questionNumber"
+            ).textContent =
+                "Question " +
+                (currentChallenge + 1) +
+                " of 5";
+
+
+            document.getElementById(
+                "challengeQuestion"
+            ).textContent =
+                current.question;
+
+
+            let container =
+                document.getElementById(
+                    "challengeOptions"
+                );
+
+
+            container.innerHTML = "";
+
+
+            current.options.forEach(
+                function(option, index) {
+
+                    let button =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    button.textContent =
+                        option;
+
+
+                    button.onclick =
+                        function() {
+
+                            checkChallenge(
+                                index + 1
+                            );
+
+                        };
+
+
+                    container.appendChild(
+                        button
+                    );
+
+                }
+            );
+
+
+            document.getElementById(
+                "challengeResult"
+            ).textContent = "";
+
+
+            document.getElementById(
+                "nextQuestion"
+            ).style.display =
+                "none";
+
+
+            questionAnswered = false;
+
+        }
+
+
+        /* =========================================
+           RESTART CHALLENGE
+           ========================================= */
+
+        function restartChallenge() {
+
+            location.reload();
+
+        }
+
+
+        /* =========================================
+           INITIALIZE PAGE
+           ========================================= */
+
+        updateEquation();
+
+
+    </script>
+
+
+</body>
+
+</html>
