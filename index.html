@@ -49,40 +49,6 @@
 
 
         /* ==============================
-           LOGOUT BUTTON
-        ============================== */
-
-        #logoutBtn {
-            background: white;
-            color: #0f766e;
-
-            border: 2px solid white;
-
-            padding: 11px 22px;
-
-            border-radius: 8px;
-
-            font-size: 15px;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: all 0.2s ease;
-
-            white-space: nowrap;
-        }
-
-        #logoutBtn:hover {
-            background: #0f766e;
-            color: white;
-
-            border-color: white;
-
-            transform: translateY(-2px);
-        }
-
-
-        /* ==============================
            LABORATORY CARDS
         ============================== */
 
@@ -245,13 +211,6 @@
                 </p>
 
             </div>
-
-
-            <!-- LOGOUT BUTTON -->
-
-            <button id="logoutBtn">
-                Logout
-            </button>
 
         </div>
 
@@ -422,51 +381,6 @@
         </p>
 
     </footer>
-
-
-
-    <!-- ==============================
-         LOGOUT JAVASCRIPT
-    ============================== -->
-
-    <script>
-
-        document
-            .getElementById("logoutBtn")
-            .addEventListener("click", async function () {
-
-                try {
-
-                    const response =
-                        await fetch("/logout");
-
-                    const result =
-                        await response.json();
-
-
-                    if (result.success) {
-
-                        window.location.href = "/";
-
-                    } else {
-
-                        alert(
-                            "Logout failed. Please try again."
-                        );
-
-                    }
-
-                } catch (error) {
-
-                    alert(
-                        "Unable to logout. Please try again."
-                    );
-
-                }
-
-            });
-
-    </script>
 
 
 </body>

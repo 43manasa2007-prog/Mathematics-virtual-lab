@@ -39,6 +39,7 @@ app.use(express.static(__dirname, { index: false }));
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "login.html"));
 });
+
 // Protected Mathematics Virtual Lab
 app.get("/lab", (req, res) => {
 
@@ -127,23 +128,6 @@ app.get("/check-login", (req, res) => {
             loggedIn: false
         });
     }
-});
-
-// Logout
-app.get("/logout", (req, res) => {
-    req.session.destroy((error) => {
-        if (error) {
-            return res.json({
-                success: false,
-                message: "Logout failed"
-            });
-        }
-
-        res.json({
-            success: true,
-            message: "Logged out successfully"
-        });
-    });
 });
 
 // Start server
