@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Allow JSON data
 app.use(express.json());
@@ -16,6 +16,6 @@ app.get("/", (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Mathematics Virtual Lab running at http://localhost:${PORT}`);
 });
